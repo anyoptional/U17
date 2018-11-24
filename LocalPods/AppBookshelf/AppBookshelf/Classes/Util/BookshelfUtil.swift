@@ -10,11 +10,11 @@ import Foundation
 class AppBookshelfBunbleLoader: NSObject {}
 
 extension Bundle {
-    static var resourcesBundle: Bundle? {
+    static let resourcesBundle: Bundle? = {
         var path = Bundle(for: AppBookshelfBunbleLoader.self).resourcePath ?? ""
         path.append("/AppBookshelf.bundle")
         return Bundle(path: path)
-    }
+    }()
 }
 
 extension UIImage {

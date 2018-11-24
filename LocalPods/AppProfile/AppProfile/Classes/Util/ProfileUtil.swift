@@ -11,11 +11,11 @@ import Foundation
 class AppProfileBunbleLoader: NSObject {}
 
 extension Bundle {
-    static var resourcesBundle: Bundle? {
+    static let resourcesBundle: Bundle? = {
         var path = Bundle(for: AppProfileBunbleLoader.self).resourcePath ?? ""
         path.append("/AppProfile.bundle")
         return Bundle(path: path)
-    }
+    }()
 }
 
 extension UIImage {

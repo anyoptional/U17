@@ -10,11 +10,11 @@ import Foundation
 class AppMainBunbleLoader: NSObject {}
 
 extension Bundle {
-    static var resourcesBundle: Bundle? {
+    static let resourcesBundle: Bundle? = {
         var path = Bundle(for: AppMainBunbleLoader.self).resourcePath ?? ""
         path.append("/AppMain.bundle")
         return Bundle(path: path)
-    }
+    }()
 }
 
 extension UIImage {
