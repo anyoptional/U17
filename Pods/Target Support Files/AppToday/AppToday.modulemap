@@ -1,0 +1,6 @@
+framework module AppToday {
+  umbrella header "AppToday-umbrella.h"
+
+  export *
+  module * { export * }
+}

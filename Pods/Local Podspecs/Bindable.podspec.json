@@ -1,0 +1,31 @@
+{
+  "name": "Bindable",
+  "version": "1.0.0",
+  "summary": "UI-independent layer.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "RxDataSources": [
+      "~> 3.0.2"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Bindable/Classes/Core"
+    }
+  ]
+}

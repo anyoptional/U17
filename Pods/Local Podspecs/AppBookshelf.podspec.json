@@ -1,0 +1,89 @@
+{
+  "name": "AppBookshelf",
+  "version": "1.0.0",
+  "summary": "Application bookshelf module.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "Fate": [
+
+    ],
+    "RxMoya": [
+
+    ],
+    "Bindable": [
+
+    ],
+    "YYKit": [
+      "~> 1.0.9"
+    ],
+    "RxSwift": [
+      "~> 4.1.2"
+    ],
+    "RxCocoa": [
+      "~> 4.1.2"
+    ],
+    "SnapKit": [
+      "~> 4.0.1"
+    ],
+    "ReactorKit": [
+      "~> 1.1.0"
+    ],
+    "RxAppState": [
+      "~> 1.1.2"
+    ],
+    "RxOptional": [
+      "~> 3.4.0"
+    ],
+    "RxSwiftExt": [
+      "~> 3.2.0"
+    ],
+    "RxDataSources": [
+      "~> 3.0.2"
+    ]
+  },
+  "resource_bundles": {
+    "AppBookshelf": [
+      "AppBookshelf/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Controller",
+      "source_files": "AppBookshelf/Classes/Controller"
+    },
+    {
+      "name": "Reactor",
+      "source_files": "AppBookshelf/Classes/Reactor"
+    },
+    {
+      "name": "View",
+      "source_files": "AppBookshelf/Classes/View"
+    },
+    {
+      "name": "Model",
+      "source_files": "AppBookshelf/Classes/Model"
+    },
+    {
+      "name": "Util",
+      "source_files": "AppBookshelf/Classes/Util"
+    },
+    {
+      "name": "Router",
+      "source_files": "AppBookshelf/Classes/Router"
+    }
+  ]
+}

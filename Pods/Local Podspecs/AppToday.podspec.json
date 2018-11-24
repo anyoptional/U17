@@ -1,0 +1,92 @@
+{
+  "name": "AppToday",
+  "version": "1.0.0",
+  "summary": "Application today module.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "Fate": [
+
+    ],
+    "RxMoya": [
+
+    ],
+    "Bindable": [
+
+    ],
+    "YYKit": [
+      "~> 1.0.9"
+    ],
+    "RxSwift": [
+      "~> 4.1.2"
+    ],
+    "RxCocoa": [
+      "~> 4.1.2"
+    ],
+    "SnapKit": [
+      "~> 4.0.1"
+    ],
+    "ReactorKit": [
+      "~> 1.1.0"
+    ],
+    "RxAppState": [
+      "~> 1.1.2"
+    ],
+    "RxOptional": [
+      "~> 3.4.0"
+    ],
+    "RxSwiftExt": [
+      "~> 3.2.0"
+    ],
+    "RxDataSources": [
+      "~> 3.0.2"
+    ],
+    "UITableView+FDTemplateLayoutCell": [
+      "~> 1.6"
+    ]
+  },
+  "resource_bundles": {
+    "AppToday": [
+      "AppToday/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Controller",
+      "source_files": "AppToday/Classes/Controller"
+    },
+    {
+      "name": "Reactor",
+      "source_files": "AppToday/Classes/Reactor"
+    },
+    {
+      "name": "View",
+      "source_files": "AppToday/Classes/View"
+    },
+    {
+      "name": "Model",
+      "source_files": "AppToday/Classes/Model"
+    },
+    {
+      "name": "Util",
+      "source_files": "AppToday/Classes/Util"
+    },
+    {
+      "name": "Router",
+      "source_files": "AppToday/Classes/Router"
+    }
+  ]
+}

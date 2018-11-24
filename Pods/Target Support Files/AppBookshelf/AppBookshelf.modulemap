@@ -1,0 +1,6 @@
+framework module AppBookshelf {
+  umbrella header "AppBookshelf-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,89 @@
+{
+  "name": "AppDiscover",
+  "version": "1.0.0",
+  "summary": "Application discover module.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "Fate": [
+
+    ],
+    "RxMoya": [
+
+    ],
+    "Bindable": [
+
+    ],
+    "YYKit": [
+      "~> 1.0.9"
+    ],
+    "RxSwift": [
+      "~> 4.1.2"
+    ],
+    "RxCocoa": [
+      "~> 4.1.2"
+    ],
+    "SnapKit": [
+      "~> 4.0.1"
+    ],
+    "ReactorKit": [
+      "~> 1.1.0"
+    ],
+    "RxAppState": [
+      "~> 1.1.2"
+    ],
+    "RxOptional": [
+      "~> 3.4.0"
+    ],
+    "RxSwiftExt": [
+      "~> 3.2.0"
+    ],
+    "RxDataSources": [
+      "~> 3.0.2"
+    ]
+  },
+  "resource_bundles": {
+    "AppDiscover": [
+      "AppDiscover/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Controller",
+      "source_files": "AppDiscover/Classes/Controller"
+    },
+    {
+      "name": "Reactor",
+      "source_files": "AppDiscover/Classes/Reactor"
+    },
+    {
+      "name": "View",
+      "source_files": "AppDiscover/Classes/View"
+    },
+    {
+      "name": "Model",
+      "source_files": "AppDiscover/Classes/Model"
+    },
+    {
+      "name": "Util",
+      "source_files": "AppDiscover/Classes/Util"
+    },
+    {
+      "name": "Router",
+      "source_files": "AppDiscover/Classes/Router"
+    }
+  ]
+}

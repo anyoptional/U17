@@ -1,0 +1,6 @@
+framework module AppProfile {
+  umbrella header "AppProfile-umbrella.h"
+
+  export *
+  module * { export * }
+}

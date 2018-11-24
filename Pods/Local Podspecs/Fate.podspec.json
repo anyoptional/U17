@@ -1,0 +1,59 @@
+{
+  "name": "Fate",
+  "version": "1.0.0",
+  "summary": "Core services.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "frameworks": "UIKit",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "YYKit": [
+      "~> 1.0.9"
+    ],
+    "RxSwift": [
+      "~> 4.1.2"
+    ],
+    "RxCocoa": [
+      "~> 4.1.2"
+    ],
+    "Timepiece": [
+      "~> 1.3.1"
+    ],
+    "MJRefresh": [
+      "~> 3.1.15.7"
+    ],
+    "RxDataSources": [
+      "~> 3.0.2"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Fate/Classes/Core"
+    },
+    {
+      "name": "RxAdaptor",
+      "source_files": "Fate/Classes/RxAdaptor"
+    },
+    {
+      "name": "YYKitAdaptor",
+      "source_files": "Fate/Classes/YYKitAdaptor"
+    },
+    {
+      "name": "UILayoutAdaptor",
+      "source_files": "Fate/Classes/UILayoutAdaptor"
+    }
+  ]
+}

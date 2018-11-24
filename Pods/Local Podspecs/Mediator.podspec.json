@@ -1,0 +1,36 @@
+{
+  "name": "Mediator",
+  "version": "1.0.0",
+  "summary": "Mediator pattern.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "frameworks": "UIKit",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "public_header_files": "Mediator/Classes/Supports/*.h",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Mediator/Classes/Core"
+    },
+    {
+      "name": "Supports",
+      "source_files": "Mediator/Classes/Supports"
+    },
+    {
+      "name": "Category",
+      "source_files": "Mediator/Classes/Category"
+    }
+  ]
+}

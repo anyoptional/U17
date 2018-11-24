@@ -1,0 +1,41 @@
+{
+  "name": "RxMoya",
+  "version": "1.0.0",
+  "summary": "Network abstraction layer",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "RxMoya/Classes/Core",
+      "frameworks": "Foundation",
+      "dependencies": {
+        "Moya": [
+          "~> 11.0.2"
+        ],
+        "YYKit": [
+          "~> 1.0.9"
+        ],
+        "RxSwift": [
+          "~> 4.1.2"
+        ],
+        "RxOptional": [
+          "~> 3.4.0"
+        ]
+      }
+    }
+  ]
+}

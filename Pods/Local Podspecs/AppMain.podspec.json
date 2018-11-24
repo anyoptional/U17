@@ -1,0 +1,44 @@
+{
+  "name": "AppMain",
+  "version": "1.0.0",
+  "summary": "Application main module.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "Mediator": [
+
+    ]
+  },
+  "resource_bundles": {
+    "AppMain": [
+      "AppMain/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Controller",
+      "source_files": "AppMain/Classes/Controller"
+    },
+    {
+      "name": "Router",
+      "source_files": "AppMain/Classes/Router"
+    },
+    {
+      "name": "View",
+      "source_files": "AppMain/Classes/View"
+    }
+  ]
+}

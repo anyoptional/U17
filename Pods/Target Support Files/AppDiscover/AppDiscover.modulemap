@@ -1,0 +1,6 @@
+framework module AppDiscover {
+  umbrella header "AppDiscover-umbrella.h"
+
+  export *
+  module * { export * }
+}
