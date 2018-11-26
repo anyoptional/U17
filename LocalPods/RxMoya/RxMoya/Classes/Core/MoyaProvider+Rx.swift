@@ -19,11 +19,11 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
     ///   - token: the token for request
     ///   - cacheable: cache respose or not
     /// - Returns: observable sequence that contains response json
-    public func request(_ token: APITargetType, cacheable: Bool = false) -> Observable<JSONObject> {
+    public func request(_ token: APITargetType, allowsURLCache: Bool = false, ignoredKeys: [String] = []) -> Observable<JSONObject> {
         return Observable.create { [weak base = base] observer in
             /// load cache first
-            if cacheable {
-                if let jsonObject = Cache.objectForTarget(token) {
+            if allowsURLCache {
+                if let jsonObject = Cache.objectForTarget(token, ignoredKeys: ignoredKeys) {
                     observer.onNext(jsonObject)
                 }
             }
@@ -34,7 +34,7 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
                         let response = try response.filterSuccessfulStatusCodes()
                         let jsonObject = try response.mapString()
                         /// store in cache
-                        if cacheable { Cache.setObject(jsonObject, forTarget: token) }
+                        if allowsURLCache { Cache.setObject(jsonObject, forTarget: token, ignoredKeys: ignoredKeys) }
                         /// emit element
                         observer.onNext(jsonObject)
                         /// unsubscribe

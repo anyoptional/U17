@@ -59,7 +59,8 @@ final class TodayViewReactor: Reactor {
 extension TodayViewReactor {
     private func getRecommandList() -> Observable<Mutation> {
         let recommandListReq = TodayRecommandListReq()
-        return APIProvider.rx.request(TodayAPI.getRecommandList(recommandListReq), cacheable: true)
+        return APIProvider.rx.request(TodayAPI.getRecommandList(recommandListReq),
+                                      allowsURLCache: true, ignoredKeys: ["time"])
             .mapObject(ObjCType.self)
             .map { $0.data?.returnData }
             .filterNil()
