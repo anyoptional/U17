@@ -33,6 +33,9 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
                     do {
                         let response = try response.filterSuccessfulStatusCodes()
                         let jsonObject = try response.mapString()
+                        /// store in cache
+                        if cacheable { Cache.setObject(jsonObject, forTarget: token) }
+                        /// emit element
                         observer.onNext(jsonObject)
                         /// unsubscribe
                         observer.onCompleted()
