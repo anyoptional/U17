@@ -50,7 +50,7 @@ final class TodayViewReactor: Reactor {
         case .setRecommandResp(let resp):
             state.refreshState.downState = .idle
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
-            state.sections += [Section(items: (resp.comics?.map { SectionItem(rawValue: $0) }).filterNil([]))]
+            state.sections = [Section(items: (resp.comics?.map { SectionItem(rawValue: $0) }).filterNil([]))]
         }
         return state
     }
