@@ -26,3 +26,11 @@ public enum APIError: Error {
     /// 其他奇奇怪怪的错误
     case underlying(Error)
 }
+
+/// Swift Error转APIError
+/// 用于网络请求时的catch操作
+public extension Error {
+    public var apiError: APIError {
+        return (self as? APIError) ?? .unknown
+    }
+}

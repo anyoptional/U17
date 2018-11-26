@@ -38,10 +38,19 @@
       "~> 3.0.2"
     ]
   },
+  "resource_bundles": {
+    "Fate": [
+      "Fate/Assets/*.png"
+    ]
+  },
   "subspecs": [
     {
       "name": "Core",
       "source_files": "Fate/Classes/Core"
+    },
+    {
+      "name": "CommonUI",
+      "source_files": "Fate/Classes/CommonUI"
     },
     {
       "name": "RxAdaptor",

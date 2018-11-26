@@ -22,12 +22,13 @@ final class TodayViewReactor: Reactor {
     
     enum Mutation {
         case setError(APIError)
-        case setRecommandResp([ObjCType.DataBean.ReturnDataBean.DayDataListBean])
+        case setRecommandResp(ObjCType.DataBean.ReturnDataBean)
     }
     
     struct State {
         var error: APIError?
         var sections = [Section]()
+        var refreshState = U17RefreshState()
     }
     
     var initialState = State()
@@ -47,8 +48,9 @@ final class TodayViewReactor: Reactor {
             state.error = error
             
         case .setRecommandResp(let resp):
-            state.sections.removeAll(keepingCapacity: true)
-            state.sections += resp.map { Section.dayItemDataList(items: ($0.dayItemDataList?.map { SectionItem.dayItemData(item: TodayRecommandCellDisplay(rawValue: $0)) }).filterNil([]) ) }
+            state.refreshState.downState = .idle
+            state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
+            state.sections += [Section(items: (resp.comics?.map { SectionItem(rawValue: $0) }).filterNil([]))]
         }
         return state
     }
@@ -59,15 +61,9 @@ extension TodayViewReactor {
         let recommandListReq = TodayRecommandListReq()
         return APIProvider.rx.request(TodayAPI.getRecommandList(recommandListReq), cacheable: true)
             .mapObject(ObjCType.self)
-            .map { $0.data?.returnData?.dayDataList }
+            .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setRecommandResp($0) }
-            .catchError({ (error) -> Observable<Mutation> in
-                if let error = error as? APIError {
-                    return Observable.just(Mutation.setError(error))
-                } else {
-                    return Observable.just(Mutation.setError(APIError.unknown))
-                }
-            })
+            .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }

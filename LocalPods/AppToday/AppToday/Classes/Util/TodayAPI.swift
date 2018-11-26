@@ -20,7 +20,7 @@ extension TodayAPI: APITargetType {
     
     var path: APIPath {
         switch self {
-        case .getRecommandList: return "comic/todayRecommend"
+        case .getRecommandList: return "list/todayRecommendList"
         }
     }
     

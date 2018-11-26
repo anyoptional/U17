@@ -28,8 +28,16 @@ Pod::Spec.new do |s|
     s.dependency 'MJRefresh', '~> 3.1.15.7'
     s.dependency 'RxDataSources', '~> 3.0.2'
     
+    s.resource_bundles = {
+      'Fate' => ['Fate/Assets/*.png']
+    }
+    
     s.subspec "Core" do |cs|
         cs.source_files  = "Fate/Classes/Core"
+    end
+    
+    s.subspec "CommonUI" do |cs|
+      cs.source_files  = "Fate/Classes/CommonUI"
     end
     
     s.subspec "RxAdaptor" do |cs|

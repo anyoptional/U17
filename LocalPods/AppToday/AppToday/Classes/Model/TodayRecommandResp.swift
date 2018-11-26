@@ -11,56 +11,63 @@ import YYKit
 
 @objcMembers
 class TodayRecommandResp: NSObject, YYModel {
-
-	var code: Int = 0
-	var data: DataBean?
-
-	@objcMembers
-	class DataBean: NSObject, YYModel {
-		var message: String?
-		var returnData: ReturnDataBean?
-
-		@objcMembers
-		class ReturnDataBean: NSObject, YYModel {
-			var dayDataList: [DayDataListBean]?
-
-			@objcMembers
-			class DayDataListBean: NSObject, YYModel {
-				var timeStamp: String?
-				var weekDay: String?
-				var dayItemDataList: [DayItemDataListBean]?
-
-				@objcMembers
-				class DayItemDataListBean: NSObject, YYModel {
-					var dataType: Int = 0
-					var longDescription: String?
-					var comicCover: String?
-					var tags: [String]?
-					var htmlId: Int = 0
-					var comicId: Int = 0
-					var type: Int = 0
-					var isComicCanRead: Bool = false
-					var cover: String?
-					var btnColor: Int = 0
-					var comicName: String?
-					var shortDescription: String?
-					var comicListTitle: String?
-					var threadId: Int = 0
-				}
-
-				static func modelContainerPropertyGenericClass() -> [String : Any]? {
-    				return ["dayItemDataList" : DayItemDataListBean.self]
-				}
-			}
-
-			var last_modified: Int = 0
-
-			static func modelContainerPropertyGenericClass() -> [String : Any]? {
-    			return ["dayDataList" : DayDataListBean.self]
-			}
-		}
-
-		var stateCode: Int = 0
-	}
-
+    
+    var msg: String?
+    var data: DataBean?
+    
+    @objcMembers
+    class DataBean: NSObject, YYModel {
+        var returnData: ReturnDataBean?
+        
+        @objcMembers
+        class ReturnDataBean: NSObject, YYModel {
+            var page: Int = 0
+            var isNew: Bool = false
+            var hasMore: Bool = false
+            var curDay: Int = 0
+            var comics: [ComicsBean]?
+            
+            @objcMembers
+            class ComicsBean: NSObject, YYModel {
+                var chapterId: Int = 0
+                var descriptor: String?
+                var author: String?
+                var uiType: Int = 0
+                var comicId: Int = 0
+                var title: String?
+                var tagList: [TagListBean]?
+                
+                @objcMembers
+                class TagListBean: NSObject, YYModel {
+                    var tagColor: String?
+                    var tagStr: String?
+                }
+                
+                var btnColor: Int = 0
+                var actionType: Int = 0
+                var todayId: Int = 0
+                var cover: String?
+                var chapterIndex: Int = 0
+                
+                static func modelCustomPropertyMapper() -> [String : Any]? {
+                    return ["descriptor" : "description"]
+                }
+                
+                static func modelContainerPropertyGenericClass() -> [String : Any]? {
+                    return ["tagList" : TagListBean.self]
+                }
+            }
+            
+            
+            static func modelContainerPropertyGenericClass() -> [String : Any]? {
+                return ["comics" : ComicsBean.self]
+            }
+        }
+        
+        var message: String?
+        var stateCode: Int = 0
+    }
+    
+    var code: Int = 0
 }
+

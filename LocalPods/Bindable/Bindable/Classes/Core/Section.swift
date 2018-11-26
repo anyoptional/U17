@@ -11,6 +11,10 @@ import RxDataSources
 // A wrapper for table/collection view sectioned data source
 public struct UITableCollectionViewSection<ItemType: Displayable> {
     public var items: [Item]
+    
+    public init(items: [Item]) {
+        self.items = items
+    }
 }
 
 extension UITableCollectionViewSection: SectionModelType {

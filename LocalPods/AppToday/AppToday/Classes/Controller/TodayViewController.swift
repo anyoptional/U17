@@ -59,6 +59,20 @@ extension TodayViewController: View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        // MARK: 下拉刷新
+        tableView.gifHeader.rx.refresh
+            .debounce(1, scheduler: MainScheduler.instance)
+            .takeWhen { $0 == .refreshing }
+            .map { _ in Reactor.Action.getRecommandList }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // MARK: 修改刷新控件的状态
+        reactor.state
+            .map { $0.refreshState.downState }
+            .bind(to: tableView.gifHeader.rx.refresh)
+            .disposed(by: disposeBag)
+        
         // MARK: 绑定数据源
         reactor.state
             .map { $0.sections }
@@ -77,11 +91,9 @@ extension TodayViewController: View {
     }
     
     private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommandSection> {
-        return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, item) in
+        return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, display) in
             let cell = tv.dequeueReusableCell(withIdentifier: "cell") as! TodayRecommandCell
-            if case let .dayItemData(display) = ds[ip] {
-                cell.display = display
-            }
+            cell.display = display
             return cell
         })
     }
@@ -92,9 +104,7 @@ extension TodayViewController: UITableViewDelegate {
         return tableView.fd_heightForCell(withIdentifier: "cell", cacheBy: indexPath, configuration: { [weak self] (cell) in
             guard let `self` = self else { return }
             let cell = cell as! TodayRecommandCell
-            if case let .dayItemData(display) = self.dataSource[indexPath] {
-                cell.display = display
-            }
+            cell.display = self.dataSource[indexPath]
         })
     }
 }

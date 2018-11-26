@@ -9,14 +9,17 @@ import Foundation
 
 @objcMembers
 class TodayReq: NSObject {
+    var day = "6"
+    var android_id = "iphone"
     var time = Int32(Date().timeIntervalSince1970)
     var device_id = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var key = """
-fabe6953ce6a1b8738bd2cabebf893a472d2b6274ef7ef6f6a5dc7171e5cafb14933ae65c70bceb97e0e9d47af6324d50394ba70c1bb462e0ed18b88b26095a82be87bc9eddf8e548a2a3859274b25bd0ecfce13e81f8317cfafa822d8ee486fe2c43e7acd93e9f19fdae5c628266dc4762060f6026c5ca83e865844fc6beea59822ed4a70f5288c25edb1367700ebf5c78a27f5cce53036f1dac4a776588cd890cd54f9e5a7adcaeec340c7a69cd986:::open
+2158a2da6424d7274cd3937a1c4f520721c6986830c2fdbbcf59e5e480ca5e9ce83ab3dd1ff92f0df537be9394acecb7f4974bd87c36990760fbb26cd5951826ee10af5100ac4321a6ea5e4712b9164284ef793fb73d5586:::u17
 """
-    var model = "none"
+    var model = "iPhone 6s"
     var target = "U17_3.0"
-    var version = "3.0.0"
+    var version = "4.3.12"
+    var systemVersion = UIDevice.current.systemVersion
 }
 
 @objcMembers

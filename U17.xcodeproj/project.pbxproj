@@ -410,14 +410,15 @@
 			baseConfigurationReference = FB4F491D5FFB034C7D9DA27A /* Pods-U17.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9WYEP9V89C;
+				DEVELOPMENT_TEAM = 3MEQ3GT44F;
 				INFOPLIST_FILE = U17/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.archer.U17;
+				PRODUCT_BUNDLE_IDENTIFIER = org.archer.u17;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Bridge/cartoon.h";
 				SWIFT_VERSION = 4.2;
@@ -430,14 +431,15 @@
 			baseConfigurationReference = C372B763E76FB817B2EE591C /* Pods-U17.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9WYEP9V89C;
+				DEVELOPMENT_TEAM = 3MEQ3GT44F;
 				INFOPLIST_FILE = U17/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.archer.U17;
+				PRODUCT_BUNDLE_IDENTIFIER = org.archer.u17;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Bridge/cartoon.h";
 				SWIFT_VERSION = 4.2;
