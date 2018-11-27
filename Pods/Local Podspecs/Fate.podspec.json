@@ -36,6 +36,9 @@
     ],
     "RxDataSources": [
       "~> 3.0.2"
+    ],
+    "UITableView+FDTemplateLayoutCell": [
+      "~> 1.6"
     ]
   },
   "resource_bundles": {
@@ -55,6 +58,10 @@
     {
       "name": "RxAdaptor",
       "source_files": "Fate/Classes/RxAdaptor"
+    },
+    {
+      "name": "Identifiable",
+      "source_files": "Fate/Classes/Identifiable"
     },
     {
       "name": "YYKitAdaptor",

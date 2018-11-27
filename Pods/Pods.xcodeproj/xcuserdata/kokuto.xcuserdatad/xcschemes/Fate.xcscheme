@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D59371386D894C7A7AA6557E025DFA9"
+               BlueprintIdentifier = "B6F480B08D2CF8B47CE8D1B217D012FF"
                BlueprintName = "Fate"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Fate.framework">

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FE9D51F399060C97D416B5653085908E"
+               BlueprintIdentifier = "6738B259CA9AE679B25F5640A3A28178"
                BlueprintName = "AppBookshelf"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "AppBookshelf.framework">

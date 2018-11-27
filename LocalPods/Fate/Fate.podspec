@@ -27,13 +27,14 @@ Pod::Spec.new do |s|
     s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'MJRefresh', '~> 3.1.15.7'
     s.dependency 'RxDataSources', '~> 3.0.2'
+    s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
     
     s.resource_bundles = {
       'Fate' => ['Fate/Assets/*.png']
     }
     
     s.subspec "Core" do |cs|
-        cs.source_files  = "Fate/Classes/Core"
+      cs.source_files  = "Fate/Classes/Core"
     end
     
     s.subspec "CommonUI" do |cs|
@@ -41,15 +42,19 @@ Pod::Spec.new do |s|
     end
     
     s.subspec "RxAdaptor" do |cs|
-        cs.source_files  = "Fate/Classes/RxAdaptor"
+      cs.source_files  = "Fate/Classes/RxAdaptor"
+    end
+    
+    s.subspec "Identifiable" do |cs|
+      cs.source_files  = "Fate/Classes/Identifiable"
     end
     
     s.subspec "YYKitAdaptor" do |cs|
-        cs.source_files  = "Fate/Classes/YYKitAdaptor"
+      cs.source_files  = "Fate/Classes/YYKitAdaptor"
     end
     
     s.subspec "UILayoutAdaptor" do |cs|
-        cs.source_files  = "Fate/Classes/UILayoutAdaptor"
+      cs.source_files  = "Fate/Classes/UILayoutAdaptor"
     end
     
 end

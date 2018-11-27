@@ -14,9 +14,7 @@ struct Cache {
     
     static func setObject(_ json: JSONObject, forTarget target: APITargetType, ignoredKeys: [String] = []) {
         let cacheKey = cacheKeyWithTarget(target, ignoredKeys: ignoredKeys)
-        _cache?.setObject(json as NSString, forKey: cacheKey, with: {
-            debugPrint("Cache success.")
-        })
+        _cache?.setObject(json as NSString, forKey: cacheKey, with: nil)
     }
     
     static func objectForTarget(_ target: APITargetType, ignoredKeys: [String] = []) -> JSONObject? {

@@ -25,7 +25,7 @@ class TodayViewController: UIViewController {
         if #available(iOS 11, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
-        v.register(TodayRecommandCell.self, forCellReuseIdentifier: "cell")
+        v.fate.register(cellClass: TodayRecommandCell.self)
         return v
     }()
     
@@ -92,7 +92,7 @@ extension TodayViewController: View {
     
     private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommandSection> {
         return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, display) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "cell") as! TodayRecommandCell
+            let cell: TodayRecommandCell = tv.fate.dequeueReusableCell(forIndexPath: ip)
             cell.display = display
             return cell
         })
@@ -101,9 +101,7 @@ extension TodayViewController: View {
 
 extension TodayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: "cell", cacheBy: indexPath, configuration: { [weak self] (cell) in
-            guard let `self` = self else { return }
-            let cell = cell as! TodayRecommandCell
+        return tableView.fate.heightForRowAt(indexPath, cellClass: TodayRecommandCell.self, configuration: { (cell) in
             cell.display = self.dataSource[indexPath]
         })
     }
