@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 一些颜色定义
 public struct U17def {
     public static var black_333333: UIColor {
         return UIColor(rgbValue: 0x333333)

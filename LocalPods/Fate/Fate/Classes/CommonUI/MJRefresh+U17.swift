@@ -18,6 +18,7 @@ public struct U17RefreshState {
 }
 
 public extension UIScrollView {
+    /// u17的gif下拉刷新控件
     public var gifHeader: MJRefreshHeader {
         set {
             synchronized(self) {
@@ -35,6 +36,7 @@ public extension UIScrollView {
         }
     }
     
+    /// u17今日模块的上拉刷新控件
     public var todayFooter: MJRefreshFooter {
         set {
             synchronized(self) {

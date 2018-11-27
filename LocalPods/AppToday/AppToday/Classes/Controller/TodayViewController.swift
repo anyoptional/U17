@@ -14,7 +14,6 @@ import RxSwiftExt
 import ReactorKit
 import RxAppState
 import RxDataSources
-import UITableView_FDTemplateLayoutCell
 
 class TodayViewController: UIViewController {
     
@@ -91,8 +90,8 @@ extension TodayViewController: View {
     }
     
     private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommandSection> {
-        return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, display) in
-            let cell: TodayRecommandCell = tv.fate.dequeueReusableCell(forIndexPath: ip)
+        return RxTableViewSectionedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, display) in
+            let cell: TodayRecommandCell = tableView.fate.dequeueReusableCell(for: indexPath)
             cell.display = display
             return cell
         })

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: 加载Fate.bundle里面的图片资源
+
 class FateBundleLoader: NSObject {}
 
 extension Bundle {

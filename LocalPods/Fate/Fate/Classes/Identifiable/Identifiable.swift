@@ -30,21 +30,29 @@ extension UITableViewHeaderFooterView: ReuseIdentifiable {}
 
 public extension Fate where Base: UITableView {
     
+    /// 给UITableView注册cell,
+    /// 配合下面的dequeue方法取出cell.
     public func register<_Tp: UITableViewCell>(cellClass: _Tp.Type) {
         base.register(cellClass.self, forCellReuseIdentifier: cellClass.reuseIdentifier)
     }
     
-    public func dequeueReusableCell<_Tp: UITableViewCell>(forIndexPath indexPath: IndexPath, cellClass: _Tp.Type = _Tp.self) -> _Tp {
+    /// 从重用队列中取cell,
+    /// cell必须先用上面的方法注册.
+    public func dequeueReusableCell<_Tp: UITableViewCell>(for indexPath: IndexPath, cellClass: _Tp.Type = _Tp.self) -> _Tp {
         guard let cell = base.dequeueReusableCell(withIdentifier: cellClass.reuseIdentifier, for: indexPath) as? _Tp else {
             fatalError("Could not dequeue cell.")
         }
         return cell
     }
     
+    /// 给UITableView注册headerFooterView,
+    /// 配合下面的dequeue方法取出headerFooterView.
     public func register<_Tp: UITableViewHeaderFooterView>(headerFooterViewClass: _Tp.Type) {
         base.register(headerFooterViewClass.self, forHeaderFooterViewReuseIdentifier: headerFooterViewClass.reuseIdentifier)
     }
     
+    /// 从重用队列中取headerFooterView,
+    /// headerFooterView必须先用上面的方法注册.
     public func dequeueReusableHeaderFooterView<_Tp: UITableViewHeaderFooterView>(_ headerFooterViewClass: _Tp.Type = _Tp.self) -> _Tp? {
         guard let headerFooterView = base.dequeueReusableHeaderFooterView(withIdentifier: headerFooterViewClass.reuseIdentifier) as? _Tp? else {
             fatalError("Could not dequeue header/footer view.")
@@ -59,17 +67,23 @@ extension UICollectionReusableView: ReuseIdentifiable {}
 
 public extension Fate where Base: UICollectionView {
     
+    /// 给UICollectionView注册cell,
+    /// 配合下面的dequeue方法取出cell.
     public func register<_Tp: UICollectionViewCell>(_ cellClass: _Tp.Type) {
         base.register(cellClass.self, forCellWithReuseIdentifier: cellClass.reuseIdentifier)
     }
     
-    public func dequeueReusableCell<_Tp: UICollectionViewCell>(forIndexPath indexPath: IndexPath, cellClass: _Tp.Type = _Tp.self) -> _Tp {
+    /// 从重用队列中取cell,
+    /// cell必须先用上面的方法注册.
+    public func dequeueReusableCell<_Tp: UICollectionViewCell>(for indexPath: IndexPath, cellClass: _Tp.Type = _Tp.self) -> _Tp {
         guard let cell = base.dequeueReusableCell(withReuseIdentifier: cellClass.reuseIdentifier, for: indexPath) as? _Tp else {
             fatalError("Could not dequeue cell.")
         }
         return cell
     }
     
+    /// 给UICollectionView注册supplementaryView,
+    /// 配合下面的dequeue方法取出supplementaryView.
     public func register<_Tp: UICollectionReusableView>(_ supplementaryViewClass: _Tp.Type,
                                                         forSupplementaryViewOfKind elementKind: String) {
         base.register(supplementaryViewClass.self,
@@ -77,6 +91,8 @@ public extension Fate where Base: UICollectionView {
                       withReuseIdentifier: supplementaryViewClass.reuseIdentifier)
     }
     
+    /// 从重用队列中取supplementaryView,
+    /// supplementaryView必须先用上面的方法注册.
     public func dequeueReusableSupplementaryView<_Tp: UICollectionReusableView>(ofKind elementKind: String,
                                                                                 forIndexPath indexPath: IndexPath,
                                                                                 supplementaryViewClass: _Tp.Type = _Tp.self) -> _Tp {
@@ -91,7 +107,10 @@ public extension Fate where Base: UICollectionView {
 
 // MARK: FDTemplateLayoutCell解决类型推断
 
-extension Fate where Base: UITableView {
+public extension Fate where Base: UITableView {
+    
+    /// UITableView自动计算cell高度,
+    /// cell必须先用上面的方法注册.
     public func heightForRowAt<_Tp: UITableViewCell>(_ indexPath: IndexPath,
                                                      cellClass: _Tp.Type,
                                                      configuration: @escaping (_Tp) -> Void) -> CGFloat {
@@ -103,6 +122,8 @@ extension Fate where Base: UITableView {
         })
     }
     
+    /// UITableView自动计算headerFooterView高度,
+    /// cell必须先用上面的方法注册.
     public func heightForHeaderFooterView<_Tp: UITableViewHeaderFooterView>(cellClass: _Tp.Type,
                                                                             configuration: @escaping (_Tp) -> Void) -> CGFloat {
         return base.fd_heightForHeaderFooterView(withIdentifier: cellClass.reuseIdentifier, configuration: { (headerFooterView) in
