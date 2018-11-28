@@ -7,36 +7,20 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'SwipeMenu'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of SwipeMenu.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
-
-  s.homepage         = 'https://github.com/kCFNull/SwipeMenu'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'kCFNull' => 'code4archer@163.com' }
-  s.source           = { :git => 'https://github.com/kCFNull/SwipeMenu.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '8.0'
-
-  s.source_files = 'SwipeMenu/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'SwipeMenu' => ['SwipeMenu/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.name             = 'SwipeMenu'
+    s.version          = '1.0.0'
+    s.summary          = 'A swipable page menu.'
+    
+    s.homepage         = 'Coming soon...'
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.author           = { 'Archer' => 'code4archer@163.com' }
+    s.source           = { :git => 'Coming soon...', :tag => s.version.to_s }
+    
+    s.ios.deployment_target = '8.0'
+    
+    s.subspec "Core" do |cs|
+        cs.source_files  = "SwipeMenu/Classes/Core"
+        cs.frameworks  = "UIKit"
+    end
+    
 end

@@ -1,0 +1,27 @@
+{
+  "name": "SwipeMenu",
+  "version": "1.0.0",
+  "summary": "A swipable page menu.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "SwipeMenu/Classes/Core",
+      "frameworks": "UIKit"
+    }
+  ]
+}

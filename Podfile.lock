@@ -515,6 +515,9 @@ PODS:
   - RxSwiftExt/Core (3.2.0):
     - RxSwift (~> 4.0)
   - SnapKit (4.0.1)
+  - SwipeMenu (1.0.0):
+    - SwipeMenu/Core (= 1.0.0)
+  - SwipeMenu/Core (1.0.0)
   - Timepiece (1.3.1)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - YYKit (1.0.9):
@@ -531,6 +534,7 @@ DEPENDENCIES:
   - Fate (from `LocalPods/Fate`)
   - Mediator (from `LocalPods/Mediator`)
   - RxMoya (from `LocalPods/RxMoya`)
+  - SwipeMenu (from `LocalPods/SwipeMenu`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -570,6 +574,8 @@ EXTERNAL SOURCES:
     :path: LocalPods/Mediator
   RxMoya:
     :path: LocalPods/RxMoya
+  SwipeMenu:
+    :path: LocalPods/SwipeMenu
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -594,10 +600,11 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxSwiftExt: 64b7140124629a6a084159735f3714f0fb1c61d6
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  SwipeMenu: 84c3bfec4d02957f008409f7a9d1f52b35e12ba6
   Timepiece: c0760ec0e545697d86b80424dcd2b4d5ef66cf51
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: a1f76a9dfce6dc9845b28df592ce455e31536b91
+PODFILE CHECKSUM: f690d665c563d641fcf8ec840fc846d98a0c150e
 
 COCOAPODS: 1.5.3

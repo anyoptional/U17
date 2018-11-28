@@ -18,6 +18,10 @@ final class U17TabBarController: UITabBarController {
     private func appearanceAdjustify() {
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = .white
+        UITabBar.appearance().shadowImage = UIGraphicsImageCreate(UIColor(red: 230.0 / 255.0,
+                                                                          green: 230.0 / 255.0,
+                                                                          blue: 230.0 / 255.0, alpha: 1))
+        UITabBar.appearance().backgroundImage = UIGraphicsImageCreate(.white)
     }
     
     private func initialize() {
@@ -42,9 +46,20 @@ final class U17TabBarController: UITabBarController {
     }
 }
 
+fileprivate func UIGraphicsImageCreate(_ color: UIColor, _ size: CGSize = CGSize(width: 1, height: 0.4)) -> UIImage? {
+    if size.width <= 0 || size.height <= 0 { return nil }
+    let rect = CGRect(origin: .zero, size: size)
+    UIGraphicsBeginImageContextWithOptions(size, false, 0)
+    defer { UIGraphicsEndImageContext() }
+    let ctx = UIGraphicsGetCurrentContext()
+    ctx?.setFillColor(color.cgColor)
+    ctx?.fill(rect)
+    return UIGraphicsGetImageFromCurrentImageContext()
+}
+
 #if false
 extension UIImage {
-    func resize(to size: CGSize) -> UIImage? {
+    fileprivate func resize(to size: CGSize) -> UIImage? {
         if size.width <= 0 || size.height <= 0 { return nil }
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
