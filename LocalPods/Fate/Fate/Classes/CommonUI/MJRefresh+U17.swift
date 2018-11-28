@@ -11,7 +11,7 @@ import MJRefresh
 public struct U17RefreshState {
     /// 上拉刷新状态
     public var upState = MJRefreshState.idle
-    /// 上拉刷新状态
+    /// 下拉刷新状态
     public var downState = MJRefreshState.idle
     
     public init() {}

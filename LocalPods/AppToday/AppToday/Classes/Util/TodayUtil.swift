@@ -7,11 +7,11 @@
 
 import Foundation
 
-class AppTodayBunbleLoader: NSObject {}
+class AppTodayBundleLoader: NSObject {}
 
 extension Bundle {
     static let resourcesBundle: Bundle? = {
-        var path = Bundle(for: AppTodayBunbleLoader.self).resourcePath ?? ""
+        var path = Bundle(for: AppTodayBundleLoader.self).resourcePath ?? ""
         path.append("/AppToday.bundle")
         return Bundle(path: path)
     }()

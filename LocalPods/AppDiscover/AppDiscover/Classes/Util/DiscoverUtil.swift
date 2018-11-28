@@ -7,11 +7,11 @@
 
 import Foundation
 
-class AppDiscoverBunbleLoader: NSObject {}
+class AppDiscoverBundleLoader: NSObject {}
 
 extension Bundle {
     static let resourcesBundle: Bundle? = {
-        var path = Bundle(for: AppDiscoverBunbleLoader.self).resourcePath ?? ""
+        var path = Bundle(for: AppDiscoverBundleLoader.self).resourcePath ?? ""
         path.append("/AppDiscover.bundle")
         return Bundle(path: path)
     }()

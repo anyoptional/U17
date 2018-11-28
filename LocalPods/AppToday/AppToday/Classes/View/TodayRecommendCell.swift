@@ -1,5 +1,5 @@
 //
-//  TodayRecommandCell.swift
+//  TodayRecommendCell.swift
 //  AppToday
 //
 //  Created by Archer on 2018/11/23.
@@ -9,7 +9,7 @@ import Fate
 import YYKit
 import Bindable
 
-class TodayRecommandCell: UITableViewCell {
+class TodayRecommendCell: UITableViewCell {
     
     private lazy var imgView: UIImageView = {
         let v = UIImageView()
@@ -94,8 +94,8 @@ class TodayRecommandCell: UITableViewCell {
     }
 }
 
-extension TodayRecommandCell: Bindable {
-    func bind(display: TodayRecommandCellDisplay) {
+extension TodayRecommendCell: Bindable {
+    func bind(display: TodayRecommendCellDisplay) {
         
         let presenter = display.state.presenter
         

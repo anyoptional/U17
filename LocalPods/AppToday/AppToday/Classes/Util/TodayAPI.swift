@@ -8,32 +8,32 @@
 import RxMoya
 
 enum TodayAPI {
-    case getRecommandList(JSONParamConvertible)
+    case getRecommendList(JSONParamConvertible)
 }
 
 extension TodayAPI: APITargetType {
     var host: APIHost {
         switch self {
-        case .getRecommandList: return "http://app.u17.com/v3/appV3_3/ios/phone"
+        case .getRecommendList: return "http://app.u17.com/v3/appV3_3/ios/phone"
         }
     }
     
     var path: APIPath {
         switch self {
-        case .getRecommandList: return "list/todayRecommendList"
+        case .getRecommendList: return "list/todayRecommendList"
         }
     }
     
     var method: APIMethod {
         switch self {
-        case .getRecommandList:
+        case .getRecommendList:
             return .get
         }
     }
     
     var parameters: APIParameters {
         switch self {
-        case let .getRecommandList(req):
+        case let .getRecommendList(req):
             return req.asParameters()
         }
     }

@@ -9,7 +9,6 @@ import Foundation
 
 @objcMembers
 class TodayReq: NSObject {
-    var day = "6"
     var android_id = "iphone"
     var time = Int32(Date().timeIntervalSince1970)
     var device_id = UIDevice.current.identifierForVendor?.uuidString ?? ""
@@ -23,5 +22,7 @@ class TodayReq: NSObject {
 }
 
 @objcMembers
-class TodayRecommandListReq: TodayReq {}
+class TodayRecommendListReq: TodayReq {
+    var day: String?
+}
 

@@ -24,7 +24,7 @@ class TodayViewController: UIViewController {
         if #available(iOS 11, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
-        v.fate.register(cellClass: TodayRecommandCell.self)
+        v.fate.register(cellClass: TodayRecommendCell.self)
         return v
     }()
     
@@ -54,7 +54,7 @@ extension TodayViewController: View {
         
         // MARK: 请求数据
         rx.viewDidLoad
-            .map { Reactor.Action.getRecommandList }
+            .map { Reactor.Action.getRecommendList }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -62,7 +62,7 @@ extension TodayViewController: View {
         tableView.gifHeader.rx.refresh
             .debounce(1, scheduler: MainScheduler.instance)
             .takeWhen { $0 == .refreshing }
-            .map { _ in Reactor.Action.getRecommandList }
+            .map { _ in Reactor.Action.getRecommendList }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -89,9 +89,9 @@ extension TodayViewController: View {
             }.disposed(by: disposeBag)
     }
     
-    private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommandSection> {
+    private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommendSection> {
         return RxTableViewSectionedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, display) in
-            let cell: TodayRecommandCell = tableView.fate.dequeueReusableCell(for: indexPath)
+            let cell: TodayRecommendCell = tableView.fate.dequeueReusableCell(for: indexPath)
             cell.display = display
             return cell
         })
@@ -100,7 +100,7 @@ extension TodayViewController: View {
 
 extension TodayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fate.heightForRowAt(indexPath, cellClass: TodayRecommandCell.self, configuration: { (cell) in
+        return tableView.fate.heightForRowAt(indexPath, cellClass: TodayRecommendCell.self, configuration: { (cell) in
             cell.display = self.dataSource[indexPath]
         })
     }

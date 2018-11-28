@@ -8,11 +8,11 @@
 
 import Foundation
 
-class AppProfileBunbleLoader: NSObject {}
+class AppProfileBundleLoader: NSObject {}
 
 extension Bundle {
     static let resourcesBundle: Bundle? = {
-        var path = Bundle(for: AppProfileBunbleLoader.self).resourcePath ?? ""
+        var path = Bundle(for: AppProfileBundleLoader.self).resourcePath ?? ""
         path.append("/AppProfile.bundle")
         return Bundle(path: path)
     }()

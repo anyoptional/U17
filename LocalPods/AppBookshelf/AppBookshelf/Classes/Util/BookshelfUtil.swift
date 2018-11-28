@@ -7,11 +7,11 @@
 
 import Foundation
 
-class AppBookshelfBunbleLoader: NSObject {}
+class AppBookshelfBundleLoader: NSObject {}
 
 extension Bundle {
     static let resourcesBundle: Bundle? = {
-        var path = Bundle(for: AppBookshelfBunbleLoader.self).resourcePath ?? ""
+        var path = Bundle(for: AppBookshelfBundleLoader.self).resourcePath ?? ""
         path.append("/AppBookshelf.bundle")
         return Bundle(path: path)
     }()

@@ -1,5 +1,5 @@
 //
-//  TodayRecommandCellDisplay.swift
+//  TodayRecommendCellDisplay.swift
 //  AppToday
 //
 //  Created by Archer on 2018/11/23.
@@ -7,7 +7,7 @@
 
 import Bindable
 
-struct TodayRecommandCellPresenter: Presentable {
+struct TodayRecommendCellPresenter: Presentable {
     
     let imgURL: URL?
     let titleText: String
@@ -16,7 +16,7 @@ struct TodayRecommandCellPresenter: Presentable {
     let chapterText: String
     
     /// oh fuck, 真尼玛长orz...
-    init(rawValue: TodayRecommandResp.DataBean.ReturnDataBean.ComicsBean) {
+    init(rawValue: TodayRecommendResp.DataBean.ReturnDataBean.ComicsBean) {
         
         titleText = rawValue.title.filterNil()
         
@@ -30,4 +30,4 @@ struct TodayRecommandCellPresenter: Presentable {
     }
 }
 
-typealias TodayRecommandCellDisplay = UIViewSingleDisplay<TodayRecommandCellPresenter>
+typealias TodayRecommendCellDisplay = UIViewSingleDisplay<TodayRecommendCellPresenter>

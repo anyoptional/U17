@@ -7,11 +7,11 @@
 
 import Foundation
 
-class AppMainBunbleLoader: NSObject {}
+class AppMainBundleLoader: NSObject {}
 
 extension Bundle {
     static let resourcesBundle: Bundle? = {
-        var path = Bundle(for: AppMainBunbleLoader.self).resourcePath ?? ""
+        var path = Bundle(for: AppMainBundleLoader.self).resourcePath ?? ""
         path.append("/AppMain.bundle")
         return Bundle(path: path)
     }()

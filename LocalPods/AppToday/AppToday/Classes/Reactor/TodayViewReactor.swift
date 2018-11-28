@@ -12,17 +12,17 @@ import ReactorKit
 
 final class TodayViewReactor: Reactor {
     
-    typealias Section = TodayRecommandSection
+    typealias Section = TodayRecommendSection
     typealias SectionItem = Section.Item
-    typealias ObjCType = TodayRecommandResp
+    typealias ObjCType = TodayRecommendResp
     
     enum Action {
-        case getRecommandList
+        case getRecommendList
     }
     
     enum Mutation {
         case setError(APIError)
-        case setRecommandResp(ObjCType.DataBean.ReturnDataBean)
+        case setRecommendResp(ObjCType.DataBean.ReturnDataBean)
     }
     
     struct State {
@@ -35,8 +35,8 @@ final class TodayViewReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .getRecommandList:
-            return getRecommandList()
+        case .getRecommendList:
+            return getRecommendList()
         }
     }
     
@@ -47,7 +47,7 @@ final class TodayViewReactor: Reactor {
         case .setError(let error):
             state.error = error
             
-        case .setRecommandResp(let resp):
+        case .setRecommendResp(let resp):
             state.refreshState.downState = .idle
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
             state.sections = [Section(items: (resp.comics?.map { SectionItem(rawValue: $0) }).filterNil([]))]
@@ -57,14 +57,14 @@ final class TodayViewReactor: Reactor {
 }
 
 extension TodayViewReactor {
-    private func getRecommandList() -> Observable<Mutation> {
-        let recommandListReq = TodayRecommandListReq()
-        return APIProvider.rx.request(TodayAPI.getRecommandList(recommandListReq),
+    private func getRecommendList() -> Observable<Mutation> {
+        let recommendListReq = TodayRecommendListReq()
+        return APIProvider.rx.request(TodayAPI.getRecommendList(recommendListReq),
                                       allowsURLCache: true, ignoredKeys: ["time"])
             .mapObject(ObjCType.self)
             .map { $0.data?.returnData }
             .filterNil()
-            .map { Mutation.setRecommandResp($0) }
+            .map { Mutation.setRecommendResp($0) }
             .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }
