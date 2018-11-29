@@ -13,7 +13,7 @@ class DiscoverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor(hexString: "#30DC91")
     }
     
 }

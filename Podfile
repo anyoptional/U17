@@ -10,7 +10,6 @@ target 'U17' do
     pod 'AppToday', :path => 'LocalPods/AppToday'
     pod 'Mediator', :path => 'LocalPods/Mediator'
     pod 'Bindable', :path => 'LocalPods/Bindable'
-    pod 'SwipeMenu', :path => 'LocalPods/SwipeMenu'
     pod 'AppProfile', :path => 'LocalPods/AppProfile'
     pod 'AppDiscover', :path => 'LocalPods/AppDiscover'
     pod 'AppBookshelf', :path => 'LocalPods/AppBookshelf'

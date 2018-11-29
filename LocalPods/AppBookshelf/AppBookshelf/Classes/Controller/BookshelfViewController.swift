@@ -13,7 +13,7 @@ final class BookshelfViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(rgbValue: 0xFF0000)
+        view.backgroundColor = UIColor(rgbValue: 0x30DC91)
         
     }
 }

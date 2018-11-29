@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     s.author           = { 'Archer' => 'code4archer@163.com' }
     s.source           = { :git => 'Coming soon...', :tag => s.version.to_s }
     
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     
     s.dependency 'Mediator'
     

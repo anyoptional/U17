@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     s.author           = { 'Archer' => 'code4archer@163.com' }
     s.source           = { :git => 'Coming soon...', :tag => s.version.to_s }
     
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     
     s.dependency 'Fate'
     s.dependency 'RxMoya'
@@ -26,13 +26,15 @@ Pod::Spec.new do |s|
     s.dependency 'RxSwift', '~> 4.1.2'
     s.dependency 'RxCocoa', '~> 4.1.2'
     s.dependency 'SnapKit', '~> 4.0.1'
+    s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'ReactorKit', '~> 1.1.0'
     s.dependency 'RxAppState', '~> 1.1.2'
     s.dependency 'RxOptional', '~> 3.4.0'
     s.dependency 'RxSwiftExt', '~> 3.2.0'
     s.dependency 'RxDataSources', '~> 3.0.2'
+    s.dependency 'TYPagerController', '~> 2.1.2'
     s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
-    
+
     s.resource_bundles = {
         'AppToday' => ['AppToday/Assets/*.png']
     }

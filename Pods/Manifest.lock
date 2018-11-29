@@ -320,6 +320,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/Controller (1.0.0):
@@ -334,6 +336,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/Model (1.0.0):
@@ -348,6 +352,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/Reactor (1.0.0):
@@ -362,6 +368,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/Router (1.0.0):
@@ -376,6 +384,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/Util (1.0.0):
@@ -390,6 +400,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - AppToday/View (1.0.0):
@@ -404,6 +416,8 @@ PODS:
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
+    - Timepiece (~> 1.3.1)
+    - TYPagerController (~> 2.1.2)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
   - Bindable (1.0.0):
@@ -423,6 +437,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -431,6 +446,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -439,6 +455,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -447,6 +464,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -455,6 +473,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -463,6 +482,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -471,6 +491,7 @@ PODS:
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.0.2)
     - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -514,11 +535,10 @@ PODS:
     - RxSwiftExt/Core (= 3.2.0)
   - RxSwiftExt/Core (3.2.0):
     - RxSwift (~> 4.0)
+  - SkeletonView (1.4.1)
   - SnapKit (4.0.1)
-  - SwipeMenu (1.0.0):
-    - SwipeMenu/Core (= 1.0.0)
-  - SwipeMenu/Core (1.0.0)
   - Timepiece (1.3.1)
+  - TYPagerController (2.1.2)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
@@ -534,7 +554,6 @@ DEPENDENCIES:
   - Fate (from `LocalPods/Fate`)
   - Mediator (from `LocalPods/Mediator`)
   - RxMoya (from `LocalPods/RxMoya`)
-  - SwipeMenu (from `LocalPods/SwipeMenu`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -550,8 +569,10 @@ SPEC REPOS:
     - RxOptional
     - RxSwift
     - RxSwiftExt
+    - SkeletonView
     - SnapKit
     - Timepiece
+    - TYPagerController
     - "UITableView+FDTemplateLayoutCell"
     - YYKit
 
@@ -574,20 +595,18 @@ EXTERNAL SOURCES:
     :path: LocalPods/Mediator
   RxMoya:
     :path: LocalPods/RxMoya
-  SwipeMenu:
-    :path: LocalPods/SwipeMenu
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppBookshelf: cf4b82d000981823f9fe5e25bb993caabd0e19b5
-  AppDiscover: 126e374fc5e2d44fcdeec7ada475bf995d5223ed
-  AppMain: ca4a359350de51f5cc6ec24f17055439f2b43f83
-  AppProfile: 4143f8ec54294988b8d0dd4a153601be4d88bd95
-  AppToday: 8dd6767d10c884457ce4f410bbdb6d7d4091bab0
-  Bindable: 201bc2348c155931d5852661b8afc2ff0394d698
+  AppBookshelf: e1fc726f5b60fe2530dea8e8a44651bb66f2dad2
+  AppDiscover: 0c60aed4da3795aa0db0f016dd97ba8f6d776f6d
+  AppMain: a53d8237a9b59beb5feb082cb5bee26f28d904af
+  AppProfile: a9857979366341a1ee7771308a556de1d02b60a7
+  AppToday: f62b55671237c9f2906b92f17cbf35cfb1bd6610
+  Bindable: d90f134e0aec1bbe93f57d3a55108c38c1740f21
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: d0346e38a3975ce1b9f94465583db89d52b2a82f
-  Mediator: 88b8b19081c5eeec909e623c79c1a274763ad011
+  Fate: 327375da17c4934e321c21c4752924da883a72ae
+  Mediator: ae6cb5dc3cc80f2a02673f06eaee28cb126fadba
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
@@ -595,16 +614,17 @@ SPEC CHECKSUMS:
   RxAppState: 0238d65c304725fa815a4b3758be210d48f4db82
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
-  RxMoya: 077fc8411f82c6acb096b588555a3215e38a9eda
+  RxMoya: 6b8446e759e5d5e5198376f8700287096fa7e01c
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxSwiftExt: 64b7140124629a6a084159735f3714f0fb1c61d6
+  SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SwipeMenu: 84c3bfec4d02957f008409f7a9d1f52b35e12ba6
   Timepiece: c0760ec0e545697d86b80424dcd2b4d5ef66cf51
+  TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: f690d665c563d641fcf8ec840fc846d98a0c150e
+PODFILE CHECKSUM: a1f76a9dfce6dc9845b28df592ce455e31536b91
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

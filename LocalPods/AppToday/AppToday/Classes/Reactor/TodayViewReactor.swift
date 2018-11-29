@@ -61,7 +61,7 @@ extension TodayViewReactor {
         let recommendListReq = TodayRecommendListReq()
         recommendListReq.day = "4"
         return APIProvider.rx.request(TodayAPI.getRecommendList(recommendListReq),
-                                      allowsURLCache: true, ignoredKeys: ["time"])
+                                      allowsURLCache: false, ignoredKeys: ["time"])
             .mapObject(ObjectType.self)
             .map { $0.data?.returnData }
             .filterNil()

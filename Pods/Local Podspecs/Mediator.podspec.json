@@ -16,7 +16,7 @@
   },
   "frameworks": "UIKit",
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "public_header_files": "Mediator/Classes/Supports/*.h",
   "subspecs": [

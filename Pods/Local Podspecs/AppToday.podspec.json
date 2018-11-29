@@ -15,7 +15,7 @@
     "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "dependencies": {
     "Fate": [
@@ -39,6 +39,9 @@
     "SnapKit": [
       "~> 4.0.1"
     ],
+    "Timepiece": [
+      "~> 1.3.1"
+    ],
     "ReactorKit": [
       "~> 1.1.0"
     ],
@@ -53,6 +56,9 @@
     ],
     "RxDataSources": [
       "~> 3.0.2"
+    ],
+    "TYPagerController": [
+      "~> 2.1.2"
     ],
     "UITableView+FDTemplateLayoutCell": [
       "~> 1.6"

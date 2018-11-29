@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     
     s.frameworks  = "UIKit"
     
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     
     s.public_header_files = "Mediator/Classes/Supports/*.h"
     

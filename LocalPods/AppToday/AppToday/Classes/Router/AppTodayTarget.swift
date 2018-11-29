@@ -12,7 +12,6 @@ class AppTodayTarget: NSObject {
     
     func getTodayViewController() -> UIViewController {
         let vc = TodayViewController()
-        vc.reactor = TodayViewReactor()
         return vc
     }
     

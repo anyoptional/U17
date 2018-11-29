@@ -15,7 +15,7 @@
     "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "dependencies": {
     "Fate": [
