@@ -46,7 +46,7 @@ final class U17TabBarController: UITabBarController {
     }
 }
 
-fileprivate func UIGraphicsImageCreate(_ color: UIColor, _ size: CGSize = CGSize(width: 1, height: 0.4)) -> UIImage? {
+fileprivate func UIGraphicsImageCreate(_ color: UIColor, _ size: CGSize = CGSize(width: 1, height: 0.5)) -> UIImage? {
     if size.width <= 0 || size.height <= 0 { return nil }
     let rect = CGRect(origin: .zero, size: size)
     UIGraphicsBeginImageContextWithOptions(size, false, 0)

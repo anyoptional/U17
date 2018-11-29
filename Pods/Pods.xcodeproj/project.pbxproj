@@ -710,6 +710,7 @@
 		C44561E921AE4EE5000A42D2 /* SwipeMenuTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561E821AE4EE5000A42D2 /* SwipeMenuTabBar.swift */; };
 		C44561EB21AE4F59000A42D2 /* SwipeMenuScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561EA21AE4F59000A42D2 /* SwipeMenuScrollView.swift */; };
 		C44561ED21AE4FB9000A42D2 /* SwipeMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561EC21AE4FB9000A42D2 /* SwipeMenuController.swift */; };
+		C45215F821AF707D00C31441 /* ExNSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215F721AF707D00C31441 /* ExNSCopying.swift */; };
 		C4A583792DC85B89B96A64A90F304F3A /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FF04F16A2204300011B02A96DDDBD5 /* Diff.swift */; };
 		C4BDB0CD1AC89545C52C67B5C84DC032 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF13F3F52E14ABF839F90986D2129A2 /* Create.swift */; };
 		C4C4A2D1B55A3504DA55EA220DA25611 /* ReactorKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 864D64D00C722F55C8E58C64AD7703A6 /* ReactorKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2589,6 +2590,7 @@
 		C44561E821AE4EE5000A42D2 /* SwipeMenuTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuTabBar.swift; path = SwipeMenu/Classes/Core/SwipeMenuTabBar.swift; sourceTree = "<group>"; };
 		C44561EA21AE4F59000A42D2 /* SwipeMenuScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuScrollView.swift; path = SwipeMenu/Classes/Core/SwipeMenuScrollView.swift; sourceTree = "<group>"; };
 		C44561EC21AE4FB9000A42D2 /* SwipeMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuController.swift; path = SwipeMenu/Classes/Core/SwipeMenuController.swift; sourceTree = "<group>"; };
+		C45215F721AF707D00C31441 /* ExNSCopying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExNSCopying.swift; path = Fate/Classes/Core/ExNSCopying.swift; sourceTree = "<group>"; };
 		C45BC5A0DEB6FB37C422F4FE0EB628A4 /* __objc_msgSend.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = __objc_msgSend.h; path = Mediator/Classes/Supports/__objc_msgSend.h; sourceTree = "<group>"; };
 		C494342ECBCB126D3DE127754535D2DF /* YYTextArchiver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYTextArchiver.h; path = YYKit/Text/String/YYTextArchiver.h; sourceTree = "<group>"; };
 		C4DECE74CCA44E95AE87DF15AF8C7485 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
@@ -4008,6 +4010,7 @@
 				D3C4587D90B78A4C5A5DA0DB7A5ACEE2 /* ExUIImage.swift */,
 				5BB5EBD4CF99BF3E6BAD9BD01BC2C665 /* ExUIViewController.swift */,
 				D1F283815C70C14F1CB675D19BAA1B25 /* Fate.swift */,
+				C45215F721AF707D00C31441 /* ExNSCopying.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -6196,7 +6199,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -6737,6 +6740,7 @@
 				4AED63635BBF3CE7E8DA973DE5C69BF6 /* ExArray.swift in Sources */,
 				2679E94FEADA83E07BDB479316580183 /* ExBool.swift in Sources */,
 				2A227385DCAEF405C2EE494FCD693601 /* ExDispatchOnce.swift in Sources */,
+				C45215F821AF707D00C31441 /* ExNSCopying.swift in Sources */,
 				123AC94EDAA3662617F0E3AB1820EF55 /* ExDispatchTime.swift in Sources */,
 				D1E0081D157EF064EEBCFCDE285885CB /* ExNumberType.swift in Sources */,
 				46EEFAE73683B0E5B7AC12D33A1506FC /* ExOptional.swift in Sources */,
@@ -9753,6 +9757,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;

@@ -30,6 +30,7 @@ class TodayRecommendCell: UITableViewCell {
     private lazy var tagLabel: YYLabel = {
         let v = YYLabel()
         v.textAlignment = .left
+        v.textContainerInset = UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 0)
         contentView.addSubview(v)
         return v
     }()
@@ -78,6 +79,10 @@ class TodayRecommendCell: UITableViewCell {
             make.right.equalTo(-18)
             make.centerY.equalTo(titleLabel)
         }
+        tagLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(titleLabel.snp.right).offset(3)
+            make.centerY.equalTo(titleLabel)
+        }
         updateLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.left.equalTo(titleLabel)
@@ -106,6 +111,8 @@ extension TodayRecommendCell: Bindable {
         updateLabel.text = presenter.updateText
         
         chapterLabel.text = presenter.chapterText
+        
+        tagLabel.attributedText = presenter.tagAttributedText
         
         imgView.fate.setImage(withURL: presenter.imgURL,
                               placeholder: UIImage(nameInBundle: "today_list_placeholder"))

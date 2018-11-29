@@ -14,7 +14,8 @@ final class TodayViewReactor: Reactor {
     
     typealias Section = TodayRecommendSection
     typealias SectionItem = Section.Item
-    typealias ObjCType = TodayRecommendResp
+    typealias ObjectType = TodayRecommendResp
+    typealias ResponseType = TodayRecommendResp.DataBean.ReturnDataBean
     
     enum Action {
         case getRecommendList
@@ -22,7 +23,7 @@ final class TodayViewReactor: Reactor {
     
     enum Mutation {
         case setError(APIError)
-        case setRecommendResp(ObjCType.DataBean.ReturnDataBean)
+        case setRecommendResp(ResponseType)
     }
     
     struct State {
@@ -59,9 +60,10 @@ final class TodayViewReactor: Reactor {
 extension TodayViewReactor {
     private func getRecommendList() -> Observable<Mutation> {
         let recommendListReq = TodayRecommendListReq()
+        recommendListReq.day = "4"
         return APIProvider.rx.request(TodayAPI.getRecommendList(recommendListReq),
                                       allowsURLCache: true, ignoredKeys: ["time"])
-            .mapObject(ObjCType.self)
+            .mapObject(ObjectType.self)
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setRecommendResp($0) }
