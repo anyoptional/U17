@@ -13,7 +13,6 @@ import ReactorKit
 final class TodayViewReactor: Reactor {
     
     typealias Section = TodayRecommendSection
-    typealias SectionItem = Section.Item
     typealias ObjectType = TodayRecommendResp
     typealias ResponseType = TodayRecommendResp.DataBean.ReturnDataBean
     
@@ -51,7 +50,7 @@ final class TodayViewReactor: Reactor {
         case .setRecommendResp(let resp):
             state.refreshState.downState = .idle
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
-            state.sections = [Section(items: (resp.comics?.map { SectionItem(rawValue: $0) }).filterNil([]))]
+            state.sections = [Section(items: (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([]))]
         }
         return state
     }

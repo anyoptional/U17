@@ -7,4 +7,4 @@
 
 import Bindable
 
-typealias TodayRecommendSection = UITableCollectionViewSection<TodayRecommendCellDisplay>
+typealias TodayRecommendSection = RxDataSourcesSection<TodayRecommendCellDisplay>

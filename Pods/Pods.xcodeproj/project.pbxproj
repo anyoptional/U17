@@ -707,10 +707,12 @@
 		C16AE29AD401697D972A8BFC912F9313 /* refresh_will_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 480A26D6F4C1F4CADF3EA0AD8D0D0FC8 /* refresh_will_refresh.png */; };
 		C262B0A3746D01EFA8ECA3EA63E2F4D7 /* AsMaybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6438651A98041C3DE6EAF0F200FAC /* AsMaybe.swift */; };
 		C267FB01EBAF17EE53FD1D2C5FC3338C /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF922404B2587970B9F6997D1822D13C /* Reduce.swift */; };
-		C44561E921AE4EE5000A42D2 /* SwipeMenuTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561E821AE4EE5000A42D2 /* SwipeMenuTabBar.swift */; };
 		C44561EB21AE4F59000A42D2 /* SwipeMenuScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561EA21AE4F59000A42D2 /* SwipeMenuScrollView.swift */; };
-		C44561ED21AE4FB9000A42D2 /* SwipeMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44561EC21AE4FB9000A42D2 /* SwipeMenuController.swift */; };
 		C45215F821AF707D00C31441 /* ExNSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215F721AF707D00C31441 /* ExNSCopying.swift */; };
+		C45215FA21AF798600C31441 /* SwipeMenuTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215F921AF798600C31441 /* SwipeMenuTabView.swift */; };
+		C45215FC21AF7A0900C31441 /* SwipeMenuIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215FB21AF7A0900C31441 /* SwipeMenuIndicator.swift */; };
+		C45215FE21AF7A4700C31441 /* SwipeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215FD21AF7A4700C31441 /* SwipeMenuViewController.swift */; };
+		C452160021AF8F9C00C31441 /* SwipeMenuTabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45215FF21AF8F9C00C31441 /* SwipeMenuTabItemView.swift */; };
 		C4A583792DC85B89B96A64A90F304F3A /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FF04F16A2204300011B02A96DDDBD5 /* Diff.swift */; };
 		C4BDB0CD1AC89545C52C67B5C84DC032 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF13F3F52E14ABF839F90986D2129A2 /* Create.swift */; };
 		C4C4A2D1B55A3504DA55EA220DA25611 /* ReactorKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 864D64D00C722F55C8E58C64AD7703A6 /* ReactorKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2587,10 +2589,12 @@
 		C3BAF0ABE2571B3D6123228B54B8B0F9 /* YYTextAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYTextAttribute.h; path = YYKit/Text/String/YYTextAttribute.h; sourceTree = "<group>"; };
 		C404117DACBE9A8A749C7239008F2624 /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = Sources/RxDataSources/Deprecated.swift; sourceTree = "<group>"; };
 		C43D6588D76DD041A8D6893F40B660A1 /* TailRecursiveSink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TailRecursiveSink.swift; path = RxSwift/Observers/TailRecursiveSink.swift; sourceTree = "<group>"; };
-		C44561E821AE4EE5000A42D2 /* SwipeMenuTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuTabBar.swift; path = SwipeMenu/Classes/Core/SwipeMenuTabBar.swift; sourceTree = "<group>"; };
 		C44561EA21AE4F59000A42D2 /* SwipeMenuScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuScrollView.swift; path = SwipeMenu/Classes/Core/SwipeMenuScrollView.swift; sourceTree = "<group>"; };
-		C44561EC21AE4FB9000A42D2 /* SwipeMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuController.swift; path = SwipeMenu/Classes/Core/SwipeMenuController.swift; sourceTree = "<group>"; };
 		C45215F721AF707D00C31441 /* ExNSCopying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExNSCopying.swift; path = Fate/Classes/Core/ExNSCopying.swift; sourceTree = "<group>"; };
+		C45215F921AF798600C31441 /* SwipeMenuTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuTabView.swift; path = SwipeMenu/Classes/Core/SwipeMenuTabView.swift; sourceTree = "<group>"; };
+		C45215FB21AF7A0900C31441 /* SwipeMenuIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuIndicator.swift; path = SwipeMenu/Classes/Core/SwipeMenuIndicator.swift; sourceTree = "<group>"; };
+		C45215FD21AF7A4700C31441 /* SwipeMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuViewController.swift; path = SwipeMenu/Classes/Core/SwipeMenuViewController.swift; sourceTree = "<group>"; };
+		C45215FF21AF8F9C00C31441 /* SwipeMenuTabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwipeMenuTabItemView.swift; path = SwipeMenu/Classes/Core/SwipeMenuTabItemView.swift; sourceTree = "<group>"; };
 		C45BC5A0DEB6FB37C422F4FE0EB628A4 /* __objc_msgSend.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = __objc_msgSend.h; path = Mediator/Classes/Supports/__objc_msgSend.h; sourceTree = "<group>"; };
 		C494342ECBCB126D3DE127754535D2DF /* YYTextArchiver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYTextArchiver.h; path = YYKit/Text/String/YYTextArchiver.h; sourceTree = "<group>"; };
 		C4DECE74CCA44E95AE87DF15AF8C7485 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
@@ -4884,9 +4888,11 @@
 		EF6857155DCFC4015DAB10E3D1FB6AFC /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				C44561E821AE4EE5000A42D2 /* SwipeMenuTabBar.swift */,
-				C44561EC21AE4FB9000A42D2 /* SwipeMenuController.swift */,
+				C45215F921AF798600C31441 /* SwipeMenuTabView.swift */,
+				C45215FB21AF7A0900C31441 /* SwipeMenuIndicator.swift */,
 				C44561EA21AE4F59000A42D2 /* SwipeMenuScrollView.swift */,
+				C45215FF21AF8F9C00C31441 /* SwipeMenuTabItemView.swift */,
+				C45215FD21AF7A4700C31441 /* SwipeMenuViewController.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -6736,6 +6742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E31215C981D19C6CF161FABD9F4F9F15 /* Array+Rx.swift in Sources */,
+				C452160021AF8F9C00C31441 /* SwipeMenuTabItemView.swift in Sources */,
 				E7B3860DF83EF470AA48EF3FF8B56AED /* BundleLoader.swift in Sources */,
 				4AED63635BBF3CE7E8DA973DE5C69BF6 /* ExArray.swift in Sources */,
 				2679E94FEADA83E07BDB479316580183 /* ExBool.swift in Sources */,
@@ -6745,10 +6752,13 @@
 				D1E0081D157EF064EEBCFCDE285885CB /* ExNumberType.swift in Sources */,
 				46EEFAE73683B0E5B7AC12D33A1506FC /* ExOptional.swift in Sources */,
 				332112CCFB1B07CDFD8CE09E449607EC /* ExString.swift in Sources */,
+				C45215FC21AF7A0900C31441 /* SwipeMenuIndicator.swift in Sources */,
 				7B7EA454A8F559CC899B9712B85D2A51 /* ExUIApplication.swift in Sources */,
 				4E85C95F5BA2FCFCC178C22958B91F56 /* ExUIButton.swift in Sources */,
+				C45215FA21AF798600C31441 /* SwipeMenuTabView.swift in Sources */,
 				9D8A8B45FE32106A9679A9D5503E74EA /* ExUIColor.swift in Sources */,
 				D1B0BDCD8CF790EA9897D2629220B0D2 /* ExUIImage.swift in Sources */,
+				C45215FE21AF7A4700C31441 /* SwipeMenuViewController.swift in Sources */,
 				3DA02D475A517BCE7B913B538EF5BBC5 /* ExUIViewController.swift in Sources */,
 				B4BEB95E3A4C19AAC623B32BD9FF05BF /* Fate-dummy.m in Sources */,
 				91DD2FC6D4180768B61391811719A705 /* Fate.swift in Sources */,
@@ -6975,9 +6985,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C44561ED21AE4FB9000A42D2 /* SwipeMenuController.swift in Sources */,
 				05D5C43C4C5E1D0402E5DD35BABB3527 /* SwipeMenu-dummy.m in Sources */,
-				C44561E921AE4EE5000A42D2 /* SwipeMenuTabBar.swift in Sources */,
 				C44561EB21AE4F59000A42D2 /* SwipeMenuScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

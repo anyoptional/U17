@@ -20,11 +20,11 @@ class TodayViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let v = UITableView()
         v.separatorStyle = .none
-        v.showsVerticalScrollIndicator = false
+        v.showsVerticalScrollIndicator = true
+        v.fate.register(cellClass: TodayRecommendCell.self)
         if #available(iOS 11, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
-        v.fate.register(cellClass: TodayRecommendCell.self)
         return v
     }()
     

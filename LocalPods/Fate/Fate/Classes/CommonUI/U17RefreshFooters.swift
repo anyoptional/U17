@@ -7,6 +7,11 @@
 
 import MJRefresh
 
-public final class U17RefreshTodayFooter: MJRefreshAutoFooter {
+public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
     
+    private lazy var stateIv: UIImageView = {
+        let v = UIImageView()
+        v.image = UIImage(nameInBundle: "")
+        return v
+    }()
 }
