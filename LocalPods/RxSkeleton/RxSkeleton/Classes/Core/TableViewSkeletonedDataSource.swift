@@ -25,8 +25,8 @@ public class TableViewSkeletonedDataSource<S: SectionModelType>
                 canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
                 sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
                 sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index },
-                skeletonNumberOfSections: @escaping SkeletonNumberOfSections,
-                skeletonNumberOfRowsInSection: @escaping SkeletonNumberOfRowsInSection,
+                skeletonNumberOfSections: @escaping SkeletonNumberOfSections = { _, _ in 1 },
+                skeletonNumberOfRowsInSection: @escaping SkeletonNumberOfRowsInSection = { _, tv, _ in Int(ceil(tv.frame.height/tv.rowHeight)) },
                 skeletonReuseIdentifierForRowAtIndex: @escaping SkeletonReuseIdentifierForRowAtIndex) {
         self.skeletonNumberOfSections = skeletonNumberOfSections
         self.skeletonNumberOfRowsInSection = skeletonNumberOfRowsInSection
@@ -45,8 +45,8 @@ public class TableViewSkeletonedDataSource<S: SectionModelType>
                 titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
                 canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
                 canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
-                skeletonNumberOfSections: @escaping SkeletonNumberOfSections,
-                skeletonNumberOfRowsInSection: @escaping SkeletonNumberOfRowsInSection,
+                skeletonNumberOfSections: @escaping SkeletonNumberOfSections = { _, _ in 1 },
+                skeletonNumberOfRowsInSection: @escaping SkeletonNumberOfRowsInSection = { _, tv, _ in Int(ceil(tv.frame.height/tv.rowHeight)) },
                 skeletonReuseIdentifierForRowAtIndex: @escaping SkeletonReuseIdentifierForRowAtIndex) {
         self.skeletonNumberOfSections = skeletonNumberOfSections
         self.skeletonNumberOfRowsInSection = skeletonNumberOfRowsInSection

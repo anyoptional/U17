@@ -100,10 +100,6 @@ extension TodayListViewController: View {
             let cell: TodayRecommendCell = tableView.fate.dequeueReusableCell(for: indexPath)
             cell.display = display
             return cell
-        }, skeletonNumberOfSections: { (ds, tv) in
-            return 1
-        }, skeletonNumberOfItemsInSection: { (ds, tv, section) in
-            return 3
         }, skeletonReuseIdentifierForItemAtIndex: { (ds, tv, ip) in
             return TodayRecommendCell.reuseIdentifier
         })

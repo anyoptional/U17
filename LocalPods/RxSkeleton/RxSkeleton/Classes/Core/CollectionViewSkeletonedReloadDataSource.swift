@@ -21,8 +21,11 @@ public class CollectionViewSkeletonedReloadDataSource<S: SectionModelType>
                 configureSupplementaryView: ConfigureSupplementaryView? = nil,
                 moveItem: @escaping MoveItem = { _, _, _ in () },
                 canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false },
-                skeletonNumberOfSections: @escaping SkeletonNumberOfSections,
-                skeletonNumberOfItemsInSection: @escaping SkeletonNumberOfItemsInSection,
+                skeletonNumberOfSections: @escaping SkeletonNumberOfSections = { _, _ in 1 },
+                skeletonNumberOfItemsInSection: @escaping SkeletonNumberOfItemsInSection = { _, cv, _ in
+                    guard let flowlayout = cv.collectionViewLayout as? UICollectionViewFlowLayout else { return 0 }
+                    return Int(ceil(cv.frame.height/flowlayout.itemSize.height))
+                },
                 skeletonReuseIdentifierForItemAtIndex: @escaping SkeletonReuseIdentifierForItemAtIndex) {
         self.skeletonNumberOfSections = skeletonNumberOfSections
         self.skeletonNumberOfItemsInSection = skeletonNumberOfItemsInSection
