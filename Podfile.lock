@@ -317,6 +317,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -333,6 +334,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -349,6 +351,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -365,6 +368,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -381,6 +385,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -397,6 +402,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -413,6 +419,7 @@ PODS:
     - RxDataSources (~> 3.0.2)
     - RxMoya
     - RxOptional (~> 3.4.0)
+    - RxSkeleton
     - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
@@ -530,6 +537,17 @@ PODS:
   - RxOptional (3.4.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
+  - RxSkeleton (1.0.0):
+    - RxCocoa (~> 4.1.2)
+    - RxDataSources (~> 3.0.2)
+    - RxSkeleton/Core (= 1.0.0)
+    - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
+  - RxSkeleton/Core (1.0.0):
+    - RxCocoa (~> 4.1.2)
+    - RxDataSources (~> 3.0.2)
+    - RxSwift (~> 4.1.2)
+    - SkeletonView (~> 1.4.1)
   - RxSwift (4.1.2)
   - RxSwiftExt (3.2.0):
     - RxSwiftExt/Core (= 3.2.0)
@@ -554,6 +572,7 @@ DEPENDENCIES:
   - Fate (from `LocalPods/Fate`)
   - Mediator (from `LocalPods/Mediator`)
   - RxMoya (from `LocalPods/RxMoya`)
+  - RxSkeleton (from `LocalPods/RxSkeleton`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -595,6 +614,8 @@ EXTERNAL SOURCES:
     :path: LocalPods/Mediator
   RxMoya:
     :path: LocalPods/RxMoya
+  RxSkeleton:
+    :path: LocalPods/RxSkeleton
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -602,7 +623,7 @@ SPEC CHECKSUMS:
   AppDiscover: 0c60aed4da3795aa0db0f016dd97ba8f6d776f6d
   AppMain: a53d8237a9b59beb5feb082cb5bee26f28d904af
   AppProfile: a9857979366341a1ee7771308a556de1d02b60a7
-  AppToday: f62b55671237c9f2906b92f17cbf35cfb1bd6610
+  AppToday: 954f1b5f6128db4dedd8e8bb1a08bccac0e60c29
   Bindable: d90f134e0aec1bbe93f57d3a55108c38c1740f21
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Fate: 327375da17c4934e321c21c4752924da883a72ae
@@ -616,6 +637,7 @@ SPEC CHECKSUMS:
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxMoya: 6b8446e759e5d5e5198376f8700287096fa7e01c
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
+  RxSkeleton: 6fc96de9f654bd49c5f787239ec10bc9ebe2caa0
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxSwiftExt: 64b7140124629a6a084159735f3714f0fb1c61d6
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
@@ -625,6 +647,6 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: a1f76a9dfce6dc9845b28df592ce455e31536b91
+PODFILE CHECKSUM: 7c3b2427e76d8e75174245ec6fd2424e292847bf
 
 COCOAPODS: 1.6.0.beta.2

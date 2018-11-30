@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
     s.dependency 'Fate'
     s.dependency 'RxMoya'
     s.dependency 'Bindable'
+    s.dependency 'RxSkeleton'
     s.dependency 'YYKit', '~> 1.0.9'
     s.dependency 'RxSwift', '~> 4.1.2'
     s.dependency 'RxCocoa', '~> 4.1.2'

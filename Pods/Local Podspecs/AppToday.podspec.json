@@ -27,6 +27,9 @@
     "Bindable": [
 
     ],
+    "RxSkeleton": [
+
+    ],
     "YYKit": [
       "~> 1.0.9"
     ],

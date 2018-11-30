@@ -13,6 +13,7 @@ import RxCocoa
 import RxSwiftExt
 import ReactorKit
 import RxAppState
+import RxSkeleton
 import RxDataSources
 
 class TodayListViewController: UIViewController {
@@ -20,12 +21,15 @@ class TodayListViewController: UIViewController {
     // 传递当前页是星期几
     var weekday: String?
     
-    private lazy var tableView: UITableView = {
-        let v = UITableView()
-        v.separatorStyle = .none
-        v.estimatedRowHeight = 280
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        v.isSkeletonable = true
+        v.backgroundColor = .white
+        v.delegate = self
         v.showsVerticalScrollIndicator = true
-        v.fate.register(cellClass: TodayRecommendCell.self)
+        v.fate.register(TodayRecommendCell.self)
         if #available(iOS 11, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
@@ -37,6 +41,18 @@ class TodayListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
+        showSkeleton()
+    }
+    
+    private func showSkeleton() {
+        collectionView.prepareSkeleton { (flag) in
+            self.view.showAnimatedGradientSkeleton()
+            // MARK: 请求数据
+            guard let reactor = self.reactor else { return }
+            Observable.just(Reactor.Action.getRecommendList(self.weekday))
+                .bind(to: reactor.action)
+                .disposed(by: self.disposeBag)
+        }
     }
     
     deinit { NSLog("\(className()) is deallocating...") }
@@ -44,15 +60,9 @@ class TodayListViewController: UIViewController {
 
 extension TodayListViewController: View {
     func bind(reactor: TodayListViewReactor) {
-            
-        // MARK: 请求数据
-        rx.viewDidLoad
-            .map { [weak self] in Reactor.Action.getRecommendList(self?.weekday) }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
+    
         // MARK: 下拉刷新
-        tableView.gifHeader.rx.refresh
+        collectionView.gifHeader.rx.refresh
             .debounce(1, scheduler: MainScheduler.instance)
             .takeWhen { $0 == .refreshing }
             .discard()
@@ -63,13 +73,15 @@ extension TodayListViewController: View {
         // MARK: 修改刷新控件的状态
         reactor.state
             .map { $0.refreshState.downState }
-            .bind(to: tableView.gifHeader.rx.refresh)
+            .bind(to: collectionView.gifHeader.rx.refresh)
             .disposed(by: disposeBag)
         
         // MARK: 绑定数据源
         reactor.state
             .map { $0.sections }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .filterEmpty()
+            .do(onNext: { [weak self] _ in self?.view.hideSkeleton() })
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         // MARK: 处理出错
@@ -83,29 +95,34 @@ extension TodayListViewController: View {
             }.disposed(by: disposeBag)
     }
     
-    private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<TodayRecommendSection> {
-        return RxTableViewSectionedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, display) in
+    private func tableViewSectionedReloadDataSource() -> RxCollectionViewSkeletonedReloadDataSource<TodayRecommendSection> {
+        return RxCollectionViewSkeletonedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, display) in
             let cell: TodayRecommendCell = tableView.fate.dequeueReusableCell(for: indexPath)
             cell.display = display
             return cell
+        }, skeletonNumberOfSections: { (ds, tv) in
+            return 1
+        }, skeletonNumberOfItemsInSection: { (ds, tv, section) in
+            return 3
+        }, skeletonReuseIdentifierForItemAtIndex: { (ds, tv, ip) in
+            return TodayRecommendCell.reuseIdentifier
         })
     }
 }
 
-extension TodayListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fate.heightForRowAt(indexPath, cellClass: TodayRecommendCell.self, configuration: { (cell) in
-            cell.display = self.dataSource[indexPath]
-        })
+extension TodayListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.width, height: 315)
     }
 }
 
 extension TodayListViewController {
     private func buildUI() {
+        view.isSkeletonable = true
         automaticallyAdjustsScrollViewInsets = false
         
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
