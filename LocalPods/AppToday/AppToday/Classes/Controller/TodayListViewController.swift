@@ -36,7 +36,7 @@ class TodayListViewController: UIViewController {
         return v
     }()
     
-    private lazy var dataSource = tableViewSectionedReloadDataSource()
+    private lazy var dataSource = collectionViewSkeletonedReloadDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +95,12 @@ extension TodayListViewController: View {
             }.disposed(by: disposeBag)
     }
     
-    private func tableViewSectionedReloadDataSource() -> RxCollectionViewSkeletonedReloadDataSource<TodayRecommendSection> {
-        return RxCollectionViewSkeletonedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, display) in
-            let cell: TodayRecommendCell = tableView.fate.dequeueReusableCell(for: indexPath)
+    private func collectionViewSkeletonedReloadDataSource() -> RxCollectionViewSkeletonedReloadDataSource<TodayRecommendSection> {
+        return RxCollectionViewSkeletonedReloadDataSource(configureCell: { (ds, tv, ip, display) in
+            let cell: TodayRecommendCell = tv.fate.dequeueReusableCell(for: ip)
             cell.display = display
             return cell
-        }, skeletonReuseIdentifierForItemAtIndex: { (ds, tv, ip) in
+        }, reuseIdentifierForItemAtIndexPath: { (ds, tv, ip) in
             return TodayRecommendCell.reuseIdentifier
         })
     }

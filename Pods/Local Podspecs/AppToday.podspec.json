@@ -58,7 +58,7 @@
       "~> 3.2.0"
     ],
     "RxDataSources": [
-      "~> 3.0.2"
+      "~> 3.1.0"
     ],
     "TYPagerController": [
       "~> 2.1.2"

@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
     s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'SkeletonView', '~> 1.4.1'
     s.dependency 'MJRefresh', '~> 3.1.15.7'
-    s.dependency 'RxDataSources', '~> 3.0.2'
+    s.dependency 'RxDataSources', '~> 3.1.0'
     s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
 
     s.resource_bundles = {

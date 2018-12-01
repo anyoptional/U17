@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     s.dependency 'RxAppState', '~> 1.1.2'
     s.dependency 'RxOptional', '~> 3.4.0'
     s.dependency 'RxSwiftExt', '~> 3.2.0'
-    s.dependency 'RxDataSources', '~> 3.0.2'
+    s.dependency 'RxDataSources', '~> 3.1.0'
     
     s.resource_bundles = {
         'AppBookshelf' => ['AppBookshelf/Assets/*.png']

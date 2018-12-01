@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '9.0'
     
-    s.dependency 'RxDataSources', '~> 3.0.2'
+    s.dependency 'RxDataSources', '~> 3.1.0'
     
     s.subspec "Core" do |cs|
         cs.source_files  = "Bindable/Classes/Core"

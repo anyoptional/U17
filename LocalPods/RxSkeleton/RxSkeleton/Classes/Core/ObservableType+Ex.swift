@@ -21,7 +21,7 @@ extension ObservableType {
             let subscription = self.asObservable()
                 .observeOn(MainScheduler())
                 .catchError { error in
-                    bindingError(error)
+                    debugFatalError(error)
                     return Observable.empty()
                 }
                 // source can never end, otherwise it would release the subscriber, and deallocate the data source
@@ -35,7 +35,7 @@ extension ObservableType {
                     
                     switch event {
                     case .error(let error):
-                        bindingError(error)
+                        debugFatalError(error)
                         unregisterDelegate.dispose()
                     case .completed:
                         unregisterDelegate.dispose()
@@ -50,13 +50,4 @@ extension ObservableType {
                 unregisterDelegate.dispose()
             }
     }
-}
-
-fileprivate func bindingError(_ error: Swift.Error) {
-    let error = "Binding error: \(error)"
-    #if DEBUG
-    fatalError(error)
-    #else
-    print(error)
-    #endif
 }

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6001FD781133998802BAD6F37FC7981"
+               BlueprintIdentifier = "04F72739BE56A643E2DDB6430A4FDA34"
                BuildableName = "RxSkeleton.bundle"
                BlueprintName = "RxSkeleton-RxSkeleton"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6001FD781133998802BAD6F37FC7981"
+            BlueprintIdentifier = "04F72739BE56A643E2DDB6430A4FDA34"
             BuildableName = "RxSkeleton.bundle"
             BlueprintName = "RxSkeleton-RxSkeleton"
             ReferencedContainer = "container:Pods.xcodeproj">

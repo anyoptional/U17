@@ -84,7 +84,7 @@ extension TodayViewController {
         tabBar.layout.barStyle = .progressBounceView
         tabBar.layout.progressVerEdging = 3
         tabBar.layout.progressColor = U17def.green_30DC91
-        tabBar.layout.normalTextColor = U17def.gray_9B9B9B
+        tabBar.layout.normalTextColor = U17def.black_666666
         tabBar.layout.selectedTextColor = U17def.green_30DC91
         tabBar.layout.normalTextFont = UIFont.systemFont(ofSize: 14)
         tabBar.layout.selectedTextFont = UIFont.systemFont(ofSize: 14)

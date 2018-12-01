@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "RxDataSources": [
-      "~> 3.0.2"
+      "~> 3.1.0"
     ]
   },
   "subspecs": [
