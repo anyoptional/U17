@@ -11,6 +11,7 @@
 		C4F90EDC21A40B7B0072AE10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F90EDA21A40B7B0072AE10 /* Main.storyboard */; };
 		C4F90EDE21A40B7C0072AE10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F90EDD21A40B7C0072AE10 /* Assets.xcassets */; };
 		C4F90EE121A40B7C0072AE10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F90EDF21A40B7C0072AE10 /* LaunchScreen.storyboard */; };
+		CB42587A21B2F61100344662 /* today.gif in Resources */ = {isa = PBXBuildFile; fileRef = CB42587921B2F61100344662 /* today.gif */; };
 		EAAFF34682E4613FBC5B0704 /* Pods_U17.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07A587E7EDE5DCE5FB7AA1B /* Pods_U17.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		C4F90EE021A40B7C0072AE10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4F90EE221A40B7C0072AE10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F90EE921A40C820072AE10 /* cartoon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cartoon.h; sourceTree = "<group>"; };
+		CB42587921B2F61100344662 /* today.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = today.gif; sourceTree = "<group>"; };
 		FB4F491D5FFB034C7D9DA27A /* Pods-U17.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-U17.debug.xcconfig"; path = "Pods/Target Support Files/Pods-U17/Pods-U17.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +55,7 @@
 			children = (
 				C4F90ED521A40B7B0072AE10 /* U17 */,
 				C4F90EE821A40C540072AE10 /* Bridge */,
+				CB42587821B2F50800344662 /* Snapshot */,
 				C4F90ED421A40B7B0072AE10 /* Products */,
 				651EA8D11C073127E15BE79E /* Pods */,
 				E6CFDBB6446F9B3B5317656B /* Frameworks */,
@@ -85,6 +88,14 @@
 				C4F90EE921A40C820072AE10 /* cartoon.h */,
 			);
 			path = Bridge;
+			sourceTree = "<group>";
+		};
+		CB42587821B2F50800344662 /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				CB42587921B2F61100344662 /* today.gif */,
+			);
+			path = Snapshot;
 			sourceTree = "<group>";
 		};
 		E6CFDBB6446F9B3B5317656B /* Frameworks */ = {
@@ -158,6 +169,7 @@
 				C4F90EE121A40B7C0072AE10 /* LaunchScreen.storyboard in Resources */,
 				C4F90EDE21A40B7C0072AE10 /* Assets.xcassets in Resources */,
 				C4F90EDC21A40B7B0072AE10 /* Main.storyboard in Resources */,
+				CB42587A21B2F61100344662 /* today.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
