@@ -1,7 +1,7 @@
 # iOS仿写有妖气漫画
 
 <p align="center">
-  <img width="375" height="667" src="Snapshot/today.gif"/>
+  <img width="320" height="568" src="Snapshot/today.gif"/>
 </p>
 
 # 项目架构
