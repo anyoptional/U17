@@ -7,96 +7,68 @@ PODS:
     - AppBookshelf/Router (= 1.0.0)
     - AppBookshelf/Util (= 1.0.0)
     - AppBookshelf/View (= 1.0.0)
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/Controller (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/Model (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/Reactor (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/Router (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/Util (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppBookshelf/View (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover (1.0.0):
     - AppDiscover/Controller (= 1.0.0)
     - AppDiscover/Model (= 1.0.0)
@@ -104,96 +76,68 @@ PODS:
     - AppDiscover/Router (= 1.0.0)
     - AppDiscover/Util (= 1.0.0)
     - AppDiscover/View (= 1.0.0)
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/Controller (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/Model (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/Reactor (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/Router (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/Util (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppDiscover/View (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppMain (1.0.0):
     - AppMain/Controller (= 1.0.0)
     - AppMain/Router (= 1.0.0)
@@ -212,96 +156,68 @@ PODS:
     - AppProfile/Router (= 1.0.0)
     - AppProfile/Util (= 1.0.0)
     - AppProfile/View (= 1.0.0)
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/Controller (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/Model (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/Reactor (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/Router (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/Util (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppProfile/View (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
+    - RxSkeleton
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
-    - YYKit (~> 1.0.9)
   - AppToday (1.0.0):
     - AppToday/Controller (= 1.0.0)
     - AppToday/Model (= 1.0.0)
@@ -309,129 +225,82 @@ PODS:
     - AppToday/Router (= 1.0.0)
     - AppToday/Util (= 1.0.0)
     - AppToday/View (= 1.0.0)
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/Controller (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/Model (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/Reactor (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/Router (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/Util (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - AppToday/View (1.0.0):
-    - Bindable
     - Fate
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
+    - RxBindable
     - RxMoya
-    - RxOptional (~> 3.4.0)
     - RxSkeleton
-    - RxSwift (~> 4.1.2)
     - RxSwiftExt (~> 3.2.0)
     - SnapKit (~> 4.0.1)
     - Timepiece (~> 1.3.1)
     - TYPagerController (~> 2.1.2)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
-  - Bindable (1.0.0):
-    - Bindable/Core (= 1.0.0)
-    - RxDataSources (~> 3.1.0)
-  - Bindable/Core (1.0.0):
-    - RxDataSources (~> 3.1.0)
   - Differentiator (3.1.0)
   - Fate (1.0.0):
     - Fate/CommonUI (= 1.0.0)
@@ -521,6 +390,8 @@ PODS:
   - RxAppState (1.1.2):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
+  - RxBindable (0.0.9):
+    - RxDataSources
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
   - RxDataSources (3.1.0):
@@ -537,17 +408,11 @@ PODS:
   - RxOptional (3.4.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSkeleton (1.0.0):
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
-    - RxSkeleton/Core (= 1.0.0)
-    - RxSwift (~> 4.1.2)
-    - SkeletonView (~> 1.4.1)
-  - RxSkeleton/Core (1.0.0):
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
-    - RxSwift (~> 4.1.2)
-    - SkeletonView (~> 1.4.1)
+  - RxSkeleton (0.0.9):
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - SkeletonView
   - RxSwift (4.1.2)
   - RxSwiftExt (3.2.0):
     - RxSwiftExt/Core (= 3.2.0)
@@ -568,11 +433,9 @@ DEPENDENCIES:
   - AppMain (from `LocalPods/AppMain`)
   - AppProfile (from `LocalPods/AppProfile`)
   - AppToday (from `LocalPods/AppToday`)
-  - Bindable (from `LocalPods/Bindable`)
   - Fate (from `LocalPods/Fate`)
   - Mediator (from `LocalPods/Mediator`)
   - RxMoya (from `LocalPods/RxMoya`)
-  - RxSkeleton (from `LocalPods/RxSkeleton`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -583,9 +446,11 @@ SPEC REPOS:
     - ReactorKit
     - Result
     - RxAppState
+    - RxBindable
     - RxCocoa
     - RxDataSources
     - RxOptional
+    - RxSkeleton
     - RxSwift
     - RxSwiftExt
     - SkeletonView
@@ -606,25 +471,20 @@ EXTERNAL SOURCES:
     :path: LocalPods/AppProfile
   AppToday:
     :path: LocalPods/AppToday
-  Bindable:
-    :path: LocalPods/Bindable
   Fate:
     :path: LocalPods/Fate
   Mediator:
     :path: LocalPods/Mediator
   RxMoya:
     :path: LocalPods/RxMoya
-  RxSkeleton:
-    :path: LocalPods/RxSkeleton
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppBookshelf: 6aa08d725447882bd0affd4ce5bd78a8185dc0d9
-  AppDiscover: 5f0bb0278d0eff0233046ed435960c1847696770
+  AppBookshelf: 6813708f1f1ba7f679439e88cc6851f99f7b21f9
+  AppDiscover: d7f5534217e2c9690a8000276219d2697bbc1959
   AppMain: a53d8237a9b59beb5feb082cb5bee26f28d904af
-  AppProfile: 1943b20808bf20586849f8136f48211065a0e6c7
-  AppToday: 5b75b484ed625df42a93ccb9938ddeccd93709b1
-  Bindable: d0062e1911bdb86687f5e2710d12c78a058e725f
+  AppProfile: cebd039cb7cd1f95859f7b3aae98ebacb5c4bb1c
+  AppToday: 61c1dc13b711dd745e1a40ecc33e265ca3957aea
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Fate: 0f425f040f3ca6a3f2179f09476a4b0708b6216e
   Mediator: ae6cb5dc3cc80f2a02673f06eaee28cb126fadba
@@ -633,11 +493,12 @@ SPEC CHECKSUMS:
   ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxAppState: 0238d65c304725fa815a4b3758be210d48f4db82
+  RxBindable: 3074c6fc31206f512554d535f70a15de1d556fe7
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxMoya: 6b8446e759e5d5e5198376f8700287096fa7e01c
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
-  RxSkeleton: e2524b2fd1b4c6cf75a8de844b4d4375e6bd9707
+  RxSkeleton: b5a29725d68b68cbfdba63214a7f81ef5a2dcb56
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxSwiftExt: 64b7140124629a6a084159735f3714f0fb1c61d6
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
@@ -647,6 +508,6 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 7c3b2427e76d8e75174245ec6fd2424e292847bf
+PODFILE CHECKSUM: 95932abb0414a1c6a1748df6d0a4c49721e4834e
 
 COCOAPODS: 1.6.0.beta.2

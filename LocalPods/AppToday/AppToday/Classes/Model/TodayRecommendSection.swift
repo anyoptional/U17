@@ -5,6 +5,6 @@
 //  Created by Archer on 2018/11/23.
 //
 
-import Bindable
+import RxBindable
 
-typealias TodayRecommendSection = RxTableCollectionViewSection<TodayRecommendCellDisplay>
+typealias TodayRecommendSection = RxTableCollectionViewAnimatedSection<TodayRecommendCellDisplay>

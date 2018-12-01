@@ -7,7 +7,7 @@
 
 import Fate
 import YYKit
-import Bindable
+import RxBindable
 
 class TodayRecommendCell: UICollectionViewCell {
     

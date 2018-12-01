@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double BindableVersionNumber;
-FOUNDATION_EXPORT const unsigned char BindableVersionString[];
+FOUNDATION_EXPORT double RxBindableVersionNumber;
+FOUNDATION_EXPORT const unsigned char RxBindableVersionString[];
 

@@ -49,6 +49,17 @@ class TodayRecommendResp: NSObject, YYModel {
                 var cover: String?
                 var chapterIndex: Int = 0
                 
+                // Equatable conformance
+                override func isEqual(_ object: Any?) -> Bool {
+                    guard let object = object as? ComicsBean else { return false }
+                    // 每本漫画的id应该是不同的
+                    return comicId == object.comicId
+                }
+                
+                override var hash: Int {
+                    return comicId.hashValue
+                }
+                
                 static func modelCustomPropertyMapper() -> [String : Any]? {
                     return ["descriptor" : "description"]
                 }

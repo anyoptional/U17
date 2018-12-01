@@ -24,17 +24,11 @@
     "RxMoya": [
 
     ],
-    "Bindable": [
+    "RxSkeleton": [
 
     ],
-    "YYKit": [
-      "~> 1.0.9"
-    ],
-    "RxSwift": [
-      "~> 4.1.2"
-    ],
-    "RxCocoa": [
-      "~> 4.1.2"
+    "RxBindable": [
+
     ],
     "SnapKit": [
       "~> 4.0.1"
@@ -45,14 +39,8 @@
     "RxAppState": [
       "~> 1.1.2"
     ],
-    "RxOptional": [
-      "~> 3.4.0"
-    ],
     "RxSwiftExt": [
       "~> 3.2.0"
-    ],
-    "RxDataSources": [
-      "~> 3.1.0"
     ]
   },
   "resource_bundles": {

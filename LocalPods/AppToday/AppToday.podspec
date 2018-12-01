@@ -21,21 +21,15 @@ Pod::Spec.new do |s|
     
     s.dependency 'Fate'
     s.dependency 'RxMoya'
-    s.dependency 'Bindable'
     s.dependency 'RxSkeleton'
-    s.dependency 'YYKit', '~> 1.0.9'
-    s.dependency 'RxSwift', '~> 4.1.2'
-    s.dependency 'RxCocoa', '~> 4.1.2'
+    s.dependency 'RxBindable'
     s.dependency 'SnapKit', '~> 4.0.1'
     s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'ReactorKit', '~> 1.1.0'
     s.dependency 'RxAppState', '~> 1.1.2'
-    s.dependency 'RxOptional', '~> 3.4.0'
     s.dependency 'RxSwiftExt', '~> 3.2.0'
-    s.dependency 'RxDataSources', '~> 3.1.0'
     s.dependency 'TYPagerController', '~> 2.1.2'
-    s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
-
+    
     s.resource_bundles = {
         'AppToday' => ['AppToday/Assets/*.png']
     }

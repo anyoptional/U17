@@ -6,7 +6,7 @@
 //
 
 import YYKit
-import Bindable
+import RxBindable
 
 struct TodayRecommendCellPresenter: Presentable {
     
