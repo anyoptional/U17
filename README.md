@@ -1,4 +1,4 @@
-# iOS仿写有妖气漫画
+# 效果图
 
 <p align="center">
   <img width="320" height="568" src="Snapshot/today.gif"/>
