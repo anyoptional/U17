@@ -24,5 +24,6 @@ class TodayReq: NSObject {
 @objcMembers
 class TodayRecommendListReq: TodayReq {
     var day: String?
+    var page: Int = 0
 }
 

@@ -9,9 +9,66 @@ import MJRefresh
 
 public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
     
-    private lazy var stateIv: UIImageView = {
+    public enum DisplayMode {
+        case normal
+        case specific
+    }
+    
+    public var displayMode: DisplayMode? {
+        didSet {
+            guard let mode = displayMode else { return }
+            if mode == .normal {
+                remindIv.image = UIImage(nameInBundle: "today_nomore")
+            } else {
+                remindIv.image = UIImage(nameInBundle: "today_nomore_last")
+            }
+        }
+    }
+    
+    private lazy var remindIv: UIImageView = {
         let v = UIImageView()
-        v.image = UIImage(nameInBundle: "")
+        v.clipsToBounds = true
+        v.contentMode = .scaleAspectFit
+        addSubview(v)
         return v
-    }()
+    }()    
+
+    public override func prepare() {
+        super.prepare()
+        stateLabel.textColor = U17def.gray_9B9B9B
+    }
+    
+    public override func placeSubviews() {
+        super.placeSubviews()
+        if state == .noMoreData {
+            remindIv.size = CGSize(width: 320, height: 120)
+            remindIv.center = CGPoint(x: mj_w / 2, y: mj_h / 2)
+        } else {
+            remindIv.frame = .zero
+        }
+    }
+    
+    public override var state: MJRefreshState {
+        didSet {
+            switch (state) {
+            case .noMoreData:
+                if mj_h == 200 { return }
+                let oldH = mj_h
+                mj_h = 200
+                scrollView.mj_insetB += (mj_h - oldH)
+                remindIv.isHidden = false
+                stateLabel.isHidden = true
+                backgroundColor = U17def.gray_FAFAFA
+            default:
+                if mj_h == MJRefreshFooterHeight { return }
+                let oldH = mj_h
+                mj_h = MJRefreshFooterHeight
+                scrollView.mj_insetB += (mj_h - oldH)
+                remindIv.isHidden = true
+                stateLabel.isHidden = false
+                backgroundColor = .clear
+
+            }
+        }
+    }
 }

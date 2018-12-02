@@ -46,9 +46,21 @@ class TodayViewController: TYTabPagerController {
         super.viewDidLoad()
         buildUI()
         buildNavbar()
+        bindRxEvent()
     }
     
     deinit { NSLog("\(className()) is deallocating...") }
+}
+
+extension TodayViewController {
+    private func bindRxEvent() {
+        searchButton.rx.tap
+            .subscribeNext(weak: self) { (self) in
+                return { _ in
+                    // add later
+                }
+        }.disposed(by: disposeBag)
+    }
 }
 
 extension TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControllerDataSource {
@@ -58,6 +70,7 @@ extension TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControlle
     
     func tabPagerController(_ tabPagerController: TYTabPagerController, controllerFor index: Int, prefetching: Bool) -> UIViewController {
         let vc = TodayListViewController()
+        vc.isFirstPage = (index == 0)
         vc.weekday = weekdayMapper[index].weekday
         vc.reactor = TodayListViewReactor()
         return vc

@@ -8,11 +8,13 @@
 import YYKit
 
 public extension Fate where Base: UIButton {
-    public func setImage(withURL imageURL: URL?, placeholder: UIImage? = nil) {
-        base.setImageWith(imageURL, for: .normal, placeholder: placeholder)
+    public func setImage(withURL imageURL: URL?, placeholder: UIImage? = nil,
+                         options: YYWebImageOptions = [.setImageWithFadeAnimation, .progressive, .progressiveBlur]) {
+        base.setImageWith(imageURL, for: .normal, placeholder: placeholder, options: options)
     }
     
-    public func setBackgroundImage(withURL imageURL: URL?, placeholder: UIImage? = nil) {
-        base.setBackgroundImageWith(imageURL, for: .normal, placeholder: placeholder)
+    public func setBackgroundImage(withURL imageURL: URL?, placeholder: UIImage? = nil,
+                                   options: YYWebImageOptions = [.setImageWithFadeAnimation, .progressive, .progressiveBlur]) {
+        base.setBackgroundImageWith(imageURL, for: .normal, placeholder: placeholder, options: options)
     }
 }

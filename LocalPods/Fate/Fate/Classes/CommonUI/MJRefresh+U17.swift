@@ -37,7 +37,7 @@ public extension UIScrollView {
     }
     
     /// u17今日模块的上拉刷新控件
-    public var todayFooter: MJRefreshFooter {
+    public var todayFooter: U17RefreshTodayFooter {
         set {
             synchronized(self) {
                 mj_footer = newValue;
@@ -45,13 +45,13 @@ public extension UIScrollView {
         }
         get {
             return synchronized(self) {
-                if let footer = mj_footer {
+                if let footer = mj_footer as? U17RefreshTodayFooter {
                     return footer
                 }
                 let footer = U17RefreshTodayFooter()
                 footer.isOnlyRefreshPerDrag = true
                 mj_footer = footer
-                return mj_footer
+                return mj_footer as! U17RefreshTodayFooter
             }
         }
     }

@@ -67,6 +67,6 @@ extension RxTableCollectionViewAnimatedSection: AnimatableSectionModelType {
 
 extension RxTableCollectionViewAnimatedSection: CustomStringConvertible {
     public var description: String {
-        return "RxTableCollectionViewAnimatableSection(section: \"\(section)\", items: \(items))"
+        return "RxTableCollectionViewAnimatedSection(section: \"\(section)\", items: \(items))"
     }
 }

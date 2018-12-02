@@ -9,7 +9,7 @@ import YYKit
 
 public extension Fate where Base: UIImageView {
     public func setImage(withURL imageURL: URL?, placeholder: UIImage? = nil,
-                  options: YYWebImageOptions = [.setImageWithFadeAnimation, .progressive, .progressiveBlur]) {
+                         options: YYWebImageOptions = [.setImageWithFadeAnimation, .progressive, .progressiveBlur]) {
         base.setImageWith(imageURL, placeholder: placeholder, options: options)
     }
 }

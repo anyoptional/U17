@@ -25,8 +25,12 @@ public struct U17def {
         return UIColor(rgbValue: 0x9B9B9B)
     }
     
-    public static var gray_FBFBFB: UIColor {
+    public static var gray_FAFAFA: UIColor {
         return UIColor(rgbValue: 0xFAFAFA)
+    }
+    
+    public static var gray_F5F5F5: UIColor {
+        return UIColor(rgbValue: 0xF5F5F5)
     }
     
     public static var green_30DC91: UIColor {

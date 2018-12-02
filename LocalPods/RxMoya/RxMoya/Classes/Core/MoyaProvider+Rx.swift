@@ -70,6 +70,8 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
             }
             return Disposables.create { cancellableToken?.cancel() }
         }.observeOn(MainScheduler.instance)
+        /// ignore when cache is same as network response
+        .distinctUntilChanged()
         /// retry when failed and shares resources
         .retry(3).share(replay: 1, scope: .forever)
     }
