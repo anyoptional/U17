@@ -25,12 +25,16 @@ public class FDTransaction: NSObject {
 extension FDTransaction {
     /// Executes task when main runloop is before waiting.
     public func commit(task: @escaping Task) {
+        objc_sync_enter(self)
         dispatchedTasks.append(task)
+        objc_sync_exit(self)
     }
     
     /// Removes all commited tasks, note task may execute already.
     public func removeAllTasks() {
+        objc_sync_enter(self)
         dispatchedTasks.removeAll(keepingCapacity: true)
+        objc_sync_exit(self)
     }
 }
 
@@ -42,8 +46,12 @@ extension FDTransaction {
                                                           activity,
                                                           true, 0xFFFFFF) // after CATransaction
         { (observer, activity) in
-            while !self.dispatchedTasks.isEmpty {
-                let task = self.dispatchedTasks.remove(at: 0)
+            objc_sync_enter(self)
+            var tasks = self.dispatchedTasks
+            self.removeAllTasks()
+            objc_sync_exit(self)
+            while !tasks.isEmpty {
+                let task = tasks.remove(at: 0)
                 // 以source0分解到runloop
                 self.perform(#selector(self.invokeTask),
                              on: Thread.main,
