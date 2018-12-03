@@ -47,13 +47,17 @@ class TodayListViewController: UIViewController {
     }()
     
     private lazy var dataSource = collectionViewSkeletonedAnimatedDataSource()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
         showSkeleton()
     }
     
+    deinit { NSLog("\(className()) is deallocating...") }
+}
+
+extension TodayListViewController {
     private func showSkeleton() {
         collectionView.prepareSkeleton { (flag) in
             self.view.showAnimatedGradientSkeleton()
@@ -64,8 +68,6 @@ class TodayListViewController: UIViewController {
                 .disposed(by: self.disposeBag)
         }
     }
-    
-    deinit { NSLog("\(className()) is deallocating...") }
 }
 
 extension TodayListViewController: View {

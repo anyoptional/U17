@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
     s.dependency 'SkeletonView', '~> 1.4.1'
     s.dependency 'MJRefresh', '~> 3.1.15.7'
     s.dependency 'RxDataSources', '~> 3.1.0'
+    s.dependency 'SDCycleScrollView'
+    s.dependency 'SDWebImage/WebP'
     s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
 
     s.resource_bundles = {
@@ -50,8 +52,8 @@ Pod::Spec.new do |s|
       cs.source_files  = "Fate/Classes/Identifiable"
     end
     
-    s.subspec "YYKitAdaptor" do |cs|
-      cs.source_files  = "Fate/Classes/YYKitAdaptor"
+    s.subspec "ImageLoading" do |cs|
+      cs.source_files  = "Fate/Classes/ImageLoading"
     end
     
     s.subspec "UILayoutAdaptor" do |cs|

@@ -118,6 +118,7 @@ extension TodayRecommendCell: Bindable {
         tagLabel.attributedText = presenter.tagAttributedText
         
         imgView.fate.setImage(withURL: presenter.imgURL,
-                              placeholder: UIImage(nameInBundle: "today_list_placeholder"))
+                              placeholder: UIImage(nameInBundle: "today_list_placeholder"),
+                              shouldDecompressImages: false)
     }
 }

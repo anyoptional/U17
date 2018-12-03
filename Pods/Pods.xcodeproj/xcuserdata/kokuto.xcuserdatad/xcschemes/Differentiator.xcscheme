@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FCD968364B8402FC0F822EFB0F9FE798"
+               BlueprintIdentifier = "757916B95C89D46C64A7730F574FAE1F"
                BuildableName = "Differentiator.framework"
                BlueprintName = "Differentiator"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FCD968364B8402FC0F822EFB0F9FE798"
+            BlueprintIdentifier = "757916B95C89D46C64A7730F574FAE1F"
             BuildableName = "Differentiator.framework"
             BlueprintName = "Differentiator"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -40,6 +40,12 @@
     "RxDataSources": [
       "~> 3.1.0"
     ],
+    "SDCycleScrollView": [
+
+    ],
+    "SDWebImage/WebP": [
+
+    ],
     "UITableView+FDTemplateLayoutCell": [
       "~> 1.6"
     ]
@@ -67,8 +73,8 @@
       "source_files": "Fate/Classes/Identifiable"
     },
     {
-      "name": "YYKitAdaptor",
-      "source_files": "Fate/Classes/YYKitAdaptor"
+      "name": "ImageLoading",
+      "source_files": "Fate/Classes/ImageLoading"
     },
     {
       "name": "UILayoutAdaptor",
