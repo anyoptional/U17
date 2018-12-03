@@ -60,4 +60,7 @@ Pod::Spec.new do |s|
       cs.source_files  = "Fate/Classes/UILayoutAdaptor"
     end
     
+    s.subspec "RunloopOptimize" do |cs|
+        cs.source_files  = "Fate/Classes/RunloopOptimize"
+    end
 end

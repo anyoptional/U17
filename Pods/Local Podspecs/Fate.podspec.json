@@ -79,6 +79,10 @@
     {
       "name": "UILayoutAdaptor",
       "source_files": "Fate/Classes/UILayoutAdaptor"
+    },
+    {
+      "name": "RunloopOptimize",
+      "source_files": "Fate/Classes/RunloopOptimize"
     }
   ]
 }
