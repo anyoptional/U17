@@ -10,7 +10,6 @@ import SDWebImage
 public extension Fate where Base: UIImageView {
     public func setImage(withURL imageURL: URL?,
                          placeholder: UIImage? = nil,
-                         failedImage: UIImage? = nil,
                          shouldDecompressImages: Bool = true,
                          shouldSetImageWithFadeAnimation: Bool = true) {
         SDImageCache.shared().config.shouldDecompressImages = shouldDecompressImages
@@ -32,7 +31,7 @@ public extension Fate where Base: UIImageView {
                             }
                             base.image = image
                         } else {
-                            base.image = (failedImage != nil) ? failedImage : placeholder
+                            base.image = placeholder
                         }
         })
     }

@@ -30,7 +30,7 @@ extension FDTransaction {
         objc_sync_exit(self)
     }
     
-    /// Removes all commited tasks, note task may execute already.
+    /// Removes all commited tasks, note that task may execute already.
     public func removeAllTasks() {
         objc_sync_enter(self)
         dispatchedTasks.removeAll(keepingCapacity: true)
