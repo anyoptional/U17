@@ -11,6 +11,7 @@ class U17SearchBar: U17TextField {
     
     private lazy var deleteButton: UIButton = {
         let v = UIButton()
+        v.isHidden = true
         let image = UIImage(nameInBundle: "search_cancel")
         v.setBackgroundImage(image, for: .normal)
         return v
