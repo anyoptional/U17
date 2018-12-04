@@ -41,10 +41,12 @@ public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
     public override func placeSubviews() {
         super.placeSubviews()
         if state == .noMoreData {
+            backgroundColor = U17def.gray_FAFAFA
             remindIv.size = CGSize(width: 320, height: 120)
             remindIv.center = CGPoint(x: mj_w / 2, y: mj_h / 2)
         } else {
             remindIv.frame = .zero
+            backgroundColor = .clear
         }
     }
     
@@ -58,7 +60,6 @@ public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
                 scrollView.mj_insetB += (mj_h - oldH)
                 remindIv.isHidden = false
                 stateLabel.isHidden = true
-                backgroundColor = U17def.gray_FAFAFA
             default:
                 if mj_h == MJRefreshFooterHeight { return }
                 let oldH = mj_h
@@ -66,8 +67,6 @@ public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
                 scrollView.mj_insetB += (mj_h - oldH)
                 remindIv.isHidden = true
                 stateLabel.isHidden = false
-                backgroundColor = .clear
-
             }
         }
     }

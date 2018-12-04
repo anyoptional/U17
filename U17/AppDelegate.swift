@@ -7,6 +7,7 @@
 //
 
 import AppMain
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupIQkeyboardManager()
         setupRootViewController()
         
         /// Check `Pods target -> Development Pods` for more details
@@ -30,5 +32,14 @@ extension AppDelegate {
         window?.backgroundColor = .white
         window?.rootViewController = AppMainTarget.rootViewController() 
         window?.makeKeyAndVisible()
+    }
+}
+
+extension AppDelegate {
+    private func setupIQkeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 30
     }
 }

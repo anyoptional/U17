@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// MARK: 四大组件
+/// MARK: 五大组件
 public extension Mediator {
     public static func getTodayViewController() -> UIViewController? {
         return perform("getTodayViewController", inClass: "AppTodayTarget", onModule: "AppToday") as? UIViewController
@@ -23,5 +23,9 @@ public extension Mediator {
     
     public static func getProfileViewController() -> UIViewController? {
         return perform("getProfileViewController", inClass: "AppProfileTarget", onModule: "AppProfile") as? UIViewController
+    }
+    
+    public static func getSearchViewController() -> UIViewController? {
+        return perform("getSearchViewController", inClass: "AppSearchTarget", onModule: "AppSearch") as? UIViewController
     }
 }

@@ -1,0 +1,6 @@
+framework module AppSearch {
+  umbrella header "AppSearch-umbrella.h"
+
+  export *
+  module * { export * }
+}

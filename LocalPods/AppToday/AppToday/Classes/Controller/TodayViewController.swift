@@ -6,6 +6,7 @@
 //
 
 import Fate
+import Mediator
 import Timepiece
 import TYPagerController
 
@@ -57,7 +58,9 @@ extension TodayViewController {
         searchButton.rx.tap
             .subscribeNext(weak: self) { (self) in
                 return { _ in
-                    // add later
+                    if let vc = Mediator.getSearchViewController() {
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
         }.disposed(by: disposeBag)
     }

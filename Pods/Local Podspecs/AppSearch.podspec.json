@@ -1,0 +1,80 @@
+{
+  "name": "AppSearch",
+  "version": "1.0.0",
+  "summary": "Application search module.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "dependencies": {
+    "Fate": [
+
+    ],
+    "RxMoya": [
+
+    ],
+    "Mediator": [
+
+    ],
+    "RxSkeleton": [
+
+    ],
+    "RxBindable": [
+
+    ],
+    "SnapKit": [
+      "~> 4.0.1"
+    ],
+    "ReactorKit": [
+      "~> 1.1.0"
+    ],
+    "RxAppState": [
+      "~> 1.1.2"
+    ],
+    "RxSwiftExt": [
+      "~> 3.2.0"
+    ]
+  },
+  "resource_bundles": {
+    "AppSearch": [
+      "AppSearch/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Controller",
+      "source_files": "AppSearch/Classes/Controller"
+    },
+    {
+      "name": "Reactor",
+      "source_files": "AppSearch/Classes/Reactor"
+    },
+    {
+      "name": "View",
+      "source_files": "AppSearch/Classes/View"
+    },
+    {
+      "name": "Model",
+      "source_files": "AppSearch/Classes/Model"
+    },
+    {
+      "name": "Util",
+      "source_files": "AppSearch/Classes/Util"
+    },
+    {
+      "name": "Router",
+      "source_files": "AppSearch/Classes/Router"
+    }
+  ]
+}

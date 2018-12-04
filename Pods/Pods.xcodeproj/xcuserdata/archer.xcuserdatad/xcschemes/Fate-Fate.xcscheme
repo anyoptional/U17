@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBC5987A94EDA14C440A851E0C6A06CA"
+               BlueprintIdentifier = "B236AC6826F2814E0EC7A1885510D34E"
                BuildableName = "Fate.bundle"
                BlueprintName = "Fate-Fate"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBC5987A94EDA14C440A851E0C6A06CA"
+            BlueprintIdentifier = "B236AC6826F2814E0EC7A1885510D34E"
             BuildableName = "Fate.bundle"
             BlueprintName = "Fate-Fate"
             ReferencedContainer = "container:Pods.xcodeproj">
