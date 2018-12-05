@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FF9BA3A0E54AA2B99D55F6B91CC9190A"
+               BlueprintIdentifier = "6D1F4D8EB2FBB36C11E3C9A7BB9C825B"
                BuildableName = "Fate.bundle"
                BlueprintName = "Fate-Fate"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FF9BA3A0E54AA2B99D55F6B91CC9190A"
+            BlueprintIdentifier = "6D1F4D8EB2FBB36C11E3C9A7BB9C825B"
             BuildableName = "Fate.bundle"
             BlueprintName = "Fate-Fate"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -19,6 +19,20 @@ class U17SearchViewController: UIViewController {
         return U17SearchBar(size: CGSize(width: width, height: height))
     }()
     
+    private lazy var tableView: UITableView = {
+        let v = UITableView()
+        v.estimatedRowHeight = 40
+        v.separatorStyle = .none
+        v.fate.register(cellClass: U17HotSearchCell.self)
+        v.fate.register(cellClass: U17HistorySearchCell.self)
+        if #available(iOS 11, *) {
+            v.contentInsetAdjustmentBehavior = .never
+        }
+        return v
+    }()
+    
+    private lazy var placeholderView = U17PlaceholderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
@@ -46,7 +60,10 @@ extension U17SearchViewController {
 extension U17SearchViewController: View {
     func bind(reactor: U17SearchViewReactor) {
         
-
+        placeholderView.rx.tap
+            .subscribe(onNext: { _ in
+                debugPrint("touched")
+            }).disposed(by: disposeBag)
         
         
     }
@@ -59,11 +76,24 @@ extension U17SearchViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain,
                                                             target: self, action: #selector(popViewController))
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font : UIFont.systemFont(ofSize: 15),
-                                                                   .foregroundColor : U17def.gray_C5C5C5], for: .normal)
-        
+                                                                   .foregroundColor : U17def.gray_9B9B9B], for: .normal)
     }
     
     func buildUI() {
         view.backgroundColor = .white
+        automaticallyAdjustsScrollViewInsets = false
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        placeholderView.state = .empty
+        placeholderView.contentInset = UIEdgeInsets(top: -fate.fullNavbarHeight, left: 0, bottom: 0, right: 0)
+        view.addSubview(placeholderView)
+        placeholderView.snp.makeConstraints { (make) in
+            make.edges.equalTo(tableView)
+        }
     }
 }

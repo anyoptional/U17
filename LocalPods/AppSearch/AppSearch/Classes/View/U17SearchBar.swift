@@ -23,11 +23,11 @@ class U17SearchBar: U17TextField {
         delegate = self
         layer.cornerRadius = height / 2
         layer.masksToBounds = true
-        textColor = U17def.gray_C5C5C5
+        textColor = U17def.gray_BABABA
         cursorColor = U17def.green_30DC91
         font = UIFont.systemFont(ofSize: 12)
         backgroundColor = U17def.gray_EEEEEE
-        placeholderColor = U17def.gray_C5C5C5
+        placeholderColor = U17def.gray_BABABA
         placeholderFont = UIFont.systemFont(ofSize: 13)
         textAreaInset = U17PositionInsetMake(height / 2, height / 2)
         
