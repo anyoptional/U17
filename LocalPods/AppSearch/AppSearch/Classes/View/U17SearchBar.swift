@@ -11,7 +11,7 @@ import RxCocoa
 
 class U17SearchBar: U17TextField {
     
-    private lazy var deleteButton: UIButton = {
+    fileprivate lazy var clearButton: UIButton = {
         let v = UIButton()
         v.isHidden = true
         let image = UIImage(nameInBundle: "search_cancel")
@@ -28,23 +28,15 @@ class U17SearchBar: U17TextField {
         textColor = U17def.gray_BABABA
         cursorColor = U17def.green_30DC91
         font = UIFont.systemFont(ofSize: 12)
-        backgroundColor = U17def.gray_EEEEEE
+        backgroundColor = U17def.gray_F2F2F2
         placeholderColor = U17def.gray_BABABA
         placeholderFont = UIFont.systemFont(ofSize: 13)
         textAreaInset = U17PositionInsetMake(height / 2, height / 2)
         
         // config right view
         rightViewMode = .always
-        rightView = deleteButton
+        rightView = clearButton
         rightViewInset = U17RectInsetMake(height / 2 - 2, (height - 14.5) / 2, 14.5)
-        
-        deleteButton.rx.tap
-            .subscribeNext(weak: self) { (self) in
-                return { _ in
-                    self.text = nil
-                    self.deleteButton.isHidden = true
-                }
-            }.disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,13 +49,21 @@ extension U17SearchBar: UITextFieldDelegate {
         defer {
             let replacingString = textField.text ?? ""
             let replacedString = castOrFatal(replacingString, NSString.self).replacingCharacters(in: range, with: string)
-            deleteButton.isHidden = replacedString.isBlank
+            clearButton.isHidden = replacedString.isBlank
         }
         return true
     }
 }
 
 extension Reactive where Base: U17SearchBar {
+    var clear: Observable<Void> {
+        return base.clearButton.rx.tap
+            .do(onNext: { [weak base] in
+                base?.text = nil
+                base?.clearButton.isHidden = true
+            })
+    }
+    
     var placeholderText: Binder<String> {
         return Binder(base) { (searchBar, placeholderText) in
             searchBar.placeholderText = placeholderText

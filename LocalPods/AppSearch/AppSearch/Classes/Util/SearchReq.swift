@@ -22,3 +22,8 @@ class SearchReq: NSObject {
 
 @objcMembers
 class HotKeywordsReq: SearchReq {}
+
+@objcMembers
+class KeywordRelativeReq: SearchReq {
+    var inputText: String?
+}

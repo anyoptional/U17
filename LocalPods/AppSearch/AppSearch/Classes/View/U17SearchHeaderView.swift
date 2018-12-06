@@ -46,6 +46,13 @@ class U17SearchHeaderView: UIView {
         return v
     }()
 
+    private lazy var lineView: UIView = {
+        let v = UIView()
+        v.backgroundColor = U17def.gray_EAEAEA
+        addSubview(v)
+        return v
+    }()
+    
     init() {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -58,6 +65,11 @@ class U17SearchHeaderView: UIView {
         eventButton.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.centerY.equalToSuperview()
+        }
+        
+        lineView.snp.makeConstraints { (make) in
+            make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(0.7)
         }
     }
     

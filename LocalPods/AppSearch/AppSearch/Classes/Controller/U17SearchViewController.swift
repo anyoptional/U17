@@ -18,7 +18,9 @@ class U17SearchViewController: UIViewController {
     private lazy var searchBar: U17SearchBar = {
         let width = view.width - 70
         let height = 25.toCGFloat()
-        return U17SearchBar(size: CGSize(width: width, height: height))
+        let searchBar = U17SearchBar(size: CGSize(width: width, height: height))
+        navigationItem.titleView = searchBar
+        return searchBar
     }()
     
     private lazy var tableView: UITableView = {
@@ -26,8 +28,11 @@ class U17SearchViewController: UIViewController {
         v.estimatedRowHeight = 40
         v.separatorStyle = .none
         v.backgroundColor = .white
+        v.keyboardDismissMode = .onDrag
+        v.rowHeight = UITableView.automaticDimension
         v.fate.register(cellClass: U17HotSearchCell.self)
         v.fate.register(cellClass: U17HistorySearchCell.self)
+        v.fate.register(cellClass: U17KeywordRelativeCell.self)
         if #available(iOS 11, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
@@ -37,6 +42,9 @@ class U17SearchViewController: UIViewController {
     private lazy var placeholderView = U17PlaceholderView()
     
     private lazy var dataSource = tableViewSectionedAnimatedDataSource()
+    
+    /// 是否正在搜索
+    private lazy var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,10 +89,13 @@ extension U17SearchViewController: View {
             .disposed(by: disposeBag)
         
         // MARK: 加载数据
-        rx.viewDidLoad
-            .map { Reactor.Action.getHotKeywords }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
+        // NOTE: searchBar.rx.text在bind时会发出当前的text
+        // searchBar默认是没有文字的 所以flatMap之后会触发getHotKeywords
+        // 这里的就不需要了
+//        rx.viewDidLoad
+//            .map { Reactor.Action.getHotKeywords }
+//            .bind(to: reactor.action)
+//            .disposed(by: disposeBag)
         
         // MARK: 绑定数据源
         reactor.state
@@ -98,6 +109,41 @@ extension U17SearchViewController: View {
             .map { $0.placeholderText }
             .filterNil()
             .bind(to: searchBar.rx.placeholderText)
+            .disposed(by: disposeBag)
+        
+        // MARK: 清空时加载热门关键词
+        // NOTE: searchBar.rx.text监听的时text editing event
+        // 并不包含手动赋值 所以这里清除时需要手动刷新
+        searchBar.rx.clear
+            .do(onNext: { [weak self] in
+                // 标记搜索结束
+                self?.isSearching = false
+                // 标记正在加载
+                self?.placeholderView.state = .loading
+            }).map { Reactor.Action.getHotKeywords }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // MARK: 搜索
+        searchBar
+            .rx.text.orEmpty
+            .distinctUntilChanged()
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .flatMap({ [weak self] (keyword) -> Observable<Reactor.Action> in
+                if keyword.isBlank {
+                    // 标记搜索结束
+                    self?.isSearching = false
+                    // 标记正在加载
+                    self?.placeholderView.state = .loading
+                    return .just(Reactor.Action.getHotKeywords)
+                } else {
+                    // 标记正在搜索
+                    self?.isSearching = true
+                    // 标记正在加载
+                    self?.placeholderView.state = .loading
+                    return .just(Reactor.Action.getKeywordRelative(keyword))
+                }
+            }).bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         // MARK: 处理出错
@@ -128,21 +174,39 @@ extension U17SearchViewController: View {
                 
             case .history(row: _, item: let display):
                 fatalError()
+                
+            case .relative(row: _, item: let display):
+                let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
             }
         })
     }
 }
 
 extension U17SearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fate.heightForRowAt(indexPath, cellClass: U17HotSearchCell.self, configuration: { (cell) in
-            if case let .hot(row: _, item: display) = self.dataSource[indexPath] {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {        
+        switch dataSource[indexPath] {
+        case .hot(row: _, item: let display):
+            return tableView.fate.heightForRowAt(indexPath, cellClass: U17HotSearchCell.self, configuration: { (cell) in
                 cell.display = display
-            }
-        })
+            })
+            
+        case .history(row: _, item: let display):
+            return tableView.fate.heightForRowAt(indexPath, cellClass: U17HistorySearchCell.self, configuration: { (cell) in
+                cell.display = display
+            })
+            
+        case .relative(row: _, item: let display):
+            return tableView.fate.heightForRowAt(indexPath, cellClass: U17KeywordRelativeCell.self, configuration: { (cell) in
+                cell.display = display
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // 不在搜索状态才有headerView
+        guard !isSearching else { return nil }
         let view = U17SearchHeaderView()
         view.disposeBag = DisposeBag()
         view.displayMode = (section == 0) ? .hot : .history
@@ -159,6 +223,8 @@ extension U17SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // 不在搜索状态才有headerView
+        guard !isSearching else { return 0 }
         return 30
     }
     
@@ -174,13 +240,12 @@ extension U17SearchViewController: UITableViewDelegate {
 extension U17SearchViewController {
     func buildNavbar() {
         navigationItem.hidesBackButton = true
-        navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain,
                                                             target: self, action: #selector(popViewController))
         let titleTextAttributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 15),
-                                                                   .foregroundColor : U17def.gray_9B9B9B]
+                                                                   .foregroundColor : U17def.gray_AAAAAA]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .normal)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .selected)
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .highlighted)
     }
     
     func buildUI() {

@@ -14,16 +14,9 @@ import RxBindable
 
 class U17HotSearchCell: UITableViewCell {
     
-    private lazy var lineView: UIView = {
-        let v = UIView()
-        v.backgroundColor = U17def.gray_EAEAEA
-        contentView.addSubview(v)
-        return v
-    }()
-    
     fileprivate lazy var keywordsLabel: YYLabel = {
         let v = YYLabel()
-        v.textContainerInset = UIEdgeInsets(top: 3, left: 0, bottom: 3, right: 0)
+        v.textContainerInset = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
         v.numberOfLines = 0
         v.displaysAsynchronously = true
         v.textAlignment = .left
@@ -34,10 +27,7 @@ class U17HotSearchCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        lineView.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(0.7)
-        }
+        selectionStyle = .none
         
         keywordsLabel.snp.makeConstraints { (make) in
             make.top.equalTo(10)

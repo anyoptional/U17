@@ -11,12 +11,14 @@ enum SearchSection {
     /// 在第几段 有哪些item
     case hot(section: Int, items: [SearchSectionItem])
     case history(section: Int, items: [SearchSectionItem])
+    case relative(section: Int, items: [SearchSectionItem])
 }
 
 enum SearchSectionItem {
     /// 在第几行 是哪个item
     case hot(row: Int, item: U17HotSearchCellDisplay)
     case history(row: Int, item: U17HistorySearchCellDisplay)
+    case relative(row: Int, item: U17KeywordRelativeCellDisplay)
 }
 
 extension SearchSectionItem: IdentifiableType, Equatable {
@@ -27,6 +29,8 @@ extension SearchSectionItem: IdentifiableType, Equatable {
         case .hot(row: let row, item: _):
             return row
         case .history(row: let row, item: _):
+            return row
+        case .relative(row: let row, item: _):
             return row
         }
     }
@@ -42,6 +46,8 @@ extension SearchSection: AnimatableSectionModelType {
             return items
         case .history(section: _, items: let items):
             return items
+        case .relative(section: _, items: let items):
+            return items
         }
     }
     
@@ -50,6 +56,8 @@ extension SearchSection: AnimatableSectionModelType {
         case .hot(section: let section, items: _):
             return section
         case .history(section: let section, items: _):
+            return section
+        case .relative(section: let section, items: _):
             return section
         }
     }
@@ -60,6 +68,8 @@ extension SearchSection: AnimatableSectionModelType {
             self = .hot(section: section, items: items)
         case .history(section: let section, items: _):
             self = .history(section: section, items: items)
+        case .relative(section: let section, items: _):
+            self = .relative(section: section, items: items)
         }
     }
 }

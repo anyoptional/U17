@@ -13,8 +13,8 @@ import ReactorKit
 final class TodayListViewReactor: Reactor {
     
     typealias Section = TodayRecommendSection
-    typealias ObjectType = TodayRecommendResp
-    typealias ResponseType = TodayRecommendResp.DataBean.ReturnDataBean
+    typealias Object = TodayRecommendResp
+    typealias Response = TodayRecommendResp.DataBean.ReturnDataBean
     
     enum Action {
         case pullToRefresh(String?)
@@ -23,14 +23,14 @@ final class TodayListViewReactor: Reactor {
     
     enum Mutation {
         case setError(APIError)
-        case setSections(ResponseType)
-        case setSectionItems(ResponseType)
+        case setSections(Response)
+        case setSectionItems(Response)
     }
     
     struct State {
         var error: APIError?
         var sections = [Section]()
-        var refreshState = U17RefreshState()
+        var refreshState = U17RefreshState(.refreshing, .idle)
     }
     
     var initialState = State()
@@ -90,7 +90,7 @@ extension TodayListViewReactor {
         recommendListReq.page = currentPage
         return APIProvider.rx.request(TodayAPI.getRecommendList(recommendListReq),
                                       allowsURLCache: true, ignoredKeys: ["time"])
-            .mapObject(ObjectType.self)
+            .mapObject(Object.self)
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setSections($0) }
@@ -108,7 +108,7 @@ extension TodayListViewReactor {
         recommendListReq.day = weekday
         recommendListReq.page = currentPage
         return APIProvider.rx.request(TodayAPI.getRecommendList(recommendListReq))
-            .mapObject(ObjectType.self)
+            .mapObject(Object.self)
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setSectionItems($0) }

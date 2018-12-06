@@ -21,13 +21,13 @@ struct U17HotSearchCellPresenter: Presentable {
         let attrText = NSMutableAttributedString()
         for (index, keyword) in keywords.enumerated() {
             let keywordText = NSMutableAttributedString(string: keyword)
-            keywordText.insertString("   ", at: 0)
-            keywordText.appendString("   ")
+            keywordText.insertString("    ", at: 0)
+            keywordText.appendString("    ")
             keywordText.color = U17def.gray_999999
             keywordText.font = UIFont.systemFont(ofSize: 13)
             keywordText.setTextBinding(YYTextBinding(deleteConfirm: false), range: (keywordText.string as NSString).rangeOfAll())
-            let border = YYTextBorder(fill: U17def.gray_EAEAEA, cornerRadius: 50)
-            border.insets = UIEdgeInsets(top: -6, left: -5, bottom: -6, right: -5)
+            let border = YYTextBorder(fill: U17def.gray_F2F2F2, cornerRadius: 50)
+            border.insets = UIEdgeInsets(top: -6, left: -10, bottom: -6, right: -10)
             border.lineJoin = .bevel
             keywordText.setTextBackgroundBorder(border, range: (keywordText.string as NSString).range(of: keyword))
             keywordText.setTextHighlight((keywordText.string as NSString).rangeOfAll(), color: nil, backgroundColor: nil, userInfo: nil)
@@ -48,7 +48,6 @@ struct U17HotSearchCellPresenter: Presentable {
         
         keywordsAttrText = attrText.fate.clone()
     }
-    
 }
 
 typealias U17HotSearchCellDisplay = UIViewSingleDisplay<U17HotSearchCellPresenter>

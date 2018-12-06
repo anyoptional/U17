@@ -10,11 +10,14 @@ import MJRefresh
 /// 刷新控件的状态
 public struct U17RefreshState {
     /// 上拉刷新状态
-    public var upState = MJRefreshState.idle
+    public var upState: MJRefreshState
     /// 下拉刷新状态
-    public var downState = MJRefreshState.idle
+    public var downState: MJRefreshState
     
-    public init() {}
+    public init(_ downState: MJRefreshState = .idle, _ upState: MJRefreshState = .idle) {
+        self.upState = upState
+        self.downState = downState
+    }
 }
 
 public extension UIScrollView {

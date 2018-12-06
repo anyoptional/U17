@@ -9,31 +9,31 @@ import RxMoya
 
 enum SearchAPI {
     case getHotKeywords(JSONParamConvertible)
+    case getKeywordRelative(JSONParamConvertible)
 }
 
 extension SearchAPI: APITargetType {
     var host: APIHost {
-        switch self {
-        case .getHotKeywords: return "http://app.u17.com/v3/appV3_3/ios/phone"
-        }
+        return "http://app.u17.com/v3/appV3_3/ios/phone"
     }
     
     var path: APIPath {
         switch self {
         case .getHotKeywords: return "search/hotkeywordsnew"
+        case .getKeywordRelative: return "search/relative"
         }
     }
     
     var method: APIMethod {
-        switch self {
-        case .getHotKeywords:
-            return .get
-        }
+        return .get
     }
     
     var parameters: APIParameters {
         switch self {
         case let .getHotKeywords(req):
+            return req.asParameters()
+            
+        case let .getKeywordRelative(req):
             return req.asParameters()
         }
     }

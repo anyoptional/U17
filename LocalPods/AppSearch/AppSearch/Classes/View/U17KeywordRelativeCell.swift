@@ -1,15 +1,15 @@
 //
-//  U17HistorySearchCell.swift
+//  U17KeywordRelativeCell.swift
 //  AppSearch
 //
-//  Created by Archer on 2018/12/5.
+//  Created by Archer on 2018/12/6.
 //
 
 import Fate
 import SnapKit
 import RxBindable
 
-class U17HistorySearchCell: UITableViewCell {
+class U17KeywordRelativeCell: UITableViewCell {
     
     private lazy var lineView: UIView = {
         let v = UIView()
@@ -21,8 +21,6 @@ class U17HistorySearchCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let v = UILabel()
         v.textAlignment = .left
-        v.textColor = U17def.gray_999999
-        v.font = UIFont.systemFont(ofSize: 13)
         contentView.addSubview(v)
         return v
     }()
@@ -50,8 +48,11 @@ class U17HistorySearchCell: UITableViewCell {
     }
 }
 
-extension U17HistorySearchCell: Bindable {
-    func bind(display: U17HistorySearchCellDisplay) {
+extension U17KeywordRelativeCell: Bindable {
+    func bind(display: U17KeywordRelativeCellDisplay) {
         
+        let presenter = display.state.presenter
+        
+        titleLabel.attributedText = presenter.attributedText
     }
 }

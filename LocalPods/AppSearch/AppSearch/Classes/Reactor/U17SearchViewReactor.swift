@@ -14,16 +14,20 @@ import ReactorKit
 final class U17SearchViewReactor: Reactor {
     
     typealias Section = SearchSection
-    typealias ObjectType = HotKeywordsResp
-    typealias ResponseType = HotKeywordsResp.DataBean.ReturnDataBean
+    typealias HotObject = HotKeywordsResp
+    typealias HotResponse = HotKeywordsResp.DataBean.ReturnDataBean
+    typealias RelativeObject = KeywordRelativeResp
+    typealias RelativeResponse = KeywordRelativeResp.DataBean.ReturnDataBean
     
     enum Action {
         case getHotKeywords
+        case getKeywordRelative(String)
     }
     
     enum Mutation {
         case setError(APIError)
-        case setHotKeywordsResp(ResponseType)
+        case setHotKeywordsResp(HotResponse)
+        case setKeywordRelativeResps([RelativeResponse])
     }
     
     struct State {
@@ -39,6 +43,9 @@ final class U17SearchViewReactor: Reactor {
         switch action {
         case .getHotKeywords:
             return getHotKeywords()
+            
+        case .getKeywordRelative(let keyword):
+            return getKeywordRelative(keyword)
         }
     }
     
@@ -58,6 +65,13 @@ final class U17SearchViewReactor: Reactor {
             state.placeholderState = .completed
             state.placeholderText = resp.defaultSearch
             state.sections = [.hot(section: 0, items: [.hot(row: 0, item: U17HotSearchCellDisplay(rawValue: resp))])]
+            
+        case .setKeywordRelativeResps(let resps):
+            state.placeholderState = .completed
+            state.sections = [.relative(section: 0, items: resps.enumerated().map({ (row, rawValue) in
+                .relative(row: row, item: U17KeywordRelativeCellDisplay(rawValue: rawValue))
+            }))]
+            break
         }
         return state
     }
@@ -67,9 +81,23 @@ extension U17SearchViewReactor {
     private func getHotKeywords() -> Observable<Mutation> {
         let req = HotKeywordsReq()
         return APIProvider.rx.request(SearchAPI.getHotKeywords(req))
-            .mapObject(ObjectType.self)
+            .mapObject(HotObject.self)
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setHotKeywordsResp($0) }
+    }
+    
+    private func getKeywordRelative(_ keyword: String) -> Observable<Mutation> {
+        let req = KeywordRelativeReq()
+        req.inputText = keyword
+        return APIProvider.rx.request(SearchAPI.getKeywordRelative(req))
+            .mapObject(RelativeObject.self)
+            .map { $0.data?.returnData }
+            .filterNil()
+            .do(onNext: { (resps) in
+                /// 将keyword添加进数据
+                /// 便于接下来做高亮显示关键字
+                resps.forEach { $0.keyword = keyword }
+            }).map { Mutation.setKeywordRelativeResps($0) }
     }
 }
