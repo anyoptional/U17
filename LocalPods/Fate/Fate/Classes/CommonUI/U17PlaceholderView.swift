@@ -59,15 +59,15 @@ public class U17PlaceholderView: UIView {
                 case .completed: isHidden = true
                 }
                 setNeedsLayout()
-                if let appearenceAnimation = appearenceAnimation {
-                    layer.add(appearenceAnimation, forKey: "_kCAAniamtionKey")
+                if let animation = animation {
+                    layer.add(animation, forKey: "_kCAAniamtionKey")
                 }
             }
         }
     }
     
     /// 视图切换时的动画
-    public var appearenceAnimation: CAAnimation? = {
+    public var animation: CAAnimation? = {
         let animation = CATransition()
         animation.type = .fade
         animation.duration = 0.125

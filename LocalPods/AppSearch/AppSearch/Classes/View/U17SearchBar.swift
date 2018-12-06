@@ -6,6 +6,8 @@
 //
 
 import Fate
+import RxSwift
+import RxCocoa
 
 class U17SearchBar: U17TextField {
     
@@ -58,5 +60,13 @@ extension U17SearchBar: UITextFieldDelegate {
             deleteButton.isHidden = replacedString.isBlank
         }
         return true
+    }
+}
+
+extension Reactive where Base: U17SearchBar {
+    var placeholderText: Binder<String> {
+        return Binder(base) { (searchBar, placeholderText) in
+            searchBar.placeholderText = placeholderText
+        }
     }
 }

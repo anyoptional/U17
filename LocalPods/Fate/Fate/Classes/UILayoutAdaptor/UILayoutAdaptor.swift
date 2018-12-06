@@ -7,9 +7,9 @@
 
 import YYKit
 
-let kScreenSize = YYScreenSize()
-let kScreenWidth = YYScreenSize().width
-let kScreenHeight = YYScreenSize().height
+public let kScreenSize = YYScreenSize()
+public let kScreenWidth = YYScreenSize().width
+public let kScreenHeight = YYScreenSize().height
 
 public enum iPhoneType {
     case iPhone5

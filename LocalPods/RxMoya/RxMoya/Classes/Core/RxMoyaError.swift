@@ -27,6 +27,30 @@ public enum APIError: Error {
     case underlying(Error)
 }
 
+extension APIError {
+    /// 网络相关的错误
+    public static var networkRelated: [APIError] {
+        return [.timedOut,
+                .cannotFindHost,
+                .cannotConnectToHost,
+                .notConnectedToInternet]
+    }
+}
+
+extension APIError: Equatable {
+    public static func == (lhs: APIError, rhs: APIError) -> Bool {
+        switch (lhs, rhs) {
+        // only compare network related errors
+        case (.timedOut, .timedOut): return true
+        case (.cannotFindHost, .cannotFindHost): return true
+        case (.cannotConnectToHost, .cannotConnectToHost): return true
+        case (.notConnectedToInternet, .notConnectedToInternet): return true
+        // ignore other errors
+        case _: return false
+        }
+    }
+}
+
 /// Swift Error转APIError
 /// 用于网络请求时的catch操作
 public extension Error {
