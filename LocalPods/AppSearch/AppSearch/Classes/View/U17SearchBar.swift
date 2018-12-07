@@ -37,6 +37,16 @@ class U17SearchBar: U17TextField {
         rightViewMode = .always
         rightView = clearButton
         rightViewInset = U17RectInsetMake(height / 2 - 2, (height - 14.5) / 2, 14.5)
+        
+        // 搜狗键盘在点击删除按钮删除完的时候
+        // 不会走下面的delegate回调
+        // 在这里也绑定一下
+        rx.text.orEmpty
+            .subscribeNext(weak: self) { (self) in
+                return { (text) in
+                    self.clearButton.isHidden = text.isBlank
+                }
+        }.disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,7 +65,11 @@ extension U17SearchBar: UITextFieldDelegate {
     }
 }
 
+/// 元素类型定义为fileprivate可以很好的保护封装性
+/// 采用给Reactive加扩展的方式，完美替代delegate模式
 extension Reactive where Base: U17SearchBar {
+    
+    /// clear button的点击事件
     var clear: Observable<Void> {
         return base.clearButton.rx.tap
             .do(onNext: { [weak base] in
@@ -64,6 +78,7 @@ extension Reactive where Base: U17SearchBar {
             })
     }
     
+    /// 包装searchBar的placeholderText属性
     var placeholderText: Binder<String> {
         return Binder(base) { (searchBar, placeholderText) in
             searchBar.placeholderText = placeholderText

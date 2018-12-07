@@ -51,6 +51,8 @@ extension U17HotSearchCell: Bindable {
 }
 
 extension Reactive where Base: U17HotSearchCell {
+    
+    /// 点击标签上的关键字
     var tap: Observable<String> {
         return Observable.create({ [weak base] (observer) in
             if let base = base {

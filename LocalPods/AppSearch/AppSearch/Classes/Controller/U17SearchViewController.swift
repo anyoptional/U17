@@ -78,6 +78,8 @@ extension U17SearchViewController: View {
         
         // MARK: 占位图点击
         placeholderView.rx.tap
+            // 点击的时候切换到加载状态(菊花转)
+            .do(onNext: { [weak self] _ in self?.placeholderView.state = .loading })
             .map { _ in Reactor.Action.getHotKeywords }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
@@ -127,24 +129,39 @@ extension U17SearchViewController: View {
         // MARK: 搜索
         searchBar
             .rx.text.orEmpty
+            // 不重复搜索
             .distinctUntilChanged()
+            // 在0.5s内不连续搜索
             .throttle(0.5, scheduler: MainScheduler.instance)
             .flatMap({ [weak self] (keyword) -> Observable<Reactor.Action> in
-                if keyword.isBlank {
-                    // 标记搜索结束
-                    self?.isSearching = false
-                    // 标记正在加载
-                    self?.placeholderView.state = .loading
-                    return .just(Reactor.Action.getHotKeywords)
-                } else {
-                    // 标记正在搜索
-                    self?.isSearching = true
-                    // 标记正在加载
-                    self?.placeholderView.state = .loading
-                    return .just(Reactor.Action.getKeywordRelative(keyword))
-                }
+                // 标记搜索状态
+                self?.isSearching = keyword.isNotBlank
+                // 标记正在加载
+                self?.placeholderView.state = .loading
+                // 如果是删光了就加载热门关键词
+                // 否则就开始搜索
+                let action = keyword.isBlank ? Reactor.Action.getHotKeywords
+                                             : Reactor.Action.getKeywordRelative(keyword)
+                return .just(action)
             }).bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
+        // MARK: cell点击
+        tableView
+            .rx.modelSelected(SearchSectionItem.self)
+            .subscribeNext(weak: self) { (self) in
+                return { (sectionItem) in
+                    var searchingKeyword = ""
+                    switch sectionItem {
+                    case let .hot(row: row , item: item):
+                        searchingKeyword = item.state.rawValue.hotItems![row].name.filterNil()
+                    case .history(row: _, item: let item): break
+                        
+                    case .relative(row: _, item: let item): break
+                        
+                    }
+                }
+            }.disposed(by: disposeBag)
         
         // MARK: 处理出错
         reactor.state
@@ -158,28 +175,32 @@ extension U17SearchViewController: View {
     }
     
     private func tableViewSectionedAnimatedDataSource() -> RxTableViewSectionedAnimatedDataSource<SearchSection> {
-        return RxTableViewSectionedAnimatedDataSource(configureCell: { (ds, tv, ip, item) in
-            switch item {
-            case .hot(row: _, item: let display):
-                let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
-                cell.disposeBag = DisposeBag()
-                cell.display = display
-                cell.rx.tap
-                    .subscribeNext(weak: self, { (self) in
-                        return { (keyword) in
-                            debugPrint(keyword)
-                        }
-                    }).disposed(by: cell.disposeBag)
-                return cell
-                
-            case .history(row: _, item: let display):
-                fatalError()
-                
-            case .relative(row: _, item: let display):
-                let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
-                cell.display = display
-                return cell
-            }
+        return RxTableViewSectionedAnimatedDataSource(
+            animationConfiguration: AnimationConfiguration(insertAnimation: .none,
+                                                           reloadAnimation: .none,
+                                                           deleteAnimation: .none),
+            configureCell: { (ds, tv, ip, sectionItem) in
+                switch sectionItem {
+                case .hot(row: _, item: let display):
+                    let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
+                    cell.disposeBag = DisposeBag()
+                    cell.display = display
+                    cell.rx.tap
+                        .subscribeNext(weak: self, { (self) in
+                            return { (keyword) in
+                                debugPrint(keyword)
+                            }
+                        }).disposed(by: cell.disposeBag)
+                    return cell
+                    
+                case .history(row: _, item: let display):
+                    fatalError()
+                    
+                case .relative(row: _, item: let display):
+                    let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
+                    cell.display = display
+                    return cell
+                }
         })
     }
 }

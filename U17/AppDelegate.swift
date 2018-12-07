@@ -38,8 +38,9 @@ extension AppDelegate {
 extension AppDelegate {
     private func setupIQkeyboardManager() {
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 30
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
     }
 }

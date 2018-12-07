@@ -21,7 +21,7 @@ class U17HistorySearchCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let v = UILabel()
         v.textAlignment = .left
-        v.textColor = U17def.gray_999999
+        v.textColor = U17def.gray_8E8E8E
         v.font = UIFont.systemFont(ofSize: 13)
         contentView.addSubview(v)
         return v

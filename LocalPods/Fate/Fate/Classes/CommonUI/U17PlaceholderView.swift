@@ -103,6 +103,7 @@ public class U17PlaceholderView: UIView {
     
     public init() {
         super.init(frame: .zero)
+        backgroundColor = .white
         addGestureRecognizer(tapGesture)
     }
     
@@ -131,14 +132,14 @@ extension Reactive where Base: U17PlaceholderView {
                 // 根据状态点击
                 switch state {
                     // 不需要点击的状态
-                case .failed, .loading, .completed:
+                case .empty, .loading, .completed:
                     return false
-                case .empty:
+                case .failed:
                     // 没有加载出来时点击中间的头像
-                    guard let emptyView = base.subviews.first else { return false }
+                    guard let failedView = base.subviews.first else { return false }
                     let point = ges.location(in: base)
-                    let rect = CGRect(x: emptyView.frame.minX + (emptyView.frame.width - 60)/2,
-                                      y: emptyView.frame.minY + (emptyView.frame.height - 60)/2 + 20, // 20是头像相对整图的偏移
+                    let rect = CGRect(x: failedView.frame.minX + (failedView.frame.width - 60)/2,
+                                      y: failedView.frame.minY + (failedView.frame.height - 60)/2 + 20, // 20是头像相对整图的偏移
                                       width: 60, height: 60)
                     return rect.contains(point)
                 }

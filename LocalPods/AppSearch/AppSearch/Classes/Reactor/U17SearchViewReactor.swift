@@ -67,7 +67,11 @@ final class U17SearchViewReactor: Reactor {
             state.sections = [.hot(section: 0, items: [.hot(row: 0, item: U17HotSearchCellDisplay(rawValue: resp))])]
             
         case .setKeywordRelativeResps(let resps):
-            state.placeholderState = .completed
+            if resps.isEmpty {
+                state.placeholderState = .empty
+            } else {
+                state.placeholderState = .completed
+            }
             state.sections = [.relative(section: 0, items: resps.enumerated().map({ (row, rawValue) in
                 .relative(row: row, item: U17KeywordRelativeCellDisplay(rawValue: rawValue))
             }))]
@@ -85,6 +89,7 @@ extension U17SearchViewReactor {
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setHotKeywordsResp($0) }
+            .catchError { .just(Mutation.setError($0.apiError)) }
     }
     
     private func getKeywordRelative(_ keyword: String) -> Observable<Mutation> {
@@ -93,11 +98,15 @@ extension U17SearchViewReactor {
         return APIProvider.rx.request(SearchAPI.getKeywordRelative(req))
             .mapObject(RelativeObject.self)
             .map { $0.data?.returnData }
-            .filterNil()
+            /// 如果没有数据就没有returnData
+            /// 没有数据是使用data.stateCode的0/1来控制
+            /// 这里提供一个默认值用来做占位图的.empty状态，效果一样
+            .replaceNilWith([])
             .do(onNext: { (resps) in
                 /// 将keyword添加进数据
                 /// 便于接下来做高亮显示关键字
                 resps.forEach { $0.keyword = keyword }
             }).map { Mutation.setKeywordRelativeResps($0) }
+            .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }

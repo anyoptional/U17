@@ -46,6 +46,8 @@ class TodayListViewController: UIViewController {
         return v
     }()
     
+    private lazy var placeholderView = U17PlaceholderView()
+    
     private lazy var dataSource = collectionViewSkeletonedAnimatedDataSource()
         
     override func viewDidLoad() {
@@ -73,9 +75,24 @@ extension TodayListViewController {
 extension TodayListViewController: View {
     func bind(reactor: TodayListViewReactor) {
     
+        // MARK: 占位图点击
+        placeholderView.rx.tap
+            // 点击的时候切换到加载状态(菊花转)
+            .do(onNext: { [weak self] _ in self?.placeholderView.state = .loading })
+            .map { [weak self] _ in Reactor.Action.pullToRefresh(self?.weekday) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // MARK: 占位图状态变化
+        reactor.state
+            .map { $0.placeholderState }
+            .bind(to: placeholderView.rx.state)
+            .disposed(by: disposeBag)
+        
         // MARK: 下拉刷新
         collectionView.gifHeader.rx.refresh
             .debounce(1, scheduler: MainScheduler.instance)
+            // 只在refreshing时才加载
             .takeWhen { $0 == .refreshing }
             .discard()
             .map { [weak self] in Reactor.Action.pullToRefresh(self?.weekday) }
@@ -106,7 +123,7 @@ extension TodayListViewController: View {
         // MARK: 绑定数据源
         reactor.state
             .map { $0.sections }
-            .filterEmpty()
+            // 有数据回来时不显示skeletonView
             .do(onNext: { [weak self] _ in self?.view.hideSkeleton() })
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -117,6 +134,9 @@ extension TodayListViewController: View {
             .filterNil()
             .subscribeNext(weak: self) { (self) in
                 return { error in
+                    // 由占位图显示
+                    // 不需要skeletonView
+                    self.view.hideSkeleton()
                     debugPrint("error = \(error)")
                 }
             }.disposed(by: disposeBag)
@@ -147,6 +167,11 @@ extension TodayListViewController {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(placeholderView)
+        placeholderView.snp.makeConstraints { (make) in
+            make.edges.equalTo(collectionView)
         }
     }
 }

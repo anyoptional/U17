@@ -23,7 +23,7 @@ struct U17HotSearchCellPresenter: Presentable {
             let keywordText = NSMutableAttributedString(string: keyword)
             keywordText.insertString("    ", at: 0)
             keywordText.appendString("    ")
-            keywordText.color = U17def.gray_999999
+            keywordText.color = U17def.gray_8E8E8E
             keywordText.font = UIFont.systemFont(ofSize: 13)
             keywordText.setTextBinding(YYTextBinding(deleteConfirm: false), range: (keywordText.string as NSString).rangeOfAll())
             let border = YYTextBorder(fill: U17def.gray_F2F2F2, cornerRadius: 50)

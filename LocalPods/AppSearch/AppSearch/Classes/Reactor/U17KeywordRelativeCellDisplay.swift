@@ -18,7 +18,7 @@ struct U17KeywordRelativeCellPresenter: Presentable {
         let keyword = rawValue.keyword.filterNil()
         let attrText = NSMutableAttributedString(string: name,
                                                  attributes: [.font : UIFont.systemFont(ofSize: 13),
-                                                              .foregroundColor : U17def.gray_999999])
+                                                              .foregroundColor : U17def.gray_8E8E8E])
         attrText.addAttributes([.foregroundColor : U17def.green_30DC91], range: (name as NSString).range(of: keyword))
         
         attributedText = attrText.fate.clone()

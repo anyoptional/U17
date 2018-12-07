@@ -31,6 +31,7 @@ final class TodayListViewReactor: Reactor {
         var error: APIError?
         var sections = [Section]()
         var refreshState = U17RefreshState(.refreshing, .idle)
+        var placeholderState = U17PlaceholderView.State.completed
     }
     
     var initialState = State()
@@ -54,27 +55,47 @@ final class TodayListViewReactor: Reactor {
         switch mutation {
         case .setError(let error):
             state.error = error
+            // 设置刷新控件的状态
             state.refreshState.upState = .idle
             state.refreshState.downState = .idle
+            // 设置占位图的状态
+            if APIError.networkRelated.contains(error)  {
+                state.placeholderState = .failed
+            } else {
+                state.placeholderState = .completed
+            }
             
         case .setSections(let resp):
             // 判断刷新控件的状态
             state.refreshState.downState = .idle
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
             // 设置section
-            state.sections = [Section(section: 0, items: (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([]))]
+            let sectionItems = (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([])
+            state.sections = [Section(section: 0, items: sectionItems)]
+            // 设置占位图的状态
+            if sectionItems.isEmpty {
+                state.placeholderState = .empty
+            } else {
+                state.placeholderState = .completed
+            }
             
         case .setSectionItems(let resp):
             // 判断刷新控件的状态
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
             // 设置section
-            let items = (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([])
+            let sectionItems = (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([])
             if state.sections.isEmpty {
-                state.sections = [Section(section: 0, items: items)]
+                state.sections = [Section(section: 0, items: sectionItems)]
             } else {
                 // 当前cache体系下不好处理数据变动的问题
                 // 所以上拉就不缓存了吧
-                state.sections.insert(items, at: 0)
+                state.sections.insert(sectionItems, at: 0)
+            }
+            // 设置占位图的状态
+            if state.sections[0].items.isEmpty {
+                state.placeholderState = .empty
+            } else {
+                state.placeholderState = .completed
             }
         }
         return state
