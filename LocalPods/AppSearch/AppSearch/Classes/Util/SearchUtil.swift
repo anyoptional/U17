@@ -22,3 +22,8 @@ extension UIImage {
         self.init(named: name, in: .resourcesBundle, compatibleWith: nil)
     }
 }
+
+
+struct SearchUtil {
+    
+}

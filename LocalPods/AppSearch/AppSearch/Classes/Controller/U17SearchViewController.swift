@@ -29,7 +29,6 @@ class U17SearchViewController: UIViewController {
         v.separatorStyle = .none
         v.backgroundColor = .white
         v.keyboardDismissMode = .onDrag
-        v.rowHeight = UITableView.automaticDimension
         v.fate.register(cellClass: U17HotSearchCell.self)
         v.fate.register(cellClass: U17HistorySearchCell.self)
         v.fate.register(cellClass: U17KeywordRelativeCell.self)
@@ -148,7 +147,7 @@ extension U17SearchViewController: View {
         
         // MARK: cell点击
         tableView
-            .rx.modelSelected(SearchSectionItem.self)
+            .rx.modelSelected(U17SearchSectionItem.self)
             .subscribeNext(weak: self) { (self) in
                 return { (sectionItem) in
                     var searchingKeyword = ""
@@ -174,7 +173,7 @@ extension U17SearchViewController: View {
             }.disposed(by: disposeBag)
     }
     
-    private func tableViewSectionedAnimatedDataSource() -> RxTableViewSectionedAnimatedDataSource<SearchSection> {
+    private func tableViewSectionedAnimatedDataSource() -> RxTableViewSectionedAnimatedDataSource<U17SearchSection> {
         return RxTableViewSectionedAnimatedDataSource(
             animationConfiguration: AnimationConfiguration(insertAnimation: .none,
                                                            reloadAnimation: .none,

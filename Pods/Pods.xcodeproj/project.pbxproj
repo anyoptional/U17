@@ -725,7 +725,7 @@
 		82043EE36B3D55917F5B28779975AC43 /* ReplaySubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6DB546C47A0D334B0E66D9B8D3D7A7 /* ReplaySubject.swift */; };
 		82588F941442FE39705A801740E23171 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659F1FF1EAE532A12151668CE2C6FB0 /* Empty.swift */; };
 		82676CF3EDD7E2D8E50D140709E53A97 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 464ECA723F1122BB099CB93CC32C6282 /* alpha_processing_mips_dsp_r2.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
-		826902EA08E67AB9F1FA57254C9334E9 /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961E11F9F7B16D3F3BCB1455CD6D66 /* SearchSection.swift */; };
+		826902EA08E67AB9F1FA57254C9334E9 /* U17SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961E11F9F7B16D3F3BCB1455CD6D66 /* U17SearchSection.swift */; };
 		8327C3310536415B16634C05F05CD707 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE37E2BB1DC852071AD896493E9055E /* RxCocoa.framework */; };
 		83ABA907354636508D2C33DE459CFF77 /* SDAnimatedImageRep.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5FBA0441D440B5D8CA67A4722C0258 /* SDAnimatedImageRep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83B5AA4FE52B264B1FACB6707BF9B5C8 /* today_barrage_hidden@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B570D83855715CEE6A53A6D14391AA /* today_barrage_hidden@3x.png */; };
@@ -2777,7 +2777,7 @@
 		07C269E67C57E26EA82FABDE70402BCA /* YYCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYCache.m; path = YYKit/Cache/YYCache.m; sourceTree = "<group>"; };
 		082A2E1E52CEE7CBB4F64E1FA042A5FD /* color_cache_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = color_cache_utils.h; path = src/utils/color_cache_utils.h; sourceTree = "<group>"; };
 		087CB157445A5A34198E323A65FC388F /* vp8li_dec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = vp8li_dec.h; path = src/dec/vp8li_dec.h; sourceTree = "<group>"; };
-		08961E11F9F7B16D3F3BCB1455CD6D66 /* SearchSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchSection.swift; path = AppSearch/Classes/Model/SearchSection.swift; sourceTree = "<group>"; };
+		08961E11F9F7B16D3F3BCB1455CD6D66 /* U17SearchSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = U17SearchSection.swift; path = AppSearch/Classes/Model/U17SearchSection.swift; sourceTree = "<group>"; };
 		08C9463E2B56EDD7C4F136228E9DB59B /* YYAsyncLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYAsyncLayer.m; path = YYKit/Utility/YYAsyncLayer.m; sourceTree = "<group>"; };
 		08F84CA0C3AFA315577B03893A2BAE3A /* ReactorKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReactorKit.modulemap; sourceTree = "<group>"; };
 		08FFF5A532922E1DC8DD6F9736EE2A21 /* SchedulerType+SharedSequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SchedulerType+SharedSequence.swift"; path = "RxCocoa/Traits/SharedSequence/SchedulerType+SharedSequence.swift"; sourceTree = "<group>"; };
@@ -6022,7 +6022,7 @@
 			isa = PBXGroup;
 			children = (
 				55E05401BA2A47DB084F6ABBD6C287E4 /* HotKeywordsResp.swift */,
-				08961E11F9F7B16D3F3BCB1455CD6D66 /* SearchSection.swift */,
+				08961E11F9F7B16D3F3BCB1455CD6D66 /* U17SearchSection.swift */,
 				CB42588F21B9510B00344662 /* KeywordRelativeResp.swift */,
 			);
 			name = Model;
@@ -9880,7 +9880,7 @@
 				0D04100B7EE3B77298FA82568D7A33C4 /* HotKeywordsResp.swift in Sources */,
 				8908939C6069413D353EA8662777EC19 /* SearchAPI.swift in Sources */,
 				D04714A203317816B74B3F17693509F6 /* SearchReq.swift in Sources */,
-				826902EA08E67AB9F1FA57254C9334E9 /* SearchSection.swift in Sources */,
+				826902EA08E67AB9F1FA57254C9334E9 /* U17SearchSection.swift in Sources */,
 				AEDA01E592FFA8A3722F9C5E275B79E9 /* SearchUtil.swift in Sources */,
 				D5F638DD59893758D5441B120CA2A0D2 /* U17HistorySearchCell.swift in Sources */,
 				CB42589221B9518700344662 /* U17KeywordRelativeCell.swift in Sources */,

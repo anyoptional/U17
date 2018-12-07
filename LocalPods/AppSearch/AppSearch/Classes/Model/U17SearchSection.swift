@@ -1,5 +1,5 @@
 //
-//  SearchSection.swift
+//  U17SearchSection.swift
 //  AppSearch
 //
 //  Created by Archer on 2018/12/6.
@@ -7,21 +7,21 @@
 
 import RxDataSources
 
-enum SearchSection {
+enum U17SearchSection {
     /// 在第几段 有哪些item
-    case hot(section: Int, items: [SearchSectionItem])
-    case history(section: Int, items: [SearchSectionItem])
-    case relative(section: Int, items: [SearchSectionItem])
+    case hot(section: Int, items: [U17SearchSectionItem])
+    case history(section: Int, items: [U17SearchSectionItem])
+    case relative(section: Int, items: [U17SearchSectionItem])
 }
 
-enum SearchSectionItem {
+enum U17SearchSectionItem {
     /// 在第几行 是哪个item
     case hot(row: Int, item: U17HotSearchCellDisplay)
     case history(row: Int, item: U17HistorySearchCellDisplay)
     case relative(row: Int, item: U17KeywordRelativeCellDisplay)
 }
 
-extension SearchSectionItem: IdentifiableType, Equatable {
+extension U17SearchSectionItem: IdentifiableType, Equatable {
     typealias Identity = Int
     
     var identity: Int {
@@ -36,11 +36,11 @@ extension SearchSectionItem: IdentifiableType, Equatable {
     }
 }
 
-extension SearchSection: AnimatableSectionModelType {
-    typealias Item = SearchSectionItem
+extension U17SearchSection: AnimatableSectionModelType {
+    typealias Item = U17SearchSectionItem
     typealias Identity = Int.Identity
     
-    var items: [SearchSectionItem] {
+    var items: [U17SearchSectionItem] {
         switch self {
         case .hot(section: _, items: let items):
             return items
@@ -62,7 +62,7 @@ extension SearchSection: AnimatableSectionModelType {
         }
     }
     
-    init(original: SearchSection, items: [SearchSectionItem]) {
+    init(original: U17SearchSection, items: [U17SearchSectionItem]) {
         switch original {
         case .hot(section: let section, items: _):
             self = .hot(section: section, items: items)

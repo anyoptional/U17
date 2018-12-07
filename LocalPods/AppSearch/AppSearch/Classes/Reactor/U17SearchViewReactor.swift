@@ -13,7 +13,7 @@ import ReactorKit
 
 final class U17SearchViewReactor: Reactor {
     
-    typealias Section = SearchSection
+    typealias Section = U17SearchSection
     typealias HotObject = HotKeywordsResp
     typealias HotResponse = HotKeywordsResp.DataBean.ReturnDataBean
     typealias RelativeObject = KeywordRelativeResp
