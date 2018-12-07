@@ -553,7 +553,7 @@ PODS:
   - RxAppState (1.1.2):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxBindable (0.0.9):
+  - RxBindable (1.0.0):
     - RxDataSources
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
@@ -659,26 +659,26 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppBookshelf: 378374491a5909034ab70a786e46233f337e06f6
-  AppDiscover: a514acb7c1465d5575057d5c518f13e96921f772
-  AppMain: e7d8ca130bda5ccef2afcb1ec8829835cd407e55
-  AppProfile: 45bb618e3bf45eeab47472f1bdaf74673afc9c6d
-  AppSearch: d97a3b69993aaa244a60c3aebc57c37bddbf45f1
-  AppToday: b8a76f3dc946ce22bc79916a5dbb3a20304a613a
+  AppBookshelf: 65d584b0fa26f2df338a7b737a80e907b4568851
+  AppDiscover: 29c804a7ef5e08ef7a278e8ba8713fac38717e42
+  AppMain: a53d8237a9b59beb5feb082cb5bee26f28d904af
+  AppProfile: 0de30b9ca76745e31d9ccddf8d1d09ca7b810d03
+  AppSearch: d0eaee5cebcd2626400e0b35d10d9a68281feddc
+  AppToday: 19cd26d3b1668d80b4a10030af1d36c37a110345
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: 4993193ea42efe9b967c896f75c20af7205c7b6b
+  Fate: fcf8d95df2718d9088736583e4dff794a9d9c006
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   libwebp: 38b601da310fe7c329c638d0c0d10aed006a54fe
-  Mediator: 845576f1fd066c762ec575ee94915a5d3409640c
+  Mediator: ae6cb5dc3cc80f2a02673f06eaee28cb126fadba
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxAppState: 0238d65c304725fa815a4b3758be210d48f4db82
-  RxBindable: 3074c6fc31206f512554d535f70a15de1d556fe7
+  RxBindable: a92782b2c078658b0aba6cbf70c0ca3728ef5f3b
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxMoya: 17a7b84e16d8b8522b6113999aea558ab62807ec
+  RxMoya: 6b8446e759e5d5e5198376f8700287096fa7e01c
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
   RxSkeleton: b5a29725d68b68cbfdba63214a7f81ef5a2dcb56
   RxSwift: e49536837d9901277638493ea537394d4b55f570
@@ -694,4 +694,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 27303d31baf33cae490481e9bb285a7a3379f392
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

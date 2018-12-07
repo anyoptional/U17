@@ -10,9 +10,9 @@ import RxDataSources
 
 // A wrapper for table/collection view sectioned reload data source
 public struct RxTableCollectionViewReloadSection<ItemType: Displayable> {
-    public var items: [Item]
+    public var items: [ItemType]
     
-    public init(items: [Item]) {
+    public init(items: [ItemType]) {
         self.items = items
     }
 }
@@ -28,7 +28,7 @@ extension RxTableCollectionViewReloadSection: CustomStringConvertible {
 }
 
 public extension RxTableCollectionViewReloadSection {
-    public init(original: RxTableCollectionViewReloadSection<Item>, items: [Item]) {
+    public init(original: RxTableCollectionViewReloadSection<ItemType>, items: [Item]) {
         self = original
         self.items = items
     }
@@ -36,37 +36,37 @@ public extension RxTableCollectionViewReloadSection {
 
 
 // A wrapper for table/collection view sectioned animated data source
-public struct RxTableCollectionViewAnimatedSection<ItemType: Displayable & IdentifiableType & Equatable> {
+public struct RxTableCollectionViewAnimatedSection<Section: IdentifiableType, ItemType: Displayable & IdentifiableType & Equatable> {
     
-    public var section: Int
-    public var items: [Item]
-
-    public init(section: Int, items: [Item]) {
-        self.section = section
+    public var tag: Section
+    public var items: [ItemType]
+    
+    public init(tag: Section, items: [ItemType]) {
+        self.tag = tag
         self.items = items
     }
 }
 
 extension RxTableCollectionViewAnimatedSection: AnimatableSectionModelType {
     public typealias Item = ItemType
-    public typealias Identity = Int.Identity
+    public typealias Identity = Section.Identity
     
-    public var identity: Int.Identity {
-        return section
+    public var identity: Identity {
+        return tag.identity
     }
     
     public var hashValue: Int {
-        return self.section.identity.hashValue
+        return tag.identity.hashValue
     }
     
-    public init(original: RxTableCollectionViewAnimatedSection<ItemType>, items: [ItemType]) {
-        self = original
+    public init(original: RxTableCollectionViewAnimatedSection<Section, ItemType>, items: [ItemType]) {
+        self.tag = original.tag
         self.items = items
     }
 }
 
 extension RxTableCollectionViewAnimatedSection: CustomStringConvertible {
     public var description: String {
-        return "RxTableCollectionViewAnimatedSection(section: \"\(section)\", items: \(items))"
+        return "RxTableCollectionViewAnimatedSection(tag: \"\(tag)\", items: \(items))"
     }
 }

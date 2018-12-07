@@ -20,14 +20,23 @@ final class U17SearchViewReactor: Reactor {
     typealias RelativeResponse = KeywordRelativeResp.DataBean.ReturnDataBean
     
     enum Action {
-        case getHotKeywords
+        // 获取关键词 热门和历史
+        case getKeywords
+        // 刷新热门词
+        case refreshHotKeywords
+        // 清空历史记录
+        case removeHistoryKeywords
+        // 关键词搜索
         case getKeywordRelative(String)
     }
     
     enum Mutation {
         case setError(APIError)
-        case setHotKeywordsResp(HotResponse)
-        case setKeywordRelativeResps([RelativeResponse])
+        case addHistoryKeywords([String])
+        case removeHistoryKeywords
+        case addHotKeywords(HotResponse)
+        case refreshHotKeywords(HotResponse)
+        case addKeywordRelative([RelativeResponse])
     }
     
     struct State {
@@ -39,10 +48,20 @@ final class U17SearchViewReactor: Reactor {
     
     var initialState = State()
     
+    // 热门和历史的数据源
+    private lazy var hotSection = Section.hot
+    private lazy var historySection = Section.history
+    
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .getHotKeywords:
-            return getHotKeywords()
+        case .getKeywords:
+            return getKeywords()
+            
+        case .refreshHotKeywords:
+            return refreshHotKeywords()
+            
+        case .removeHistoryKeywords:
+            return removeHistoryKeywords()
             
         case .getKeywordRelative(let keyword):
             return getKeywordRelative(keyword)
@@ -61,35 +80,85 @@ final class U17SearchViewReactor: Reactor {
                 state.placeholderState = .completed
             }
             
-        case .setHotKeywordsResp(let resp):
+        case .addHistoryKeywords(let keywords):
+            if keywords.isEmpty { break }
+            state.sections = [.history(items: keywords.map({ (rawValue) in
+                .history(item:  U17HistorySearchCellDisplay(rawValue: rawValue))
+            }))]
+            
+        case .addHotKeywords(let resp):
+            // 讲道理 历史搜索可能没有
+            // 热门总不能没有吧 所以这里就不做判空了
             state.placeholderState = .completed
             state.placeholderText = resp.defaultSearch
-            state.sections = [.hot(section: 0, items: [.hot(row: 0, item: U17HotSearchCellDisplay(rawValue: resp))])]
+            let hot: Section = .hot(items: [.hot(item: U17HotSearchCellDisplay(rawValue: resp))])
+            // 暂无section 那么就做第一段处理
+            if state.sections.isEmpty {
+                state.sections = [hot]
+            } else {
+                // 有历史记录的话就插入到第一个
+                state.sections.insert(hot, at: 0)
+            }
             
-        case .setKeywordRelativeResps(let resps):
+        case .addKeywordRelative(let resps):
             if resps.isEmpty {
                 state.placeholderState = .empty
             } else {
                 state.placeholderState = .completed
             }
-            state.sections = [.relative(section: 0, items: resps.enumerated().map({ (row, rawValue) in
-                .relative(row: row, item: U17KeywordRelativeCellDisplay(rawValue: rawValue))
+            state.sections = [.relative(items: resps.map({ (rawValue) in
+                .relative(item: U17KeywordRelativeCellDisplay(rawValue: rawValue))
             }))]
-            break
+            
+        case .refreshHotKeywords(let resp):
+            // 默认热门是一定有的
+            // 如果正好碰到没有的话 这里就有问题(也不可能会没有啦，偷个懒)
+            let hotItems: [Section.Item] =  [.hot(item: U17HotSearchCellDisplay(rawValue: resp))]
+            state.sections.replace(section: 0, items: hotItems)
+            
+        case .removeHistoryKeywords:
+            state.sections.removeLast()
         }
         return state
     }
 }
 
 extension U17SearchViewReactor {
+    private func getKeywords() -> Observable<Mutation> {
+        // 先读缓存 再请求后台
+        return Observable.concat([getHistoryKeywords(),
+                                  getHotKeywords()])
+    }
+    
     private func getHotKeywords() -> Observable<Mutation> {
+        return requestHotKeywords(isRefresh: false)
+    }
+    
+    private func refreshHotKeywords() -> Observable<Mutation> {
+        return requestHotKeywords(isRefresh: true)
+    }
+    
+    private func requestHotKeywords(isRefresh: Bool) -> Observable<Mutation> {
         let req = HotKeywordsReq()
         return APIProvider.rx.request(SearchAPI.getHotKeywords(req))
             .mapObject(HotObject.self)
             .map { $0.data?.returnData }
             .filterNil()
-            .map { Mutation.setHotKeywordsResp($0) }
-            .catchError { .just(Mutation.setError($0.apiError)) }
+            .map { (keywords) in
+                if isRefresh {
+                    return Mutation.refreshHotKeywords(keywords)
+                }
+                return Mutation.addHotKeywords(keywords)
+            }.catchError { .just(Mutation.setError($0.apiError)) }
+    }
+    
+    private func getHistoryKeywords() -> Observable<Mutation> {
+        return .just(Mutation.addHistoryKeywords(U17KeywordsCache.restore()))
+    }
+    
+    private func removeHistoryKeywords() -> Observable<Mutation> {
+        U17KeywordsCache.removeAll()
+        return .just(Mutation.removeHistoryKeywords)
     }
     
     private func getKeywordRelative(_ keyword: String) -> Observable<Mutation> {
@@ -106,7 +175,7 @@ extension U17SearchViewReactor {
                 /// 将keyword添加进数据
                 /// 便于接下来做高亮显示关键字
                 resps.forEach { $0.keyword = keyword }
-            }).map { Mutation.setKeywordRelativeResps($0) }
+            }).map { Mutation.addKeywordRelative($0) }
             .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }

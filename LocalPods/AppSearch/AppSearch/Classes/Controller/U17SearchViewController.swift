@@ -40,7 +40,7 @@ class U17SearchViewController: UIViewController {
     
     private lazy var placeholderView = U17PlaceholderView()
     
-    private lazy var dataSource = tableViewSectionedAnimatedDataSource()
+    private lazy var dataSource = tableViewSectionedReloadDataSource()
     
     /// 是否正在搜索
     private lazy var isSearching = false
@@ -58,6 +58,8 @@ class U17SearchViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // 缓存写到本地
+        U17KeywordsCache.synchronize()
         searchBar.resignFirstResponder()
     }
 }
@@ -79,7 +81,7 @@ extension U17SearchViewController: View {
         placeholderView.rx.tap
             // 点击的时候切换到加载状态(菊花转)
             .do(onNext: { [weak self] _ in self?.placeholderView.state = .loading })
-            .map { _ in Reactor.Action.getHotKeywords }
+            .map { _ in Reactor.Action.getKeywords }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -91,12 +93,12 @@ extension U17SearchViewController: View {
         
         // MARK: 加载数据
         // NOTE: searchBar.rx.text在bind时会发出当前的text
-        // searchBar默认是没有文字的 所以flatMap之后会触发getHotKeywords
+        // searchBar默认是没有文字的 所以flatMap之后会触发getKeywords
         // 这里的就不需要了
-//        rx.viewDidLoad
-//            .map { Reactor.Action.getHotKeywords }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
+        //        rx.viewDidLoad
+        //            .map { Reactor.Action.getKeywords }
+        //            .bind(to: reactor.action)
+        //            .disposed(by: disposeBag)
         
         // MARK: 绑定数据源
         reactor.state
@@ -121,7 +123,7 @@ extension U17SearchViewController: View {
                 self?.isSearching = false
                 // 标记正在加载
                 self?.placeholderView.state = .loading
-            }).map { Reactor.Action.getHotKeywords }
+            }).map { Reactor.Action.getKeywords }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -139,7 +141,7 @@ extension U17SearchViewController: View {
                 self?.placeholderView.state = .loading
                 // 如果是删光了就加载热门关键词
                 // 否则就开始搜索
-                let action = keyword.isBlank ? Reactor.Action.getHotKeywords
+                let action = keyword.isBlank ? Reactor.Action.getKeywords
                                              : Reactor.Action.getKeywordRelative(keyword)
                 return .just(action)
             }).bind(to: reactor.action)
@@ -150,13 +152,19 @@ extension U17SearchViewController: View {
             .rx.modelSelected(U17SearchSectionItem.self)
             .subscribeNext(weak: self) { (self) in
                 return { (sectionItem) in
-                    var searchingKeyword = ""
                     switch sectionItem {
-                    case let .hot(row: row , item: item):
-                        searchingKeyword = item.state.rawValue.hotItems![row].name.filterNil()
-                    case .history(row: _, item: let item): break
+                    // 在cell.rx.tap里处理
+                    case .hot: break
+                    case .history(item: let item):
+                        // 存历史搜索
+                        U17KeywordsCache.store(item.state.rawValue)
+                        // 进详情
                         
-                    case .relative(row: _, item: let item): break
+                        
+                    case .relative(item: let item):
+                        // 存历史搜索
+                        U17KeywordsCache.store(item.state.rawValue.name)
+                        // 进详情
                         
                     }
                 }
@@ -173,54 +181,52 @@ extension U17SearchViewController: View {
             }.disposed(by: disposeBag)
     }
     
-    private func tableViewSectionedAnimatedDataSource() -> RxTableViewSectionedAnimatedDataSource<U17SearchSection> {
-        return RxTableViewSectionedAnimatedDataSource(
-            animationConfiguration: AnimationConfiguration(insertAnimation: .none,
-                                                           reloadAnimation: .none,
-                                                           deleteAnimation: .none),
-            configureCell: { (ds, tv, ip, sectionItem) in
-                switch sectionItem {
-                case .hot(row: _, item: let display):
-                    let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
-                    cell.disposeBag = DisposeBag()
-                    cell.display = display
-                    cell.rx.tap
-                        .subscribeNext(weak: self, { (self) in
-                            return { (keyword) in
-                                debugPrint(keyword)
-                            }
-                        }).disposed(by: cell.disposeBag)
-                    return cell
-                    
-                case .history(row: _, item: let display):
-                    fatalError()
-                    
-                case .relative(row: _, item: let display):
-                    let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
-                    cell.display = display
-                    return cell
-                }
+    private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<U17SearchSection> {
+        return RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (ds, tv, ip, sectionItem) in
+            switch sectionItem {
+            case .hot(item: let display):
+                let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
+                self?.configure(hotSearchCell: cell, display: display)
+                return cell
+                
+            case .history(item: let display):
+                let cell: U17HistorySearchCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
+                
+            case .relative(item: let display):
+                let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
+            }
         })
+    }
+    
+    private func configure(hotSearchCell cell: U17HotSearchCell, display: U17HotSearchCellDisplay) {
+        cell.disposeBag = DisposeBag()
+        cell.display = display
+        cell.rx.tap
+            .subscribeNext(weak: self, { (self) in
+                return { (keyword) in
+                    // 缓存历史搜索
+                    U17KeywordsCache.store(keyword)
+                    // 跳转进详情
+                    
+                }
+            }).disposed(by: cell.disposeBag)
     }
 }
 
 extension U17SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {        
         switch dataSource[indexPath] {
-        case .hot(row: _, item: let display):
+        case .hot(item: let display):
             return tableView.fate.heightForRowAt(indexPath, cellClass: U17HotSearchCell.self, configuration: { (cell) in
-                cell.display = display
+                self.configure(hotSearchCell: cell, display: display)
             })
             
-        case .history(row: _, item: let display):
-            return tableView.fate.heightForRowAt(indexPath, cellClass: U17HistorySearchCell.self, configuration: { (cell) in
-                cell.display = display
-            })
-            
-        case .relative(row: _, item: let display):
-            return tableView.fate.heightForRowAt(indexPath, cellClass: U17KeywordRelativeCell.self, configuration: { (cell) in
-                cell.display = display
-            })
+        // 写定好了 这个就不自动算了
+        default: return 45
         }
     }
     
@@ -233,9 +239,8 @@ extension U17SearchViewController: UITableViewDelegate {
         view.rx.event
             .flatMap { (displayMode) -> Observable<Reactor.Action> in
                 switch displayMode {
-                case .hot: return .just(Reactor.Action.getHotKeywords)
-                    
-                case .history: return .empty()
+                case .hot: return .just(Reactor.Action.refreshHotKeywords)
+                case .history: return .just(Reactor.Action.removeHistoryKeywords)
                 }
             }.bind(to: reactor!.action) // It's safe to force-unwrap here
             .disposed(by: view.disposeBag)

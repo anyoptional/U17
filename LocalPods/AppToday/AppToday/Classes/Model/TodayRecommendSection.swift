@@ -7,4 +7,4 @@
 
 import RxBindable
 
-typealias TodayRecommendSection = RxTableCollectionViewAnimatedSection<TodayRecommendCellDisplay>
+typealias TodayRecommendSection = RxTableCollectionViewAnimatedSection<String, TodayRecommendCellDisplay>

@@ -52,6 +52,6 @@ class U17HistorySearchCell: UITableViewCell {
 
 extension U17HistorySearchCell: Bindable {
     func bind(display: U17HistorySearchCellDisplay) {
-        
+        titleLabel.text = display.state.presenter.keywordText
     }
 }

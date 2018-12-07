@@ -58,7 +58,7 @@ class U17SearchHeaderView: UIView {
         backgroundColor = .white
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(12)
             make.centerY.equalToSuperview()
         }
         

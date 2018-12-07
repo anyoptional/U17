@@ -30,7 +30,7 @@ final class TodayListViewReactor: Reactor {
     struct State {
         var error: APIError?
         var sections = [Section]()
-        var refreshState = U17RefreshState(.refreshing, .idle)
+        var refreshState = U17RefreshState()
         var placeholderState = U17PlaceholderView.State.completed
     }
     
@@ -71,7 +71,7 @@ final class TodayListViewReactor: Reactor {
             state.refreshState.upState = resp.hasMore ? .idle : .noMoreData
             // 设置section
             let sectionItems = (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([])
-            state.sections = [Section(section: 0, items: sectionItems)]
+            state.sections = [Section(tag: "first blood", items: sectionItems)]
             // 设置占位图的状态
             if sectionItems.isEmpty {
                 state.placeholderState = .empty
@@ -85,7 +85,7 @@ final class TodayListViewReactor: Reactor {
             // 设置section
             let sectionItems = (resp.comics?.map { Section.Item(rawValue: $0) }).filterNil([])
             if state.sections.isEmpty {
-                state.sections = [Section(section: 0, items: sectionItems)]
+                state.sections = [Section(tag: "first blood", items: sectionItems)]
             } else {
                 // 当前cache体系下不好处理数据变动的问题
                 // 所以上拉就不缓存了吧

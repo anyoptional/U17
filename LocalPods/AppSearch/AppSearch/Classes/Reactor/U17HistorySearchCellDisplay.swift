@@ -10,12 +10,12 @@ import RxBindable
 
 struct U17HistorySearchCellPresenter: Presentable {
     
-    init(rawValue: HotKeywordsResp.DataBean.ReturnDataBean.HotItemsBean) {
-        
-        
-        
-    }
+    let keywordText: String
     
+    init(rawValue: String) {
+        
+        keywordText = rawValue
+    }    
 }
 
 typealias U17HistorySearchCellDisplay = UIViewSingleDisplay<U17HistorySearchCellPresenter>
