@@ -48,10 +48,6 @@ final class U17SearchViewReactor: Reactor {
     
     var initialState = State()
     
-    // 热门和历史的数据源
-    private lazy var hotSection = Section.hot
-    private lazy var historySection = Section.history
-    
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .getKeywords:
@@ -74,16 +70,20 @@ final class U17SearchViewReactor: Reactor {
         switch mutation {
         case .setError(let error):
             state.error = error
-            if APIError.networkRelated.contains(error)  {
+            // 没数据且没网才显示
+            if state.sections.isEmpty &&
+                APIError.networkRelated.contains(error)  {
                 state.placeholderState = .failed
             } else {
                 state.placeholderState = .completed
             }
             
         case .addHistoryKeywords(let keywords):
+            // 先清空所有数据 避免和relative数据混在一起
+            state.sections.removeAll(keepingCapacity: true)
             if keywords.isEmpty { break }
             state.sections = [.history(items: keywords.map({ (rawValue) in
-                .history(item:  U17HistorySearchCellDisplay(rawValue: rawValue))
+                .history(item: U17HistorySearchCellDisplay(rawValue: rawValue))
             }))]
             
         case .addHotKeywords(let resp):
@@ -111,13 +111,23 @@ final class U17SearchViewReactor: Reactor {
             }))]
             
         case .refreshHotKeywords(let resp):
-            // 默认热门是一定有的
-            // 如果正好碰到没有的话 这里就有问题(也不可能会没有啦，偷个懒)
+            // 能点击刷新说明一定有热门词
+            // 这里直接操作下标0没有问题
             let hotItems: [Section.Item] =  [.hot(item: U17HotSearchCellDisplay(rawValue: resp))]
             state.sections.replace(section: 0, items: hotItems)
             
         case .removeHistoryKeywords:
-            state.sections.removeLast()
+            // 避免连续点击越界
+            if state.sections.isNotEmpty {
+                state.sections.removeLast()
+            }
+            // 可能是最后一段(网络差未请求到热门词时)
+            // 这里也追加一下判空操作
+            if state.sections.isEmpty {
+                state.placeholderState = .empty
+            } else {
+                state.placeholderState = .completed
+            }
         }
         return state
     }

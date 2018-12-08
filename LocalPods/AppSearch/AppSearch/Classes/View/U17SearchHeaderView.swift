@@ -42,6 +42,8 @@ class U17SearchHeaderView: UIView {
     
     fileprivate lazy var eventButton: UIButton = {
         let v = UIButton()
+        // 点击范围太小了 追加一点
+        v.fate.touchAreaInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         addSubview(v)
         return v
     }()
