@@ -422,6 +422,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -434,6 +435,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -446,6 +448,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -458,6 +461,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -470,6 +474,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -482,6 +487,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -494,6 +500,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -506,6 +513,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SwiftMessages
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
@@ -591,6 +599,9 @@ PODS:
     - SDWebImage/Core
   - SkeletonView (1.4.1)
   - SnapKit (4.0.1)
+  - SwiftMessages (6.0.1):
+    - SwiftMessages/App (= 6.0.1)
+  - SwiftMessages/App (6.0.1)
   - Timepiece (1.3.1)
   - TYPagerController (2.1.2)
   - "UITableView+FDTemplateLayoutCell (1.6)"
@@ -632,6 +643,7 @@ SPEC REPOS:
     - SDWebImage
     - SkeletonView
     - SnapKit
+    - SwiftMessages
     - Timepiece
     - TYPagerController
     - "UITableView+FDTemplateLayoutCell"
@@ -666,7 +678,7 @@ SPEC CHECKSUMS:
   AppSearch: d0eaee5cebcd2626400e0b35d10d9a68281feddc
   AppToday: 19cd26d3b1668d80b4a10030af1d36c37a110345
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: fcf8d95df2718d9088736583e4dff794a9d9c006
+  Fate: b92f8e026638715b119f421f3264829c9373ed12
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   libwebp: 38b601da310fe7c329c638d0c0d10aed006a54fe
   Mediator: ae6cb5dc3cc80f2a02673f06eaee28cb126fadba
@@ -687,6 +699,7 @@ SPEC CHECKSUMS:
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  SwiftMessages: 42ed7b6e1f2f1ead9ee667dc61a0ae87e4f49570
   Timepiece: c0760ec0e545697d86b80424dcd2b4d5ef66cf51
   TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f

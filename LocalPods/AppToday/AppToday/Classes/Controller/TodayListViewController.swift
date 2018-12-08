@@ -137,7 +137,7 @@ extension TodayListViewController: View {
                     // 由占位图显示
                     // 不需要skeletonView
                     self.view.hideSkeleton()
-                    debugPrint("error = \(error)")
+                    SwiftyHUD.show(error.message)
                 }
             }.disposed(by: disposeBag)
     }

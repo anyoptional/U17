@@ -21,6 +21,8 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '9.0'
     
+    s.dependency 'SDWebImage/WebP'
+    s.dependency 'SDCycleScrollView'
     s.dependency 'YYKit', '~> 1.0.9'
     s.dependency 'RxSwift', '~> 4.1.2'
     s.dependency 'RxCocoa', '~> 4.1.2'
@@ -29,8 +31,7 @@ Pod::Spec.new do |s|
     s.dependency 'SkeletonView', '~> 1.4.1'
     s.dependency 'MJRefresh', '~> 3.1.15.7'
     s.dependency 'RxDataSources', '~> 3.1.0'
-    s.dependency 'SDCycleScrollView'
-    s.dependency 'SDWebImage/WebP'
+    s.dependency 'SwiftMessages', '~> 6.0.1'
     s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
 
     s.resource_bundles = {

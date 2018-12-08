@@ -42,9 +42,6 @@ class U17SearchViewController: UIViewController {
     
     private lazy var dataSource = tableViewSectionedReloadDataSource()
     
-    /// 是否正在搜索
-    private lazy var isSearching = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
@@ -62,6 +59,8 @@ class U17SearchViewController: UIViewController {
         U17KeywordsCache.synchronize()
         searchBar.resignFirstResponder()
     }
+    
+    deinit { NSLog("\(className()) is deallocating...") }
 }
 
 extension U17SearchViewController {
@@ -119,8 +118,6 @@ extension U17SearchViewController: View {
         // 并不包含手动赋值 所以这里清除时需要手动刷新
         searchBar.rx.clear
             .do(onNext: { [weak self] in
-                // 标记搜索结束
-                self?.isSearching = false
                 // 标记正在加载
                 self?.placeholderView.state = .loading
             }).map { Reactor.Action.getKeywords }
@@ -135,8 +132,6 @@ extension U17SearchViewController: View {
             // 在0.5s内不连续搜索
             .throttle(0.5, scheduler: MainScheduler.instance)
             .flatMap({ [weak self] (keyword) -> Observable<Reactor.Action> in
-                // 标记搜索状态
-                self?.isSearching = keyword.isNotBlank
                 // 标记正在加载
                 self?.placeholderView.state = .loading
                 // 如果是删光了就加载热门关键词
@@ -156,16 +151,9 @@ extension U17SearchViewController: View {
                     // 在cell.rx.tap里处理
                     case .hot: break
                     case .history(item: let item):
-                        // 存历史搜索
-                        U17KeywordsCache.store(item.state.rawValue)
-                        // 进详情
-                        
-                        
+                        self.tapKeyword(item.state.rawValue)
                     case .relative(item: let item):
-                        // 存历史搜索
-                        U17KeywordsCache.store(item.state.rawValue.name)
-                        // 进详情
-                        
+                        self.tapKeyword(item.state.rawValue.name)
                     }
                 }
             }.disposed(by: disposeBag)
@@ -176,7 +164,7 @@ extension U17SearchViewController: View {
             .filterNil()
             .subscribeNext(weak: self) { (self) in
                 return { error in
-                    debugPrint("error = \(error)")
+                    SwiftyHUD.show(error.message)
                 }
             }.disposed(by: disposeBag)
     }
@@ -208,12 +196,16 @@ extension U17SearchViewController: View {
         cell.rx.tap
             .subscribeNext(weak: self, { (self) in
                 return { (keyword) in
-                    // 缓存历史搜索
-                    U17KeywordsCache.store(keyword)
-                    // 跳转进详情
-                    
+                    self.tapKeyword(keyword)
                 }
             }).disposed(by: cell.disposeBag)
+    }
+    
+    private func tapKeyword(_ keyword: String?) {
+        // 存历史搜索
+        U17KeywordsCache.store(keyword)
+        // TODO: 进详情
+
     }
 }
 
@@ -231,11 +223,16 @@ extension U17SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // 不在搜索状态才有headerView
-        guard !isSearching else { return nil }
+        var mode: U17SearchHeaderView.DisplayMode?
+        switch dataSource[section] {
+        case .hot: mode = .hot
+        case .history: mode = .history
+        case .relative: mode = nil // 搜索结果不需要headerView
+        }
+        guard let displayMode = mode else { return nil }
         let view = U17SearchHeaderView()
         view.disposeBag = DisposeBag()
-        view.displayMode = (section == 0) ? .hot : .history
+        view.displayMode = displayMode
         view.rx.event
             .flatMap { (displayMode) -> Observable<Reactor.Action> in
                 switch displayMode {
@@ -248,9 +245,10 @@ extension U17SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // 不在搜索状态才有headerView
-        guard !isSearching else { return 0 }
-        return 30
+        switch dataSource[section] {
+        case .hot, .history: return 30
+        case .relative: return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

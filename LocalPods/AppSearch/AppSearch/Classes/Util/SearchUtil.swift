@@ -31,10 +31,13 @@ struct U17KeywordsCache {
         if cache == nil {
             cache = getCachedKeywords()
         }
-        // 可能会有人先remove再insert 虽然可以达到效果，
-        // 但是会导致数组内元素移动 而交换不会 效率更高
+        // 效率稍微好点(相比先remove再insert)
         if let i = cache!.firstIndex(of: keyword) {
-            cache!.swapAt(i, 0)
+            let e = cache![i]
+            for j in (0..<i).reversed() {
+                cache![j + 1] = cache![j]
+            }
+            cache![0] = e
         } else {
             cache!.insert(keyword, at: 0)
         }

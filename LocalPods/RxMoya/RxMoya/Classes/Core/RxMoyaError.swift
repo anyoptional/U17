@@ -25,6 +25,27 @@ public enum APIError: Error {
     case statusCode(Int)
     /// 其他奇奇怪怪的错误
     case underlying(Error)
+    
+    public var message: String {
+        switch self {
+        case .unknown:
+            return "未知错误"
+        case .timedOut:
+            return "请求超时"
+        case .cannotFindHost:
+            return "找不到服务器"
+        case .cannotConnectToHost:
+            return "无法连接服务器"
+        case .notConnectedToInternet:
+            return "网络未连接"
+        case .stringMapping:
+            return "JSON解析错误"
+        case .statusCode(let code):
+            return "请求失败, code = \(code)"
+        case .underlying(let error):
+            return "请求失败, error = \(error)"
+        }
+    }
 }
 
 extension APIError {

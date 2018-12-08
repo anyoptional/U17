@@ -59,7 +59,8 @@ final class TodayListViewReactor: Reactor {
             state.refreshState.upState = .idle
             state.refreshState.downState = .idle
             // 设置占位图的状态
-            if APIError.networkRelated.contains(error)  {
+            if state.sections.isEmpty &&
+                APIError.networkRelated.contains(error) {
                 state.placeholderState = .failed
             } else {
                 state.placeholderState = .completed
