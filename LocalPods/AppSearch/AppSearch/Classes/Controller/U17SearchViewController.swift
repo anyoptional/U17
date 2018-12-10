@@ -129,8 +129,8 @@ extension U17SearchViewController: View {
             .rx.text.orEmpty
             // 不重复搜索
             .distinctUntilChanged()
-            // 在0.5s内不连续搜索
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            // 在0.7s内不连续搜索
+            .debounce(0.7, scheduler: MainScheduler.instance)
             .flatMap({ [weak self] (keyword) -> Observable<Reactor.Action> in
                 // 标记正在加载
                 self?.placeholderView.state = .loading

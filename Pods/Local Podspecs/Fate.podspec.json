@@ -19,9 +19,6 @@
     "ios": "9.0"
   },
   "dependencies": {
-    "SwiftMessages": [
-
-    ],
     "SDWebImage/WebP": [
 
     ],
@@ -52,6 +49,9 @@
     "RxDataSources": [
       "~> 3.1.0"
     ],
+    "SwiftMessages": [
+      "~> 6.0.1"
+    ],
     "UITableView+FDTemplateLayoutCell": [
       "~> 1.6"
     ]
@@ -81,6 +81,10 @@
     {
       "name": "ImageLoading",
       "source_files": "Fate/Classes/ImageLoading"
+    },
+    {
+      "name": "NavigationBar",
+      "source_files": "Fate/Classes/NavigationBar"
     },
     {
       "name": "UILayoutAdaptor",

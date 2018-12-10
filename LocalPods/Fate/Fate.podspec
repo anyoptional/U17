@@ -58,6 +58,10 @@ Pod::Spec.new do |s|
       cs.source_files  = "Fate/Classes/ImageLoading"
     end
     
+    s.subspec "NavigationBar" do |cs|
+      cs.source_files  = "Fate/Classes/NavigationBar"
+    end
+    
     s.subspec "UILayoutAdaptor" do |cs|
       cs.source_files  = "Fate/Classes/UILayoutAdaptor"
     end
