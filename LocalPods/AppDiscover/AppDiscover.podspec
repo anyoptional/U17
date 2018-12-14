@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
     
     s.dependency 'Fate'
     s.dependency 'RxMoya'
+    s.dependency 'FOLDin'
     s.dependency 'Mediator'
     s.dependency 'RxSkeleton'
     s.dependency 'RxBindable'

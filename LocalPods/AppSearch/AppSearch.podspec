@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   
   s.dependency 'Fate'
+  s.dependency 'FOLDin'
   s.dependency 'RxMoya'
   s.dependency 'Mediator'
   s.dependency 'RxSkeleton'

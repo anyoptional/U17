@@ -83,10 +83,6 @@
       "source_files": "Fate/Classes/ImageLoading"
     },
     {
-      "name": "NavigationBar",
-      "source_files": "Fate/Classes/NavigationBar"
-    },
-    {
       "name": "UILayoutAdaptor",
       "source_files": "Fate/Classes/UILayoutAdaptor"
     },

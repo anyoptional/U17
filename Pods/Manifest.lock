@@ -84,6 +84,7 @@ PODS:
     - AppDiscover/Util (= 1.0.0)
     - AppDiscover/View (= 1.0.0)
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -94,6 +95,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/Controller (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -104,6 +106,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/Model (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -114,6 +117,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/Reactor (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -124,6 +128,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/Router (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -134,6 +139,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/Util (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -144,6 +150,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppDiscover/View (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -247,6 +254,7 @@ PODS:
     - AppSearch/Util (= 1.0.0)
     - AppSearch/View (= 1.0.0)
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -257,6 +265,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/Controller (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -267,6 +276,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/Model (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -277,6 +287,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/Reactor (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -287,6 +298,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/Router (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -297,6 +309,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/Util (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -307,6 +320,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - AppSearch/View (1.0.0):
     - Fate
+    - FOLDin
     - Mediator
     - ReactorKit (~> 1.1.0)
     - RxAppState (~> 1.1.2)
@@ -411,7 +425,6 @@ PODS:
     - Fate/Core (= 1.0.0)
     - Fate/Identifiable (= 1.0.0)
     - Fate/ImageLoading (= 1.0.0)
-    - Fate/NavigationBar (= 1.0.0)
     - Fate/RunloopOptimize (= 1.0.0)
     - Fate/RxAdaptor (= 1.0.0)
     - Fate/UILayoutAdaptor (= 1.0.0)
@@ -479,19 +492,6 @@ PODS:
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
-  - Fate/NavigationBar (1.0.0):
-    - MJRefresh (~> 3.1.15.7)
-    - RxCocoa (~> 4.1.2)
-    - RxDataSources (~> 3.1.0)
-    - RxOptional (~> 3.4.0)
-    - RxSwift (~> 4.1.2)
-    - SDCycleScrollView
-    - SDWebImage/WebP
-    - SkeletonView (~> 1.4.1)
-    - SwiftMessages (~> 6.0.1)
-    - Timepiece (~> 1.3.1)
-    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
-    - YYKit (~> 1.0.9)
   - Fate/RunloopOptimize (1.0.0):
     - MJRefresh (~> 3.1.15.7)
     - RxCocoa (~> 4.1.2)
@@ -531,6 +531,9 @@ PODS:
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - YYKit (~> 1.0.9)
+  - FOLDin (1.0.0):
+    - FOLDin/Core (= 1.0.0)
+  - FOLDin/Core (1.0.0)
   - IQKeyboardManagerSwift (6.2.0)
   - libwebp (0.6.1):
     - libwebp/core (= 0.6.1)
@@ -631,6 +634,7 @@ DEPENDENCIES:
   - AppSearch (from `LocalPods/AppSearch`)
   - AppToday (from `LocalPods/AppToday`)
   - Fate (from `LocalPods/Fate`)
+  - FOLDin (from `LocalPods/FOLDin`)
   - IQKeyboardManagerSwift (~> 6.2.0)
   - Mediator (from `LocalPods/Mediator`)
   - RxMoya (from `LocalPods/RxMoya`)
@@ -678,6 +682,8 @@ EXTERNAL SOURCES:
     :path: LocalPods/AppToday
   Fate:
     :path: LocalPods/Fate
+  FOLDin:
+    :path: LocalPods/FOLDin
   Mediator:
     :path: LocalPods/Mediator
   RxMoya:
@@ -686,13 +692,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AppBookshelf: 378374491a5909034ab70a786e46233f337e06f6
-  AppDiscover: a514acb7c1465d5575057d5c518f13e96921f772
+  AppDiscover: 7b841f4fec7cc21f458ae441103fe8e8e31431ed
   AppMain: e7d8ca130bda5ccef2afcb1ec8829835cd407e55
   AppProfile: 45bb618e3bf45eeab47472f1bdaf74673afc9c6d
-  AppSearch: d97a3b69993aaa244a60c3aebc57c37bddbf45f1
+  AppSearch: aa500a4d924f9ab858100ce2a0cd39f082c06f2f
   AppToday: b8a76f3dc946ce22bc79916a5dbb3a20304a613a
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: 4e9845e82aa4a17ad52c6b65dccf6634d988c89d
+  Fate: 8f32ca0316b6ffb93f2de03d7ed646d834304fab
+  FOLDin: 49bdd7647ff513c29c97f83116653bdf24b03602
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   libwebp: 38b601da310fe7c329c638d0c0d10aed006a54fe
   Mediator: 845576f1fd066c762ec575ee94915a5d3409640c
@@ -719,6 +726,6 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 27303d31baf33cae490481e9bb285a7a3379f392
+PODFILE CHECKSUM: e270f27c1a19cedfcab1bba5831c86f88d5dfbe6
 
 COCOAPODS: 1.5.3

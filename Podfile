@@ -5,6 +5,7 @@ target 'U17' do
     use_frameworks!
 
     pod 'Fate', :path => 'LocalPods/Fate'
+    pod 'FOLDin', :path => 'LocalPods/FOLDin'
     pod 'RxMoya', :path => 'LocalPods/RxMoya'
     pod 'AppMain', :path => 'LocalPods/AppMain'
     pod 'AppToday', :path => 'LocalPods/AppToday'
@@ -13,7 +14,6 @@ target 'U17' do
     pod 'AppProfile', :path => 'LocalPods/AppProfile'
     pod 'AppDiscover', :path => 'LocalPods/AppDiscover'
     pod 'AppBookshelf', :path => 'LocalPods/AppBookshelf'
-    
     
     pod 'IQKeyboardManagerSwift', '~> 6.2.0'
     

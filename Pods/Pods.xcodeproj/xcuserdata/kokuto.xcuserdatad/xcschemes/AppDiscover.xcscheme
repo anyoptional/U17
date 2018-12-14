@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A8E7091A0CBEB962BE177478E41FB634"
+               BlueprintIdentifier = "92EA3F663E757C3A4F5FCF28181E47F7"
                BlueprintName = "AppDiscover"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "AppDiscover.framework">

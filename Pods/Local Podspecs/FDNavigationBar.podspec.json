@@ -1,0 +1,32 @@
+{
+  "name": "FDNavigationBar",
+  "version": "1.0.0",
+  "summary": "Custom navigaiton bar instead of system provides.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "frameworks": "UIKit",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "public_header_files": "FDNavigationBar/Classes/Supports/*.h",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "FDNavigationBar/Classes/Core"
+    },
+    {
+      "name": "Supports",
+      "source_files": "FDNavigationBar/Classes/Supports"
+    }
+  ]
+}

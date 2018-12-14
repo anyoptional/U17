@@ -1,0 +1,6 @@
+framework module FOLDin {
+  umbrella header "FOLDin-umbrella.h"
+
+  export *
+  module * { export * }
+}

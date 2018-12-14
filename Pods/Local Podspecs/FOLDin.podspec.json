@@ -1,0 +1,33 @@
+{
+  "name": "FOLDin",
+  "version": "1.0.0",
+  "summary": "Custom navigaiton bar instead of system provides.",
+  "homepage": "Coming soon...",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Archer": "code4archer@163.com"
+  },
+  "source": {
+    "git": "Coming soon...",
+    "tag": "1.0.0"
+  },
+  "frameworks": "UIKit",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "resource_bundles": {
+    "FOLDin": [
+      "FOLDin/Assets/*.png"
+    ]
+  },
+  "public_header_files": "FOLDin/Classes/Core/*.h",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "FOLDin/Classes/Core"
+    }
+  ]
+}

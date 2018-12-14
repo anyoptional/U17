@@ -6,6 +6,7 @@
 //
 
 import Fate
+import FOLDin
 import RxSwift
 import RxCocoa
 import RxSwiftExt
