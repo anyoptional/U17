@@ -52,7 +52,7 @@ class FDBarBackground: UIView {
     init() {
         super.init(frame: .zero)
         _setupViewHierarchy()
-        _configureIntialize()
+        _configureInitialize()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +66,8 @@ extension FDBarBackground {
         addSubview(backgroundImageView)
     }
     
-    private func _configureIntialize() {
-        shadowImageView.image = UIImage.create(UIColor(rgbValue: 0xDEDEDE))
+    private func _configureInitialize() {
+        backgroundColor = UIColor(rgbValue: 0xF9F9F9)
+        shadowImageView.image = UIImage.create(UIColor(rgbValue: 0xE3E3E3))
     }
 }

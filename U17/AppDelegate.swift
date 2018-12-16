@@ -6,6 +6,7 @@
 //  Copyright © 2018年 Archer. All rights reserved.
 //
 
+import FOLDin
 import AppMain
 import IQKeyboardManagerSwift
 
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupBarAppearance()
         setupIQkeyboardManager()
         setupRootViewController()
         
@@ -24,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+}
+
+extension AppDelegate {
+    private func setupBarAppearance() {
+        let navigationBar = FDNavigationBar.appearance()
+        navigationBar.barTintColor = .white
+        navigationBar.shadowImage = nil
+    }
 }
 
 extension AppDelegate {
@@ -38,7 +48,7 @@ extension AppDelegate {
 extension AppDelegate {
     private func setupIQkeyboardManager() {
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 30
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false

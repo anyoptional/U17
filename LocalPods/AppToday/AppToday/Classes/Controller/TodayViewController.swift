@@ -6,11 +6,16 @@
 //
 
 import Fate
+import FOLDin
 import Mediator
 import Timepiece
 import TYPagerController
 
 class TodayViewController: TYTabPagerController {
+    
+    override var prefersNavigationBarStyle: UINavigationBarStyle {
+        return .custom
+    }
     
     private lazy var searchButton: UIButton = {
         let v = UIButton()
@@ -47,14 +52,14 @@ class TodayViewController: TYTabPagerController {
         super.viewDidLoad()
         buildUI()
         buildNavbar()
-        bindRxEvent()
+        rxBinding()
     }
     
     deinit { NSLog("\(className()) is deallocating...") }
 }
 
 extension TodayViewController {
-    private func bindRxEvent() {
+    private func rxBinding() {
         searchButton.rx.tap
             .subscribeNext(weak: self) { (self) in
                 return { _ in
@@ -86,16 +91,14 @@ extension TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControlle
 
 extension TodayViewController {
     private func buildNavbar() {
-        navigationItem.title = "今日更新"
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(color: .white), for: .default)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
+        fd.navigationItem.title = "今日更新"
+        fd.navigationItem.rightBarButtonItem = FDBarButtonItem(customView: searchButton)
     }
     
     private func buildUI() {
         automaticallyAdjustsScrollViewInsets = false
         tabBarHeight = 50
-        tabBarOrignY = 0
+        tabBarOrignY = fd.fullNavbarHeight
         layout.addVisibleItemOnlyWhenScrollAnimatedEnd = true
         tabBar.layout.barStyle = .progressBounceView
         tabBar.layout.progressVerEdging = 3

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2407D48019D425089A55F8C2C8D375A"
-               BlueprintName = "Pods-U17"
+               BlueprintIdentifier = "59870D12B120F71EB5E211258A1FD293"
+               BlueprintName = "FOLDin-FOLDin"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-U17.framework">
+               BuildableName = "FOLDin-FOLDin.bundle">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

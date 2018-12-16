@@ -16,11 +16,15 @@ import RxDataSources
 
 class U17SearchViewController: UIViewController {
     
+    override var prefersNavigationBarStyle: UINavigationBarStyle {
+        return .custom
+    }
+    
     private lazy var searchBar: U17SearchBar = {
         let width = view.width - 70
         let height = 25.toCGFloat()
         let searchBar = U17SearchBar(size: CGSize(width: width, height: height))
-        navigationItem.titleView = searchBar
+        fd.navigationItem.titleView = searchBar
         return searchBar
     }()
     
@@ -64,7 +68,7 @@ class U17SearchViewController: UIViewController {
     deinit { NSLog("\(className()) is deallocating...") }
 }
 
-extension U17SearchViewController {
+extension U17SearchViewController {    
     // MARK: 取消搜索
     @objc private func popViewController() {
         self.navigationController?.popViewController(animated: false)
@@ -263,13 +267,14 @@ extension U17SearchViewController: UITableViewDelegate {
 
 extension U17SearchViewController {
     func buildNavbar() {
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain,
-                                                            target: self, action: #selector(popViewController))
+        fd.navigationItem.hidesBackButton = true
+        fd.navigationItem.rightBarButtonItem = FDBarButtonItem(title: "取消",
+                                                               target: self,
+                                                               action: #selector(popViewController))
         let titleTextAttributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 15),
                                                                    .foregroundColor : U17def.gray_AAAAAA]
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .normal)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .highlighted)
+        fd.navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        fd.navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .highlighted)
     }
     
     func buildUI() {
@@ -278,7 +283,7 @@ extension U17SearchViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
+            make.top.equalTo(fd.fullNavbarHeight)
             make.left.right.bottom.equalToSuperview()
         }
         
