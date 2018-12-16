@@ -52,14 +52,14 @@ class TodayViewController: TYTabPagerController {
         super.viewDidLoad()
         buildUI()
         buildNavbar()
-        rxBinding()
+        performBinding()
     }
     
     deinit { NSLog("\(className()) is deallocating...") }
 }
 
 extension TodayViewController {
-    private func rxBinding() {
+    private func performBinding() {
         searchButton.rx.tap
             .subscribeNext(weak: self) { (self) in
                 return { _ in

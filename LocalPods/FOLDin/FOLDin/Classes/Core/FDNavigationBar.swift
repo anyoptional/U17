@@ -9,16 +9,6 @@ import UIKit
 
 fileprivate let FDNavigationBarPortraitFixedHeight = 44.0
 
-public struct FDEdgeInsets {
-    public var left: CGFloat
-    public var right: CGFloat
-    
-    public init(left: CGFloat, right: CGFloat) {
-        self.left = left
-        self.right = right
-    }
-}
-
 @objcMembers
 public class FDNavigationBar: UIView {
     
@@ -49,9 +39,9 @@ public class FDNavigationBar: UIView {
         didSet { backView.shadowImage = shadowImage}
     }
     
-    // Content insets of content view
-    public dynamic var contentInsets: FDEdgeInsets = .init(left: 12, right: 12) {
-        didSet { contentView.contentInsets = contentInsets }
+    // Content margin of content view
+    public dynamic var contentMargin: FDMargin = .init(left: 12, right: 12) {
+        didSet { contentView.contentMargin = contentMargin }
     }
     
     /* You may specify the font, text color, and shadow properties for the title in the text attributes dictionary, using the keys found in NSAttributedString.h.

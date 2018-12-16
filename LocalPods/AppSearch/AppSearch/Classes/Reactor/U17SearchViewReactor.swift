@@ -82,6 +82,7 @@ final class U17SearchViewReactor: Reactor {
             // 先清空所有数据 避免和relative数据混在一起
             state.sections.removeAll(keepingCapacity: true)
             if keywords.isEmpty { break }
+            state.placeholderState = .completed
             state.sections = [.history(items: keywords.map({ (rawValue) in
                 .history(item: U17HistorySearchCellDisplay(rawValue: rawValue))
             }))]

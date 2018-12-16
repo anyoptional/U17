@@ -9,7 +9,7 @@ import UIKit
 
 class FDNavigationBarContentView: UIView {
     
-    var contentInsets = FDEdgeInsets(left: 12, right: 12)
+    var contentMargin = FDMargin(left: 12, right: 12)
     
     private var navigationItem = FDNavigationItem()
     private var titleTextAttributes: [NSAttributedString.Key : Any]?
@@ -59,7 +59,7 @@ class FDNavigationBarContentView: UIView {
 
 extension FDNavigationBarContentView {
     private func _layoutBackButton() {
-        var safeAreaInsetsLeft = contentInsets.left
+        var safeAreaInsetsLeft = contentMargin.left
         if #available(iOS 11.0, *) {
             safeAreaInsetsLeft += safeAreaInsets.left
         }
@@ -114,7 +114,7 @@ extension FDNavigationBarContentView {
     }
     
     private func _layoutRightBarStackView() {
-        var safeAreaInsetsRight = contentInsets.right
+        var safeAreaInsetsRight = contentMargin.right
         if #available(iOS 11.0, *) {
             safeAreaInsetsRight += safeAreaInsets.right
         }
@@ -162,8 +162,8 @@ extension FDNavigationBarContentView {
         titleView.centerY = height / 2
         titleView.centerX = width / 2
         
-        let leftWidth = leftBarStackView.right + (leftBarStackView.isHidden ? 0 : navigationItem.titleMargins.left)
-        let rightOriginX = rightBarStackView.left - (rightBarStackView.isHidden ? 0 : navigationItem.titleMargins.right)
+        let leftWidth = leftBarStackView.right + (leftBarStackView.isHidden ? 0 : navigationItem.titleViewMargin.left)
+        let rightOriginX = rightBarStackView.left - (rightBarStackView.isHidden ? 0 : navigationItem.titleViewMargin.right)
         let rightWidth = width - rightOriginX
         let remainingWidth = width - leftWidth - rightWidth
         if remainingWidth >= titleView.width {

@@ -283,7 +283,7 @@ extension U17SearchViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(fd.fullNavbarHeight)
+            make.top.equalTo(fd.navigationBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
         

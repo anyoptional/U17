@@ -61,11 +61,10 @@ struct U17KeywordsCache {
         // 这个缓存属于一个优先级比较低的操作
         // 即使慢一点写进去也没什么关系
         FDTransaction.default.commit {
-            let cacheDump = cache
-            cache = nil
             let defaults = UserDefaults.standard
-            defaults.set(cacheDump, forKey: "_kU17KeywordsCacheKey")
+            defaults.set(cache, forKey: "_kU17KeywordsCacheKey")
             defaults.synchronize()
+            cache = nil
         }
     }
     
