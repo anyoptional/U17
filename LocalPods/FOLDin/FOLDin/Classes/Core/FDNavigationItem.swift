@@ -30,7 +30,10 @@ public class FDNavigationItem: NSObject {
     // TitleView相对于navigationItem.leftBarButtonItems/navigationItem.rightBarButtonItems的边距，
     // left对应leftBarButtonItems，right对应rightBarButtonItems
     public var titleViewMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            titleViewMargin.delegate = self
+            delegate?.navigationItemDidChange(self)
+        }
     }
     
     // Bar button item to use for the back button in the child navigation item.
@@ -158,5 +161,16 @@ public class FDNavigationItem: NSObject {
         }
         
         delegate?.navigationItemDidChange(self)
+    }
+    
+    public override init() {
+        super.init()
+        titleViewMargin.delegate = self
+    }
+}
+
+extension FDNavigationItem: FDMarginDelegate {
+    func marginDidChange(_ margin: FDMargin) {
+        titleViewMargin = margin
     }
 }

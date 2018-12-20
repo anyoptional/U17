@@ -9,7 +9,9 @@ import UIKit
 
 class FDNavigationBarContentView: UIView {
     
-    var contentMargin = FDMargin(left: 12, right: 12)
+    var contentMargin = FDMargin(left: 12, right: 12) {
+        didSet { setNeedsLayout() }
+    }
     
     private var navigationItem = FDNavigationItem()
     private var titleTextAttributes: [NSAttributedString.Key : Any]?
@@ -18,8 +20,8 @@ class FDNavigationBarContentView: UIView {
         let v = UILabel()
         v.textColor = .black
         v.textAlignment = .center
+        v.lineBreakMode = .byTruncatingTail
         v.font = .boldSystemFont(ofSize: 18)
-        v.lineBreakMode = .byTruncatingMiddle
         addSubview(v)
         return v
     }()
@@ -153,16 +155,20 @@ extension FDNavigationBarContentView {
         titleTextAttributesDidChange(titleTextAttributes)
         titleLabel.isHidden = navigationItem.titleView != nil
         let titleView = (navigationItem.titleView != nil) ? navigationItem.titleView! : titleLabel
-        if titleView.width <= 0 {
+        // 对于leftBarButtonItems和rightBarButtonItems肯定是要显示完全的
+        // 唯一可以截断的就是titleView 在发生屏幕旋转时，因为navigationBar
+        // 变长了，所以可以试着去调整titleView的大小
+        if titleView.width <= 0 || titleView.width < titleView.intrinsicContentSize.width {
             titleView.width = titleView.intrinsicContentSize.width
         }
-        if titleView.height <= 0 {
+        if titleView.height <= 0 || titleView.width < titleView.intrinsicContentSize.height {
             titleView.height = titleView.intrinsicContentSize.height
         }
         titleView.centerY = height / 2
         titleView.centerX = width / 2
         
-        let leftWidth = leftBarStackView.right + (leftBarStackView.isHidden ? 0 : navigationItem.titleViewMargin.left)
+        // 只有当backButton和leftBarStackView都没有时才不计算navigationItem.titleViewMargin.left
+        let leftWidth = leftBarStackView.right + (leftBarStackView.isHidden && backBarButtonItem.buttonView.isHidden ? 0 : navigationItem.titleViewMargin.left )
         let rightOriginX = rightBarStackView.left - (rightBarStackView.isHidden ? 0 : navigationItem.titleViewMargin.right)
         let rightWidth = width - rightOriginX
         let remainingWidth = width - leftWidth - rightWidth
@@ -178,7 +184,23 @@ extension FDNavigationBarContentView {
                 debugPrint("WRANING: What the fuck?!")
             }
         } else {
-            debugPrint("WRANING: All UI element in FDNavigationBar exceeds the width limit.")
+            // 还有空间可以放titleView
+            // 但是满足不了宽度要求就采取截断
+            if leftWidth < rightOriginX {
+                titleView.width = rightOriginX - leftWidth
+                titleView.right = rightOriginX
+            } else {
+                titleView.width = 0
+                let extraPart = abs(rightOriginX - leftWidth)
+                let appropriateValue = (extraPart - navigationItem.titleViewMargin.left - navigationItem.titleViewMargin.right + 12) / 2
+                let oldLeftBarStackViewLeft = leftBarStackView.left
+                leftBarStackView.width -= appropriateValue
+                leftBarStackView.left = oldLeftBarStackViewLeft
+                let oldRightBarStackViewRight = rightBarStackView.right
+                rightBarStackView.width -= appropriateValue
+                rightBarStackView.right = oldRightBarStackViewRight
+                debugPrint("WRANING: All UI element in FDNavigationBar exceeds the width limit.")
+            }
         }
     }
 }

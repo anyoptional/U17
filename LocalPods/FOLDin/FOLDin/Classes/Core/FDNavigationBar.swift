@@ -41,7 +41,10 @@ public class FDNavigationBar: UIView {
     
     // Content margin of content view
     public dynamic var contentMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet { contentView.contentMargin = contentMargin }
+        didSet {
+            contentMargin.delegate = self
+            contentView.contentMargin = contentMargin
+        }
     }
     
     /* You may specify the font, text color, and shadow properties for the title in the text attributes dictionary, using the keys found in NSAttributedString.h.
@@ -68,6 +71,7 @@ public class FDNavigationBar: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         _setupViewHierarchy()
+        _configureInitailize()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,10 +85,20 @@ extension FDNavigationBar: FDNavigationItemDelegate {
     }
 }
 
+extension FDNavigationBar: FDMarginDelegate {
+    func marginDidChange(_ margin: FDMargin) {
+        contentMargin = margin
+    }
+}
+
 extension FDNavigationBar {
     private func _setupViewHierarchy() {
         addSubview(backView)
         addSubview(contentView)
+    }
+    
+    private func _configureInitailize() {
+        contentMargin.delegate = self
     }
     
     private func _layoutSubviews() {

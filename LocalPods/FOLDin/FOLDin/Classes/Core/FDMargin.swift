@@ -7,11 +7,23 @@
 
 import Foundation
 
+@objc protocol FDMarginDelegate: NSObjectProtocol {
+    func marginDidChange(_ margin: FDMargin)
+}
+
 /// 代表左右边距
 @objcMembers
 public class FDMargin: NSObject {
-    public var left: CGFloat
-    public var right: CGFloat
+    
+    weak var delegate: FDMarginDelegate?
+
+    public var left: CGFloat {
+        didSet { delegate?.marginDidChange(self) }
+    }
+    
+    public var right: CGFloat {
+        didSet { delegate?.marginDidChange(self) }
+    }
     
     public init(left: CGFloat, right: CGFloat) {
         self.left = left

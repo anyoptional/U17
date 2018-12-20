@@ -267,6 +267,16 @@ extension U17SearchViewController: UITableViewDelegate {
 
 extension U17SearchViewController {
     func buildNavbar() {
+        // FDNavigationBar的布局:
+        // ________________________________________________________________________________________________________________________________________________________________
+        // | contentMarginLeft | 返回按钮 | margin | leftBarButtonItems | titleViewMarginLeft | titleView | titleViewMarginRight | rightBarButtonItems | contentMarginRight |
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // FDBarButtonItem的margin属性是相对于leftBarButtonItems/rightBarButtonItems来说的
+        // margin指的是后一个barButtonItem相对于前一个的边距，所以对于第一个barButtonItem来说这个属性是没有用的
+        // 但是左侧因为有返回按钮的存在，第一个barButtonItem的margin就被换算到了与返回按钮的边距
+        // 同理，如果没有leftBarButtonItems和backButton，titleViewMargin.left也就没用了
+        // 没有rightBarButtonItems，titleViewMargin.right也就没用了
+        // 这种情况直接调整fd.navigationBar.contentMargin就可以
         fd.navigationItem.hidesBackButton = true
         fd.navigationItem.rightBarButtonItem = FDBarButtonItem(title: "取消",
                                                                target: self,
