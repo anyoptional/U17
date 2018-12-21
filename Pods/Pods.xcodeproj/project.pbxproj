@@ -1084,6 +1084,7 @@
 		C3EBC5CDF88B3949FE3A60F86B1D2C8C /* DeprecationWarner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D341BCBA7D15F96A4E0933A87A2979BA /* DeprecationWarner.swift */; };
 		C454A9BBFE4E75664B8F0CF349B9E523 /* warningIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 782C2FFD2AD239962EBC894658C66F90 /* warningIcon@3x.png */; };
 		C474A8F13D7FE68D16CAE149A7B4F4E8 /* SkeletonAnimationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297ADCE3DFEC575385CBEDBBE27F705 /* SkeletonAnimationBuilder.swift */; };
+		C489D16421CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */; };
 		C49F9EEF0DD987D929FAD17F846E3E03 /* successIconLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31D07DB2A8F15721FF543B3AA6B1EF1D /* successIconLight@2x.png */; };
 		C4A00F596B8F96BE21EAA9775F636D18 /* SkeletonReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F5237B8E7A9712D421B0FAADF01E2F /* SkeletonReusableCell.swift */; };
 		C4CEF2DE089C92D5036149152526B993 /* img_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C945BFADA4986F82BBAC12F9E093E6 /* img_back@2x.png */; };
@@ -3499,6 +3500,7 @@
 		C3DF7C8BF62C3A7A0D36D11EAD744447 /* ObservableType+Weak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableType+Weak.swift"; path = "Source/RxSwift/ObservableType+Weak.swift"; sourceTree = "<group>"; };
 		C43237436418A98F063AF095552F83DC /* Cancellable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cancellable.swift; path = Sources/Moya/Cancellable.swift; sourceTree = "<group>"; };
 		C453875D5A1AB8F86ABCF3CEE832A859 /* RxOptional-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxOptional-prefix.pch"; sourceTree = "<group>"; };
+		C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FDNavigationBar+Scrollable.swift"; path = "FOLDin/Classes/Core/FDNavigationBar+Scrollable.swift"; sourceTree = "<group>"; };
 		C4BB7C33DB0A155F182B992535666B2A /* lossless_enc_sse41.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = lossless_enc_sse41.c; path = src/dsp/lossless_enc_sse41.c; sourceTree = "<group>"; };
 		C4C13A3F4664AAE90DC71AB4ECB0882D /* Timepiece-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Timepiece-dummy.m"; sourceTree = "<group>"; };
 		C4E5E8142A770364C54BA5CE1A9CDA1D /* ExDispatchOnce.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExDispatchOnce.swift; path = Fate/Classes/Core/ExDispatchOnce.swift; sourceTree = "<group>"; };
@@ -6004,6 +6006,7 @@
 				23423DAA1FCE20ABBBEC72748B89CBF8 /* UIViewController+FOLDin.h */,
 				E465A8C31362CAC7A587FC1A066DEB0D /* UIViewController+FOLDin.m */,
 				33C9F81CC7216A5BA23BF64FE1AC866F /* UIViewController+FOLDin.swift */,
+				C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -9086,6 +9089,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C489D16421CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift in Sources */,
 				5D2638F188983562ED79F72899252BF6 /* FDBarBackground.swift in Sources */,
 				EA5CCAC81C8F9B126A029B24CCD49AA8 /* FDBarButtonItem.swift in Sources */,
 				AC4F93A97EF33718B346E561D8909AED /* FDButtonBarStackView.swift in Sources */,

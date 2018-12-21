@@ -12,6 +12,7 @@ import Foundation
 }
 
 /// NOTE: animated parameter is not supported.
+@objcMembers
 public class FDNavigationItem: NSObject {
 
     // Internal use only
@@ -30,10 +31,7 @@ public class FDNavigationItem: NSObject {
     // TitleView相对于navigationItem.leftBarButtonItems/navigationItem.rightBarButtonItems的边距，
     // left对应leftBarButtonItems，right对应rightBarButtonItems
     public var titleViewMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet {
-            titleViewMargin.delegate = self
-            delegate?.navigationItemDidChange(self)
-        }
+        didSet { delegate?.navigationItemDidChange(self) }
     }
     
     // Bar button item to use for the back button in the child navigation item.
@@ -93,6 +91,8 @@ public class FDNavigationItem: NSObject {
     private lazy var _leftBarButtonItems: [FDBarButtonItem]? = nil
     
     public func setLeftBarButton(_ item: FDBarButtonItem?, animated: Bool) {
+        item?.delegate = self
+        
         _leftBarButtonItem = item
         
         if _leftBarButtonItems == nil {
@@ -115,6 +115,8 @@ public class FDNavigationItem: NSObject {
     }
     
     public func setLeftBarButtonItems(_ items: [FDBarButtonItem]?, animated: Bool) {
+        items?.forEach { $0.delegate = self }
+        
         _leftBarButtonItems = items
         
         if let leftBarItems = items, !leftBarItems.isEmpty {
@@ -130,6 +132,8 @@ public class FDNavigationItem: NSObject {
     private lazy var _rightBarButtonItems: [FDBarButtonItem]? = nil
     
     public func setRightBarButton(_ item: FDBarButtonItem?, animated: Bool) {
+        item?.delegate = self
+        
         _rightBarButtonItem = item
         
         if _rightBarButtonItems == nil {
@@ -152,6 +156,8 @@ public class FDNavigationItem: NSObject {
     }
     
     public func setRightBarButtonItems(_ items: [FDBarButtonItem]?, animated: Bool) {
+        items?.forEach { $0.delegate = self }
+        
         _rightBarButtonItems = items
         
         if let rightBarItems = items, !rightBarItems.isEmpty {
@@ -172,5 +178,12 @@ public class FDNavigationItem: NSObject {
 extension FDNavigationItem: FDMarginDelegate {
     func marginDidChange(_ margin: FDMargin) {
         titleViewMargin = margin
+        titleViewMargin.delegate = self
+    }
+}
+
+extension FDNavigationItem: FDBarButtonItemDelegate {
+    func barButtonItemDidChange(_ item: FDBarButtonItem) {
+        delegate?.navigationItemDidChange(self)
     }
 }

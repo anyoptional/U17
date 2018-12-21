@@ -21,7 +21,7 @@ class FDNavigationBarContentView: UIView {
         v.textColor = .black
         v.textAlignment = .center
         v.lineBreakMode = .byTruncatingTail
-        v.font = .boldSystemFont(ofSize: 18)
+        v.font = .boldSystemFont(ofSize: 17)
         addSubview(v)
         return v
     }()
@@ -233,9 +233,8 @@ extension FDNavigationBarContentView {
     }
     
     func titleTextAttributesDidChange(_ attributes: [NSAttributedString.Key : Any]?) {
-        if let title = navigationItem.title {
-            titleTextAttributes = attributes
-            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
-        }
+        titleTextAttributes = attributes
+        guard let title = navigationItem.title else { return }
+        titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
     }
 }

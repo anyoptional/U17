@@ -112,6 +112,31 @@ public class U17PlaceholderView: UIView {
     }
 }
 
+extension U17PlaceholderView {
+    /// 在这里处理能否点击
+    /// 可以避免使用IQKeyboardManager时
+    /// 设置shouldResignOnTouchOutside为true
+    /// 而点击事件被tapGesture吃掉的问题
+    public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // 空的不能点
+        guard let state = state else { return false }
+        // 根据状态点击
+        switch state {
+        // 不需要点击的状态
+        case .empty, .loading, .completed:
+            return false
+        case .failed:
+            // 没有加载出来时点击中间的头像
+            guard let failedView = subviews.first else { return false }
+            let point = gestureRecognizer.location(in: self)
+            let rect = CGRect(x: failedView.frame.minX + (failedView.frame.width - 60)/2,
+                              y: failedView.frame.minY + (failedView.frame.height - 60)/2 + 20, // 20是头像相对整图的偏移
+                width: 60, height: 60)
+            return rect.contains(point)
+        }
+    }
+}
+
 extension Reactive where Base: U17PlaceholderView {
     
     /// Reactive extension for state
@@ -125,25 +150,7 @@ extension Reactive where Base: U17PlaceholderView {
     public var tap: Observable<U17PlaceholderView.State> {
         return base.tapGesture
             .rx.event
-            .filter { [weak base] (ges) -> Bool in
-                guard let base = base else { return false }
-                // 空的不能点
-                guard let state = base.state else { return false }
-                // 根据状态点击
-                switch state {
-                    // 不需要点击的状态
-                case .empty, .loading, .completed:
-                    return false
-                case .failed:
-                    // 没有加载出来时点击中间的头像
-                    guard let failedView = base.subviews.first else { return false }
-                    let point = ges.location(in: base)
-                    let rect = CGRect(x: failedView.frame.minX + (failedView.frame.width - 60)/2,
-                                      y: failedView.frame.minY + (failedView.frame.height - 60)/2 + 20, // 20是头像相对整图的偏移
-                                      width: 60, height: 60)
-                    return rect.contains(point)
-                }
-            }.map { [weak base] _ in base?.state }
+            .map { [weak base] _ in base?.state }
             .filterNil()
     }
 }

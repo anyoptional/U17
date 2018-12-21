@@ -7,8 +7,6 @@
 
 import UIKit
 
-fileprivate let FDNavigationBarPortraitFixedHeight = 44.0
-
 @objcMembers
 public class FDNavigationBar: UIView {
     
@@ -41,10 +39,7 @@ public class FDNavigationBar: UIView {
     
     // Content margin of content view
     public dynamic var contentMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet {
-            contentMargin.delegate = self
-            contentView.contentMargin = contentMargin
-        }
+        didSet { contentView.contentMargin = contentMargin }
     }
     
     /* You may specify the font, text color, and shadow properties for the title in the text attributes dictionary, using the keys found in NSAttributedString.h.
@@ -88,6 +83,7 @@ extension FDNavigationBar: FDNavigationItemDelegate {
 extension FDNavigationBar: FDMarginDelegate {
     func marginDidChange(_ margin: FDMargin) {
         contentMargin = margin
+        contentMargin.delegate = self
     }
 }
 

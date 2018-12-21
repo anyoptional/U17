@@ -7,16 +7,20 @@
 
 import UIKit
 
+@objc protocol FDBarButtonItemDelegate: NSObjectProtocol {
+    func barButtonItemDidChange(_ item: FDBarButtonItem)
+}
+
 /// A wrapper around `UIButton`.
 /// NOTE: 如果是customView，那它必须正确实现
 /// intrinsicContentSize或者给定frame.size
+@objcMembers
 public class FDBarButtonItem: NSObject {
     
     /// 在navigationItem.leftBarButtonItems/navigationItem.rightBarButtonItems
     /// 的count大于1时，当前barButtonItem相对于前一个的边距.
     /// 如果只有leftBarButtonItems/rightBarButtonItems只有一个，那么设置这个属性是没有
     /// 用的，可以使用navigationBar.contentInsets来设置
-    /// NOTE: 在赋值给navigationItem之前设置
     public var margin: CGFloat = 12.0
     
     // default is system font of size 15
@@ -165,6 +169,8 @@ public class FDBarButtonItem: NSObject {
     }
     
     /// Internal use only
+    weak var delegate: FDBarButtonItemDelegate?
+    
     lazy var buttonView: UIButton = {
         let v = UIButton()
         v.setTitleColor(.black, for: .normal)
