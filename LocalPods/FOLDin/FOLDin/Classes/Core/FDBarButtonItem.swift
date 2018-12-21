@@ -21,20 +21,28 @@ public class FDBarButtonItem: NSObject {
     /// 的count大于1时，当前barButtonItem相对于前一个的边距.
     /// 如果只有leftBarButtonItems/rightBarButtonItems只有一个，那么设置这个属性是没有
     /// 用的，可以使用navigationBar.contentInsets来设置
-    public var margin: CGFloat = 12.0
+    public var margin: CGFloat = 12.0 {
+        didSet { delegate?.barButtonItemDidChange(self) }
+    }
     
     // default is system font of size 15
     // NOTE: priority is low than titleTextAttributes
     public var font: UIFont? {
         get { return buttonView.titleLabel?.font }
-        set { buttonView.titleLabel?.font = newValue }
+        set {
+            buttonView.titleLabel?.font = newValue
+            delegate?.barButtonItemDidChange(self)
+        }
     }
     
     // default is black
     // NOTE: priority is low than titleTextAttributes
     public var textColor: UIColor? {
         get { return buttonView.titleColor(for: .normal) }
-        set { buttonView.setTitleColor(newValue, for: .normal) }
+        set {
+            buttonView.setTitleColor(newValue, for: .normal)
+            delegate?.barButtonItemDidChange(self)
+        }
     }
 
     // default is nil
@@ -48,13 +56,17 @@ public class FDBarButtonItem: NSObject {
                                                   for: UIControl.State(rawValue: rawValue))
                 }
             }
+            delegate?.barButtonItemDidChange(self)
         }
     }
     
     // default is nil
     public var image: UIImage? {
         get { return buttonView.image(for: .normal) }
-        set { buttonView.setImage(newValue, for: .normal) }
+        set {
+            buttonView.setImage(newValue, for: .normal)
+            delegate?.barButtonItemDidChange(self)
+        }
     }
     
     // default is NULL
@@ -78,13 +90,19 @@ public class FDBarButtonItem: NSObject {
     // default is UIEdgeInsetsZero
     public var imageInsets: UIEdgeInsets {
         get { return buttonView.imageEdgeInsets }
-        set { buttonView.imageEdgeInsets = newValue }
+        set {
+            buttonView.imageEdgeInsets = newValue
+            delegate?.barButtonItemDidChange(self)
+        }
     }
     
     // default is UIEdgeInsetsZero
     public var titleInsets: UIEdgeInsets {
         get { return buttonView.titleEdgeInsets }
-        set { buttonView.titleEdgeInsets = newValue }
+        set {
+            buttonView.titleEdgeInsets = newValue
+            delegate?.barButtonItemDidChange(self)
+        }
     }
     
     // default is nil
@@ -147,12 +165,14 @@ public class FDBarButtonItem: NSObject {
             titleTextAttributes[state.rawValue] = attributes
             if let title = title {
                 buttonView.setAttributedTitle(NSAttributedString(string: title, attributes: attributes), for: state)
+                delegate?.barButtonItemDidChange(self)
             }
         } else {
             // Similar to UIKit's implementation
             titleTextAttributes[UIControl.State.highlighted.rawValue] = attributes
             if let title = title {
                 buttonView.setAttributedTitle(NSAttributedString(string: title, attributes: attributes), for: .highlighted)
+                delegate?.barButtonItemDidChange(self)
             }
         }
     }

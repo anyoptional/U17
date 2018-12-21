@@ -1083,6 +1083,8 @@
 		C3E63E6065EAF6E600B168ED43D937FD /* YYTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FACEA0EFEFC31AE5E9D277A77EA911 /* YYTextLine.m */; };
 		C3EBC5CDF88B3949FE3A60F86B1D2C8C /* DeprecationWarner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D341BCBA7D15F96A4E0933A87A2979BA /* DeprecationWarner.swift */; };
 		C454A9BBFE4E75664B8F0CF349B9E523 /* warningIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 782C2FFD2AD239962EBC894658C66F90 /* warningIcon@3x.png */; };
+		C458FCD621CCBF7000748C69 /* FDNavigationBar+Scrollable.h in Headers */ = {isa = PBXBuildFile; fileRef = C458FCD421CCBF7000748C69 /* FDNavigationBar+Scrollable.h */; };
+		C458FCD721CCBF7000748C69 /* FDNavigationBar+Scrollable.m in Sources */ = {isa = PBXBuildFile; fileRef = C458FCD521CCBF7000748C69 /* FDNavigationBar+Scrollable.m */; };
 		C474A8F13D7FE68D16CAE149A7B4F4E8 /* SkeletonAnimationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297ADCE3DFEC575385CBEDBBE27F705 /* SkeletonAnimationBuilder.swift */; };
 		C489D16421CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */; };
 		C49F9EEF0DD987D929FAD17F846E3E03 /* successIconLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31D07DB2A8F15721FF543B3AA6B1EF1D /* successIconLight@2x.png */; };
@@ -3500,6 +3502,8 @@
 		C3DF7C8BF62C3A7A0D36D11EAD744447 /* ObservableType+Weak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableType+Weak.swift"; path = "Source/RxSwift/ObservableType+Weak.swift"; sourceTree = "<group>"; };
 		C43237436418A98F063AF095552F83DC /* Cancellable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cancellable.swift; path = Sources/Moya/Cancellable.swift; sourceTree = "<group>"; };
 		C453875D5A1AB8F86ABCF3CEE832A859 /* RxOptional-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxOptional-prefix.pch"; sourceTree = "<group>"; };
+		C458FCD421CCBF7000748C69 /* FDNavigationBar+Scrollable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FDNavigationBar+Scrollable.h"; path = "FOLDin/Classes/Core/FDNavigationBar+Scrollable.h"; sourceTree = "<group>"; };
+		C458FCD521CCBF7000748C69 /* FDNavigationBar+Scrollable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "FDNavigationBar+Scrollable.m"; path = "FOLDin/Classes/Core/FDNavigationBar+Scrollable.m"; sourceTree = "<group>"; };
 		C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FDNavigationBar+Scrollable.swift"; path = "FOLDin/Classes/Core/FDNavigationBar+Scrollable.swift"; sourceTree = "<group>"; };
 		C4BB7C33DB0A155F182B992535666B2A /* lossless_enc_sse41.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = lossless_enc_sse41.c; path = src/dsp/lossless_enc_sse41.c; sourceTree = "<group>"; };
 		C4C13A3F4664AAE90DC71AB4ECB0882D /* Timepiece-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Timepiece-dummy.m"; sourceTree = "<group>"; };
@@ -6006,6 +6010,8 @@
 				23423DAA1FCE20ABBBEC72748B89CBF8 /* UIViewController+FOLDin.h */,
 				E465A8C31362CAC7A587FC1A066DEB0D /* UIViewController+FOLDin.m */,
 				33C9F81CC7216A5BA23BF64FE1AC866F /* UIViewController+FOLDin.swift */,
+				C458FCD421CCBF7000748C69 /* FDNavigationBar+Scrollable.h */,
+				C458FCD521CCBF7000748C69 /* FDNavigationBar+Scrollable.m */,
 				C489D16321CB83C500CEE2C1 /* FDNavigationBar+Scrollable.swift */,
 			);
 			name = Core;
@@ -7277,6 +7283,7 @@
 			files = (
 				A562A51D2EC2F42F0292F63CDF9159E3 /* FOLDin-umbrella.h in Headers */,
 				EA1477DF487A6A3012862C72DCE7816B /* UIViewController+FOLDin.h in Headers */,
+				C458FCD621CCBF7000748C69 /* FDNavigationBar+Scrollable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9095,6 +9102,7 @@
 				AC4F93A97EF33718B346E561D8909AED /* FDButtonBarStackView.swift in Sources */,
 				2D01B9FA480D1C00F1581BB0F222FF6E /* FDMargin.swift in Sources */,
 				08822AF548E636F252405991CC9D35B0 /* FDNavigationBar.swift in Sources */,
+				C458FCD721CCBF7000748C69 /* FDNavigationBar+Scrollable.m in Sources */,
 				862B5C4E92ED2C74FF2223E0A230A3AD /* FDNavigationBarContentView.swift in Sources */,
 				A1B43C3503C7186A11AD74C5FC00D158 /* FDNavigationItem.swift in Sources */,
 				C549DBBFE183C92DD59E1235F3DBA6D5 /* FDUtilities.swift in Sources */,

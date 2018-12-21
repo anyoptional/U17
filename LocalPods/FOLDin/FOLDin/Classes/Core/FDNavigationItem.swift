@@ -35,9 +35,12 @@ public class FDNavigationItem: NSObject {
     }
     
     // Bar button item to use for the back button in the child navigation item.
-    public var backBarButtonItem: FDBarButtonItem? {
-        didSet { delegate?.navigationItemDidChange(self) }
-    }
+    public var backBarButtonItem: FDBarButtonItem? = {
+        let item = FDBarButtonItem()
+        item.title = "返回"
+        item.image = UIImage(nameInBundle: "img_back")
+        return item
+    }() { didSet { delegate?.navigationItemDidChange(self) } }
     
     // If YES, this navigation item will hide the back button when it's on top of the stack.
     public var hidesBackButton: Bool = false {

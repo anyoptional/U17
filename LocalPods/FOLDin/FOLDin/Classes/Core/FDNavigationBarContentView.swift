@@ -40,16 +40,6 @@ class FDNavigationBarContentView: UIView {
         return v
     }()
     
-    private lazy var backBarButtonItem: FDBarButtonItem = {
-        let item = FDBarButtonItem()
-        item.title = "返回"
-        item.target = self
-        item.action = #selector(_backAction)
-        item.image = UIImage(nameInBundle: "img_back")
-        addSubview(item.buttonView)
-        return item
-    }()
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         _layoutBackButton()
@@ -61,6 +51,25 @@ class FDNavigationBarContentView: UIView {
 
 extension FDNavigationBarContentView {
     private func _layoutBackButton() {
+        // back button 一定有 只是显不显示
+        let backBarButtonItem: FDBarButtonItem
+        if let backItem = navigationItem.backBarButtonItem {
+            if backItem.target == nil && backItem.action == nil {
+                backItem.target = self
+                backItem.action = #selector(_backAction)
+            }
+            addSubview(backItem.buttonView)
+            backBarButtonItem = backItem
+        } else {
+            let backItem = FDBarButtonItem()
+            backItem.title = "返回"
+            backItem.target = self
+            backItem.action = #selector(_backAction)
+            backItem.image = UIImage(nameInBundle: "img_back")
+            addSubview(backItem.buttonView)
+            backBarButtonItem = backItem
+            navigationItem.backBarButtonItem = backItem
+        }
         var safeAreaInsetsLeft = contentMargin.left
         if #available(iOS 11.0, *) {
             safeAreaInsetsLeft += safeAreaInsets.left
@@ -82,6 +91,7 @@ extension FDNavigationBarContentView {
     }
     
     private func _layoutLeftBarStackView() {
+        let backBarButtonItem = navigationItem.backBarButtonItem!
         leftBarStackView.top = 0
         leftBarStackView.height = height
         leftBarStackView.left = backBarButtonItem.buttonView.right
@@ -168,6 +178,7 @@ extension FDNavigationBarContentView {
         titleView.centerX = width / 2
         
         // 只有当backButton和leftBarStackView都没有时才不计算navigationItem.titleViewMargin.left
+        let backBarButtonItem = navigationItem.backBarButtonItem!
         let leftWidth = leftBarStackView.right + (leftBarStackView.isHidden && backBarButtonItem.buttonView.isHidden ? 0 : navigationItem.titleViewMargin.left )
         let rightOriginX = rightBarStackView.left - (rightBarStackView.isHidden ? 0 : navigationItem.titleViewMargin.right)
         let rightWidth = width - rightOriginX
