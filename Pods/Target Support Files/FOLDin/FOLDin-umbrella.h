@@ -10,7 +10,9 @@
 #endif
 #endif
 
+#import "FDNavigationBar+Scrollable.h"
 #import "UIViewController+FOLDin.h"
+#import "FDNavigationBar+Scrollable.h"
 #import "UIViewController+FOLDin.h"
 
 FOUNDATION_EXPORT double FOLDinVersionNumber;

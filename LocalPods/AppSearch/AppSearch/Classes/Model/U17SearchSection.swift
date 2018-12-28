@@ -12,6 +12,7 @@ enum U17SearchSection {
     case hot(items: [U17SearchSectionItem])
     case history(items: [U17SearchSectionItem])
     case relative(items: [U17SearchSectionItem])
+    case searchResult(items: [U17SearchSectionItem])
 }
 
 enum U17SearchSectionItem {
@@ -19,6 +20,7 @@ enum U17SearchSectionItem {
     case hot(item: U17HotSearchCellDisplay)
     case history(item: U17HistorySearchCellDisplay)
     case relative(item: U17KeywordRelativeCellDisplay)
+    case searchResult(item: U17SearchResultCellDisplay)
 }
 
 extension U17SearchSection: SectionModelType {
@@ -32,6 +34,8 @@ extension U17SearchSection: SectionModelType {
             return items
         case .relative(items: let items):
             return items
+        case .searchResult(items: let items):
+            return items
         }
     }
     
@@ -43,6 +47,8 @@ extension U17SearchSection: SectionModelType {
             self = .history(items: items)
         case .relative(items: _):
             self = .relative(items: items)
+        case .searchResult(items: _):
+            self = .searchResult(items: items)
         }
     }
 }

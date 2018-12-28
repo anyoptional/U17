@@ -9,6 +9,7 @@ import Fate
 import FOLDin
 import RxSwift
 import RxCocoa
+import Mediator
 import RxSwiftExt
 import ReactorKit
 import RxAppState
@@ -35,6 +36,7 @@ class U17SearchViewController: UIViewController {
         v.backgroundColor = .white
         v.keyboardDismissMode = .onDrag
         v.fate.register(cellClass: U17HotSearchCell.self)
+        v.fate.register(cellClass: U17SearchResultCell.self)
         v.fate.register(cellClass: U17HistorySearchCell.self)
         v.fate.register(cellClass: U17KeywordRelativeCell.self)
         if #available(iOS 11, *) {
@@ -156,9 +158,18 @@ extension U17SearchViewController: View {
                     // 在cell.rx.tap里处理
                     case .hot: break
                     case .history(item: let item):
-                        self.tapKeyword(item.state.rawValue)
+                        self.tapHistoryKeyword(item.state.rawValue)
                     case .relative(item: let item):
-                        self.tapKeyword(item.state.rawValue.name)
+                        guard let comicId = item.state.rawValue.comic_id else {
+                            debugPrint("No comicId found.")
+                            return
+                        }
+                        let keyword = item.state.rawValue.name
+                        self.jumpToComicDetail(keyword, comicId)
+                    case .searchResult(item: let item):
+                        let keyword = item.state.rawValue.name
+                        let comicId = item.state.rawValue.comicId
+                        self.jumpToComicDetail(keyword, comicId.toString())
                     }
                 }
             }.disposed(by: disposeBag)
@@ -179,7 +190,7 @@ extension U17SearchViewController: View {
             switch sectionItem {
             case .hot(item: let display):
                 let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
-                self?.configure(hotSearchCell: cell, display: display)
+                self?.configure(hotSearchCell: cell, display: display, indexPath: ip)
                 return cell
                 
             case .history(item: let display):
@@ -191,26 +202,43 @@ extension U17SearchViewController: View {
                 let cell: U17KeywordRelativeCell = tv.fate.dequeueReusableCell(for: ip)
                 cell.display = display
                 return cell
+                
+            case .searchResult(item: let display):
+                let cell: U17SearchResultCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
             }
         })
     }
     
-    private func configure(hotSearchCell cell: U17HotSearchCell, display: U17HotSearchCellDisplay) {
+    private func configure(hotSearchCell cell: U17HotSearchCell, display: U17HotSearchCellDisplay, indexPath: IndexPath) {
         cell.disposeBag = DisposeBag()
         cell.display = display
         cell.rx.tap
             .subscribeNext(weak: self, { (self) in
                 return { (keyword) in
-                    self.tapKeyword(keyword)
+                    guard let comicId = display.state.rawValue.hotItems?[indexPath.row].comic_id else {
+                        debugPrint("No comicId found.")
+                        return
+                    }
+                    self.jumpToComicDetail(keyword, comicId)
                 }
             }).disposed(by: cell.disposeBag)
     }
     
-    private func tapKeyword(_ keyword: String?) {
+    private func tapHistoryKeyword(_ keyword: String) {
+        Observable.just(Reactor.Action.getSearchResult(keyword))
+            .bind(to: reactor!.action) // It's safe to force-unwrap here
+            .disposed(by: disposeBag)
+    }
+    
+    private func jumpToComicDetail(_ keyword: String?, _ comicId: String) {
         // 存历史搜索
         U17KeywordsCache.store(keyword)
-        // TODO: 进详情
-
+        // 进详情
+        if let vc = Mediator.getComicDetailViewController(withComicId: comicId) {
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -219,48 +247,82 @@ extension U17SearchViewController: UITableViewDelegate {
         switch dataSource[indexPath] {
         case .hot(item: let display):
             return tableView.fate.heightForRowAt(indexPath, cellClass: U17HotSearchCell.self, configuration: { (cell) in
-                self.configure(hotSearchCell: cell, display: display)
+                self.configure(hotSearchCell: cell, display: display, indexPath: indexPath)
             })
             
         // 写定好了 这个就不自动算了
-        default: return 45
+        case .history, .relative: return 45
+        case .searchResult: return 155
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var mode: U17SearchHeaderView.DisplayMode?
-        switch dataSource[section] {
-        case .hot: mode = .hot
-        case .history: mode = .history
-        case .relative: mode = nil // 搜索结果不需要headerView
+        let sectionItem = dataSource[section]
+        if case .searchResult = sectionItem {
+            let view = UIView()
+            view.backgroundColor = .white
+            let label = UILabel()
+            label.size = CGSize(width: 250, height: 12)
+            label.origin = CGPoint(x: 20, y: 12)
+            label.textAlignment = .left
+            let count = sectionItem.items.count
+            let text = "找到相关的漫画 \(count) 本"
+            let attrText = NSMutableAttributedString(string: text, attributes: [.font : UIFont.systemFont(ofSize: 11),
+                                                                                .foregroundColor : U17def.gray_9B9B9B])
+            attrText.addAttributes([.foregroundColor : U17def.black_333333], range: (text as NSString).range(of: "\(count)"))
+            label.attributedText = attrText
+            view.addSubview(label)
+            return view
+            
+        } else {
+            var mode: U17SearchHeaderView.DisplayMode?
+            switch sectionItem {
+            case .hot: mode = .hot
+            case .history: mode = .history
+            default: mode = nil // 搜索结果不需要headerView
+            }
+            guard let displayMode = mode else { return nil }
+            let view = U17SearchHeaderView()
+            view.disposeBag = DisposeBag()
+            view.displayMode = displayMode
+            view.rx.event
+                .flatMap { (displayMode) -> Observable<Reactor.Action> in
+                    switch displayMode {
+                    case .hot: return .just(Reactor.Action.refreshHotKeywords)
+                    case .history: return .just(Reactor.Action.removeHistoryKeywords)
+                    }
+                }.bind(to: reactor!.action) // It's safe to force-unwrap here
+                .disposed(by: view.disposeBag)
+            return view
         }
-        guard let displayMode = mode else { return nil }
-        let view = U17SearchHeaderView()
-        view.disposeBag = DisposeBag()
-        view.displayMode = displayMode
-        view.rx.event
-            .flatMap { (displayMode) -> Observable<Reactor.Action> in
-                switch displayMode {
-                case .hot: return .just(Reactor.Action.refreshHotKeywords)
-                case .history: return .just(Reactor.Action.removeHistoryKeywords)
-                }
-            }.bind(to: reactor!.action) // It's safe to force-unwrap here
-            .disposed(by: view.disposeBag)
-        return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch dataSource[section] {
-        case .hot, .history: return 30
+        case .hot, .history, .searchResult: return 30
         case .relative: return 0
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let sectionItem = dataSource[section]
+        if case .searchResult = sectionItem {
+            let view = UILabel()
+            view.text = "已经全部加载完毕"
+            view.textAlignment = .center
+            view.backgroundColor = .white
+            view.font = UIFont.systemFont(ofSize: 14)
+            view.textColor = U17def.gray_999999.withAlphaComponent(0.5)
+            return view
+        }
         return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let sectionItem = dataSource[section]
+        if case .searchResult = sectionItem {
+            return 50
+        }
         return 0.01
     }
 }

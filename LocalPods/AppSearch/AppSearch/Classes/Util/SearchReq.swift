@@ -27,3 +27,10 @@ class HotKeywordsReq: SearchReq {}
 class KeywordRelativeReq: SearchReq {
     var inputText: String?
 }
+
+@objcMembers
+class SearchResultReq: SearchReq {
+    var argCon: Int = 0
+    var page: Int = 0
+    var q: String?    
+}

@@ -71,3 +71,14 @@ public final class U17RefreshTodayFooter: MJRefreshAutoNormalFooter {
         }
     }
 }
+
+public final class U17RefreshAutoStateFooter: MJRefreshAutoStateFooter {
+    override public func prepare() {
+        super.prepare()
+        setTitle("", for: .idle);
+        setTitle("", for: .pulling);
+        setTitle("努力加载中~", for: .refreshing);
+        setTitle("我也是有底线的~", for: .noMoreData);
+        stateLabel.textColor = U17def.gray_999999.withAlphaComponent(0.5)
+    }
+}

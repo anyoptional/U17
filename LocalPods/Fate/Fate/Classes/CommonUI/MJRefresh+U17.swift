@@ -58,4 +58,24 @@ public extension UIScrollView {
             }
         }
     }
+    
+    /// u17普通上拉刷新控件
+    public var autoStateFooter: MJRefreshFooter {
+        set {
+            synchronized(self) {
+                mj_footer = newValue;
+            }
+        }
+        get {
+            return synchronized(self) {
+                if let footer = mj_footer {
+                    return footer
+                }
+                let footer = U17RefreshAutoStateFooter()
+                footer.isOnlyRefreshPerDrag = true
+                mj_footer = footer
+                return mj_footer
+            }
+        }
+    }
 }

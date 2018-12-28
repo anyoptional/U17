@@ -52,18 +52,19 @@ struct U17KeywordsCache {
     
     static func removeAll() {
         cache?.removeAll()
-        let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "_kU17KeywordsCacheKey")
+        SwiftyCache.shared?.removeObject(forKey: "_kU17KeywordsCacheKey")
     }
     
     static func synchronize() {
         // 当前runloop空闲时再写
         // 这个缓存属于一个优先级比较低的操作
         // 即使慢一点写进去也没什么关系
+        guard let object = cache as NSArray? else {
+            debugPrint("No data needs to cache.")
+            return
+        }
         FDTransaction.default.commit {
-            let defaults = UserDefaults.standard
-            defaults.set(cache, forKey: "_kU17KeywordsCacheKey")
-            defaults.synchronize()
+            SwiftyCache.shared?.setObject(object, forKey: "_kU17KeywordsCacheKey")
             cache = nil
         }
     }
@@ -71,8 +72,7 @@ struct U17KeywordsCache {
     // 这样写主要是为了能释放缓存
     private static var cache: [String]? = nil
     private static func getCachedKeywords() -> [String] {
-        let defaults = UserDefaults.standard
-        let object = defaults.object(forKey: "_kU17KeywordsCacheKey")
+        let object = SwiftyCache.shared?.object(forKey: "_kU17KeywordsCacheKey")
         return (object as? [String]) ?? []
     }
 }

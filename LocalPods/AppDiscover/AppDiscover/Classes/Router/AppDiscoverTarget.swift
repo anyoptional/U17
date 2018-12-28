@@ -16,4 +16,13 @@ class AppDiscoverTarget: NSObject {
         return vc
     }
     
+    func getComicDetailViewController(_ parameters: [String : Any]) -> UIViewController {
+        guard let comicId = parameters["comicId"] as? String else {
+            fatalError("Could not fetch comic id.")
+        }
+        let vc = ComicDetailViewController()
+        vc.comicId = comicId
+        vc.reactor = ComicDetailViewReactor()
+        return vc
+    }
 }

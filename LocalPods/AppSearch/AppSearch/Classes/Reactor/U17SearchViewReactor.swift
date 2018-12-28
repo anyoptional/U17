@@ -18,6 +18,8 @@ final class U17SearchViewReactor: Reactor {
     typealias HotResponse = HotKeywordsResp.DataBean.ReturnDataBean
     typealias RelativeObject = KeywordRelativeResp
     typealias RelativeResponse = KeywordRelativeResp.DataBean.ReturnDataBean
+    typealias SearchResultObject = SearchResultResp
+    typealias SearchResultResponse = SearchResultResp.DataBean.ReturnDataBean
     
     enum Action {
         // 获取关键词 热门和历史
@@ -28,6 +30,8 @@ final class U17SearchViewReactor: Reactor {
         case removeHistoryKeywords
         // 关键词搜索
         case getKeywordRelative(String)
+        // 点击历史记录
+        case getSearchResult(String)
     }
     
     enum Mutation {
@@ -37,6 +41,8 @@ final class U17SearchViewReactor: Reactor {
         case addHotKeywords(HotResponse)
         case refreshHotKeywords(HotResponse)
         case addKeywordRelative([RelativeResponse])
+        case addSearchResult(SearchResultResponse)
+        
     }
     
     struct State {
@@ -61,6 +67,9 @@ final class U17SearchViewReactor: Reactor {
             
         case .getKeywordRelative(let keyword):
             return getKeywordRelative(keyword)
+            
+        case .getSearchResult(let keyword):
+            return getSearchResult(keyword)
         }
     }
     
@@ -83,7 +92,7 @@ final class U17SearchViewReactor: Reactor {
             state.sections.removeAll(keepingCapacity: true)
             if keywords.isEmpty { break }
             state.placeholderState = .completed
-            state.sections = [.history(items: keywords.map({ (rawValue) in
+            state.sections += [.history(items: keywords.map({ (rawValue) in
                 .history(item: U17HistorySearchCellDisplay(rawValue: rawValue))
             }))]
             
@@ -129,6 +138,19 @@ final class U17SearchViewReactor: Reactor {
             } else {
                 state.placeholderState = .completed
             }
+            
+        case .addSearchResult(let resp):
+            let comics = resp.comics.filterNil([])
+            // 设置占位图的状态
+            if comics.isEmpty {
+                state.placeholderState = .empty
+            } else {
+                state.placeholderState = .completed
+            }
+            // 设置section
+            state.sections = [.searchResult(items: comics.map({ (rawValue) in
+                .searchResult(item: U17SearchResultCellDisplay(rawValue: rawValue))
+            }))]
         }
         return state
     }
@@ -187,6 +209,20 @@ extension U17SearchViewReactor {
                 /// 便于接下来做高亮显示关键字
                 resps.forEach { $0.keyword = keyword }
             }).map { Mutation.addKeywordRelative($0) }
+            .catchError { .just(Mutation.setError($0.apiError)) }
+    }
+    
+    /// 这种搜索基本上不会搜出很多
+    /// 简单点处理忽略上拉
+    private func getSearchResult(_ keyword: String) -> Observable<Mutation> {
+        let searchResultReq = SearchResultReq()
+        searchResultReq.page = 1
+        searchResultReq.q = keyword
+        return APIProvider.rx.request(SearchAPI.getSearchResult(searchResultReq))
+            .mapObject(SearchResultObject.self)
+            .map { $0.data?.returnData }
+            .filterNil()
+            .map { Mutation.addSearchResult($0) }
             .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }

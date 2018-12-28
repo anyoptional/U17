@@ -9,6 +9,7 @@ import RxMoya
 
 enum SearchAPI {
     case getHotKeywords(JSONParamConvertible)
+    case getSearchResult(JSONParamConvertible)
     case getKeywordRelative(JSONParamConvertible)
 }
 
@@ -21,6 +22,7 @@ extension SearchAPI: APITargetType {
         switch self {
         case .getHotKeywords: return "search/hotkeywordsnew"
         case .getKeywordRelative: return "search/relative"
+        case .getSearchResult: return "search/searchResult"
         }
     }
     
@@ -34,6 +36,9 @@ extension SearchAPI: APITargetType {
             return req.asParameters()
             
         case let .getKeywordRelative(req):
+            return req.asParameters()
+            
+        case let .getSearchResult(req):
             return req.asParameters()
         }
     }
