@@ -10,6 +10,7 @@ import RxMoya
 import RxSwift
 import SnapKit
 import RxCocoa
+import Mediator
 import RxSwiftExt
 import ReactorKit
 import RxAppState
@@ -144,8 +145,19 @@ extension TodayListViewController: View {
     private func collectionViewSkeletonedAnimatedDataSource() -> RxCollectionViewSkeletonedAnimatedDataSource<TodayRecommendSection> {
         return RxCollectionViewSkeletonedAnimatedDataSource(configureCell: { (ds, cv, ip, display) in
             let cell: TodayRecommendCell = cv.fate.dequeueReusableCell(for: ip)
+            cell.disposeBag = DisposeBag()
             cell.display = display
+            // 查看全集
+            cell.rx.showComics
+                .subscribeNext(weak: self, { (self) in
+                    return { (comicId) in
+                        if let vc = Mediator.getComicDetailViewController(withComicId: comicId) {
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }).disposed(by: cell.disposeBag)
             return cell
+            
         }, reuseIdentifierForItemAtIndexPath: { (ds, cv, ip) in
             return TodayRecommendCell.reuseIdentifier
         })

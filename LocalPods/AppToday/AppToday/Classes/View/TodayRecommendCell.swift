@@ -7,6 +7,9 @@
 
 import Fate
 import YYKit
+import RxSwift
+import RxCocoa
+import RxOptional
 import RxBindable
 
 class TodayRecommendCell: UICollectionViewCell {
@@ -58,14 +61,21 @@ class TodayRecommendCell: UICollectionViewCell {
         return v
     }()
     
-    private lazy var chapterLabel: UILabel = {
-        let v = UILabel()
-        v.textAlignment = .right
-        v.textColor = U17def.gray_9B9B9B
-        v.font = UIFont.systemFont(ofSize: 12)
+    fileprivate lazy var comicButton: UIButton = {
+        let v = UIButton()
+        v.setTitle("全集", for: .normal)
+        v.setTitleColor(U17def.gray_9B9B9B, for: .normal)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        v.setImage(UIImage(nameInBundle: "expand_right"), for: .normal)
+        v.fate.touchAreaInsets = UIEdgeInsets(top: 5, left: 5, bottom: 55, right: 5)
         contentView.addSubview(v)
         return v
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        comicButton.fate.setTitleAlignment(.left, withOffset: 3)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,7 +101,7 @@ class TodayRecommendCell: UICollectionViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.left.equalTo(titleLabel)
         }
-        chapterLabel.snp.makeConstraints { (make) in
+        comicButton.snp.makeConstraints { (make) in
             make.right.equalTo(authorLabel)
             make.centerY.equalTo(updateLabel)
         }
@@ -113,12 +123,22 @@ extension TodayRecommendCell: Bindable {
         
         updateLabel.text = presenter.updateText
         
-        chapterLabel.text = presenter.chapterText
-        
         tagLabel.attributedText = presenter.tagAttributedText
         
         imgView.fate.setImage(withURL: presenter.imgURL,
                               placeholder: UIImage(nameInBundle: "today_list_placeholder"),
                               shouldDecompressImages: false)
     }
+}
+
+extension Reactive where Base: TodayRecommendCell {
+    
+    /// 显示全集
+    var showComics: Observable<String> {
+        return base.comicButton
+            .rx.tap
+            .map { [weak base] in base?.display?.state.rawValue.comicId.toString() }
+            .filterNil()
+    }
+    
 }

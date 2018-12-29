@@ -9,9 +9,9 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-public extension Reactor {
+extension Reactor {
     /// 接收一个事件
-    public func accept(_ act: Action) -> Disposable {
-        return Observable.just(act).bind(to: action)
+    public func accept(_ event: Action) -> Disposable {
+        return Observable.just(event).bind(to: action)
     }
 }
