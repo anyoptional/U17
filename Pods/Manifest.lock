@@ -436,6 +436,7 @@ PODS:
     - Fate/RxAdaptor (= 1.0.0)
     - Fate/UILayoutAdaptor (= 1.0.0)
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -449,6 +450,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/CommonUI (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -462,6 +464,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/Core (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -475,6 +478,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/Identifiable (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -488,6 +492,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/ImageLoading (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -501,6 +506,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/RunloopOptimize (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -514,6 +520,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/RxAdaptor (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -527,6 +534,7 @@ PODS:
     - YYKit (~> 1.0.9)
   - Fate/UILayoutAdaptor (1.0.0):
     - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
     - RxCocoa (~> 4.1.2)
     - RxDataSources (~> 3.1.0)
     - RxOptional (~> 3.4.0)
@@ -705,7 +713,7 @@ SPEC CHECKSUMS:
   AppSearch: aa500a4d924f9ab858100ce2a0cd39f082c06f2f
   AppToday: 6844f7e905cbafa258b6aa79fec9d7cbe3b610a9
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: 8f32ca0316b6ffb93f2de03d7ed646d834304fab
+  Fate: 76ac7eee80004d26abec568856ccf59d24232315
   FOLDin: 49bdd7647ff513c29c97f83116653bdf24b03602
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   libwebp: 38b601da310fe7c329c638d0c0d10aed006a54fe

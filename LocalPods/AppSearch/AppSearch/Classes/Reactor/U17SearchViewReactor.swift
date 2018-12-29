@@ -214,6 +214,9 @@ extension U17SearchViewReactor {
     
     /// 这种搜索基本上不会搜出很多
     /// 简单点处理忽略上拉
+    /// update 12.29: 我发现啊搜索`命运`出来了40个结果
+    /// 然后呢这40个并没有分页，所以说啊，U17本身肯定也是
+    /// 跟我一样的做法，所谓的`已经全部加载完毕`并不是refreshFooter啊~~
     private func getSearchResult(_ keyword: String) -> Observable<Mutation> {
         let searchResultReq = SearchResultReq()
         searchResultReq.page = 1

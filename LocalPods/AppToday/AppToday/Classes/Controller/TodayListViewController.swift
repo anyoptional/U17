@@ -64,9 +64,8 @@ extension TodayListViewController {
         collectionView.prepareSkeleton { (flag) in
             self.view.showAnimatedGradientSkeleton()
             // MARK: 请求数据
-            guard let reactor = self.reactor else { return }
-            Observable.just(Reactor.Action.pullToRefresh(self.weekday))
-                .bind(to: reactor.action)
+            self.reactor?
+                .accept(.pullToRefresh(self.weekday))
                 .disposed(by: self.disposeBag)
         }
     }

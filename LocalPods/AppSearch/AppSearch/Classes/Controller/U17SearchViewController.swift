@@ -29,6 +29,12 @@ class U17SearchViewController: UIViewController {
         return searchBar
     }()
     
+    /// 点击搜索栏上的`x`按钮和点击`历史记录`会通过代码
+    /// 给searchBar.text赋值，这种赋值并不会触发searchBar.rx.text
+    /// 这个属性用来记录手动赋值前searchBar.text，并保证在接下来不触发
+    /// searchBar.rx.text
+    private lazy var ignoredKeyword: String? = nil
+    
     private lazy var tableView: UITableView = {
         let v = UITableView(frame: .zero, style: .grouped)
         v.estimatedRowHeight = 40
@@ -124,10 +130,12 @@ extension U17SearchViewController: View {
         // NOTE: searchBar.rx.text监听的时text editing event
         // 并不包含手动赋值 所以这里清除时需要手动刷新
         searchBar.rx.clear
-            .do(onNext: { [weak self] in
+            .do(onNext: { [weak self] (keyword) in
+                // 记录不触发搜索的关键字
+                self?.ignoredKeyword = keyword
                 // 标记正在加载
                 self?.placeholderView.state = .loading
-            }).map { Reactor.Action.getKeywords }
+            }).map { _ in Reactor.Action.getKeywords }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -135,10 +143,17 @@ extension U17SearchViewController: View {
         searchBar
             .rx.text.orEmpty
             // 不重复搜索
-            .distinctUntilChanged()
+            // 不搜索过滤的关键词
+            // $0:上一次搜索的关键字 $1:当前的searchBar.text
+            .distinctUntilChanged { [weak self] in $0 == $1 ||
+                $0 == self?.ignoredKeyword ||
+                $1 == self?.ignoredKeyword
+            }
             // 在0.7s内不连续搜索
             .debounce(0.7, scheduler: MainScheduler.instance)
             .flatMap({ [weak self] (keyword) -> Observable<Reactor.Action> in
+                // 清空不触发搜索的关键字
+                self?.ignoredKeyword = nil
                 // 标记正在加载
                 self?.placeholderView.state = .loading
                 // 如果是删光了就加载热门关键词
@@ -227,8 +242,13 @@ extension U17SearchViewController: View {
     }
     
     private func tapHistoryKeyword(_ keyword: String) {
-        Observable.just(Reactor.Action.getSearchResult(keyword))
-            .bind(to: reactor!.action) // It's safe to force-unwrap here
+        // 记录不触发搜索的关键字
+        ignoredKeyword = keyword
+        // 改变搜索文字
+        searchBar.text = keyword
+        // 获取搜索结果
+        reactor?
+            .accept(.getSearchResult(keyword))
             .disposed(by: disposeBag)
     }
     

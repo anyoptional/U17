@@ -28,6 +28,7 @@ Pod::Spec.new do |s|
     s.dependency 'RxCocoa', '~> 4.1.2'
     s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'RxOptional', '~> 3.4.0'
+    s.dependency 'ReactorKit', '~> 1.1.0'
     s.dependency 'SkeletonView', '~> 1.4.1'
     s.dependency 'MJRefresh', '~> 3.1.15.7'
     s.dependency 'RxDataSources', '~> 3.1.0'

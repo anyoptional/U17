@@ -60,7 +60,7 @@ public extension UIScrollView {
     }
     
     /// u17普通上拉刷新控件
-    public var autoStateFooter: MJRefreshFooter {
+    public var stateFooter: MJRefreshFooter {
         set {
             synchronized(self) {
                 mj_footer = newValue;

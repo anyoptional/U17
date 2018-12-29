@@ -70,9 +70,10 @@ extension U17SearchBar: UITextFieldDelegate {
 extension Reactive where Base: U17SearchBar {
     
     /// clear button的点击事件
-    var clear: Observable<Void> {
+    var clear: Observable<String?> {
         return base.clearButton.rx.tap
-            .do(onNext: { [weak base] in
+            .map { [weak base] in base?.text }
+            .do(onNext: { [weak base] _ in
                 base?.text = nil
                 base?.clearButton.isHidden = true
             })
