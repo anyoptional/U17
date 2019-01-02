@@ -434,6 +434,7 @@ PODS:
     - Fate/ImageLoading (= 1.0.0)
     - Fate/RunloopOptimize (= 1.0.0)
     - Fate/RxAdaptor (= 1.0.0)
+    - Fate/SnapKitDSL (= 1.0.0)
     - Fate/UILayoutAdaptor (= 1.0.0)
     - MJRefresh (~> 3.1.15.7)
     - ReactorKit (~> 1.1.0)
@@ -444,6 +445,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -458,6 +460,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -472,6 +475,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -486,6 +490,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -500,6 +505,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -514,6 +520,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -528,6 +535,22 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
+    - SwiftMessages (~> 6.0.1)
+    - Timepiece (~> 1.3.1)
+    - "UITableView+FDTemplateLayoutCell (~> 1.6)"
+    - YYKit (~> 1.0.9)
+  - Fate/SnapKitDSL (1.0.0):
+    - MJRefresh (~> 3.1.15.7)
+    - ReactorKit (~> 1.1.0)
+    - RxCocoa (~> 4.1.2)
+    - RxDataSources (~> 3.1.0)
+    - RxOptional (~> 3.4.0)
+    - RxSwift (~> 4.1.2)
+    - SDCycleScrollView
+    - SDWebImage/WebP
+    - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -542,6 +565,7 @@ PODS:
     - SDCycleScrollView
     - SDWebImage/WebP
     - SkeletonView (~> 1.4.1)
+    - SnapKit (~> 4.0.1)
     - SwiftMessages (~> 6.0.1)
     - Timepiece (~> 1.3.1)
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
@@ -713,7 +737,7 @@ SPEC CHECKSUMS:
   AppSearch: aa500a4d924f9ab858100ce2a0cd39f082c06f2f
   AppToday: 6844f7e905cbafa258b6aa79fec9d7cbe3b610a9
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  Fate: 76ac7eee80004d26abec568856ccf59d24232315
+  Fate: 5006894365478726b5d1896c3f8a034c2a24f6ac
   FOLDin: 49bdd7647ff513c29c97f83116653bdf24b03602
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   libwebp: 38b601da310fe7c329c638d0c0d10aed006a54fe

@@ -76,13 +76,6 @@ class U17SearchViewController: UIViewController {
     deinit { NSLog("\(className()) is deallocating...") }
 }
 
-extension U17SearchViewController {    
-    // MARK: 取消搜索
-    @objc private func popViewController() {
-        self.navigationController?.popViewController(animated: false)
-    }
-}
-
 extension U17SearchViewController: View {
     func bind(reactor: U17SearchViewReactor) {
         
@@ -348,6 +341,13 @@ extension U17SearchViewController: UITableViewDelegate {
 }
 
 extension U17SearchViewController {
+    // MARK: 取消搜索
+    @objc private func popViewControllerAnimated() {
+        self.navigationController?.popViewController(animated: false)
+    }
+}
+
+extension U17SearchViewController {
     func buildNavbar() {
         // FDNavigationBar的布局:
         // __________________________________________________________________________________________________________________________________________________
@@ -360,9 +360,8 @@ extension U17SearchViewController {
         // 没有rightBarButtonItems，titleViewMargin.right也就没用了
         // 这种情况直接调整fd.navigationBar.contentMargin就可以
         fd.navigationItem.hidesBackButton = true
-        fd.navigationItem.rightBarButtonItem = FDBarButtonItem(title: "取消",
-                                                               target: self,
-                                                               action: #selector(popViewController))
+        fd.navigationItem.rightBarButtonItem = FDBarButtonItem(title: "取消", target: self,
+                                                               action: #selector(popViewControllerAnimated))
         let titleTextAttributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 15),
                                                                    .foregroundColor : U17def.gray_AAAAAA]
         fd.navigationItem.rightBarButtonItem?.setTitleTextAttributes(titleTextAttributes, for: .normal)
@@ -379,7 +378,7 @@ extension U17SearchViewController {
             make.left.right.bottom.equalToSuperview()
         }
         
-        placeholderView.contentInset = UIEdgeInsets(top: -fate.fullNavbarHeight,
+        placeholderView.contentInset = UIEdgeInsets(top: -fd.fullNavbarHeight,
                                                     left: 0, bottom: 0, right: 0)
         view.addSubview(placeholderView)
         placeholderView.snp.makeConstraints { (make) in

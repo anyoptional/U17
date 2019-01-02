@@ -9,6 +9,14 @@ import Mediator
 
 final class U17TabBarController: UITabBarController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
+    override var childForStatusBarStyle: UIViewController? {
+        return selectedViewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A313791771ADA0638AA9280741A840CE"
+               BlueprintIdentifier = "2790F710CE936F0DF5D33CF2B8A9D4F9"
                BuildableName = "FOLDin.bundle"
                BlueprintName = "FOLDin-FOLDin"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A313791771ADA0638AA9280741A840CE"
+            BlueprintIdentifier = "2790F710CE936F0DF5D33CF2B8A9D4F9"
             BuildableName = "FOLDin.bundle"
             BlueprintName = "FOLDin-FOLDin"
             ReferencedContainer = "container:Pods.xcodeproj">

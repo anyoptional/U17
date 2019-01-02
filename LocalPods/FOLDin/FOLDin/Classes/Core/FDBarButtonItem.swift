@@ -122,6 +122,18 @@ public class FDBarButtonItem: NSObject {
         self.action = action
     }
     
+    public convenience init(title: String?,
+                            target: AnyObject? = nil,
+                            action: Selector? = nil) {
+        self.init(title: title, image: nil, target: target, action: action)
+    }
+    
+    public convenience init(image: UIImage?,
+                            target: AnyObject? = nil,
+                            action: Selector? = nil) {
+        self.init(title: nil, image: image, target: target, action: action)
+    }
+    
     public init(customView: UIView) {
         super.init()
         self.customView = customView

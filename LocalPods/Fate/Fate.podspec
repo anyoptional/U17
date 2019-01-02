@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
     s.dependency 'YYKit', '~> 1.0.9'
     s.dependency 'RxSwift', '~> 4.1.2'
     s.dependency 'RxCocoa', '~> 4.1.2'
+    s.dependency 'SnapKit', '~> 4.0.1'
     s.dependency 'Timepiece', '~> 1.3.1'
     s.dependency 'RxOptional', '~> 3.4.0'
     s.dependency 'ReactorKit', '~> 1.1.0'
@@ -57,6 +58,10 @@ Pod::Spec.new do |s|
     
     s.subspec "ImageLoading" do |cs|
       cs.source_files  = "Fate/Classes/ImageLoading"
+    end
+    
+    s.subspec "SnapKitDSL" do |cs|
+        cs.source_files  = "Fate/Classes/SnapKitDSL"
     end
     
     s.subspec "UILayoutAdaptor" do |cs|

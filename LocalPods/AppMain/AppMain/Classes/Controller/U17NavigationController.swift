@@ -9,16 +9,22 @@ import UIKit
 
 final class U17NavigationController: UINavigationController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
+    override var childForStatusBarStyle: UIViewController? {
+        return topViewController
+    }
+    
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if viewControllers.count > 0 {
-            viewController.hidesBottomBarWhenPushed = true;
-            interactivePopGestureRecognizer?.delegate = nil;
-//            let leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ico_back")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(popViewControllerAnimated));
-//            viewController.navigationItem.leftBarButtonItem = leftBarButtonItem;
+            viewController.hidesBottomBarWhenPushed = true
+            interactivePopGestureRecognizer?.delegate = nil
         }
         
-        super.pushViewController(viewController, animated: animated);
+        super.pushViewController(viewController, animated: animated)
     }
     
 }
