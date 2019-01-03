@@ -24,7 +24,7 @@ class ComicPreviewView: UIView {
     private lazy var radiusView: UIView = {
         let v = UIView()
         v.backgroundColor = .white
-        v.layer.cornerRadius = 10
+        v.layer.cornerRadius = 15
         v.layer.masksToBounds = true
         addSubview(v)
         return v
@@ -76,7 +76,7 @@ class ComicPreviewView: UIView {
         
         coverIv.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.bottom.equalTo(-50) // 算上10个点的圆角
+            make.bottom.equalTo(-45) // 算上15个点的圆角
         }
         radiusView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()

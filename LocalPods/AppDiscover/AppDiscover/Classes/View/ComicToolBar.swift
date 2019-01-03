@@ -39,9 +39,9 @@ class ComicToolBar: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.fate.setShadowDirection(.nonBottom)
         ticketButton.fate.setTitleAlignment(.right, withOffset: 3)
         commentButton.fate.setTitleAlignment(.right, withOffset: 3)
+        layer.fate.setShadowOffset(CGSize(width: 0, height: -0.7), at: .top)
     }
     
     init() {
@@ -49,12 +49,9 @@ class ComicToolBar: UIView {
         
         // 不设置背景色阴影会包裹着subview
         backgroundColor = .white
-        
-        layer.shadowRadius = 2
-        layer.shadowOpacity = 0.125
+        layer.shadowOpacity = 0.15
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0.7, height: -0.7)
-
+        
         let buttons = [ticketButton, commentButton]
         buttons.snp.distributeViewsAlong(axisType: .horizontal, fixedSpacing: 15,
                                          leadSpacing: 0, tailSpacing: 0)
