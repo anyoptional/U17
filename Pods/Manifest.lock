@@ -163,12 +163,16 @@ PODS:
     - AppMain/Controller (= 1.0.0)
     - AppMain/Router (= 1.0.0)
     - AppMain/View (= 1.0.0)
+    - FOLDin
     - Mediator
   - AppMain/Controller (1.0.0):
+    - FOLDin
     - Mediator
   - AppMain/Router (1.0.0):
+    - FOLDin
     - Mediator
   - AppMain/View (1.0.0):
+    - FOLDin
     - Mediator
   - AppProfile (1.0.0):
     - AppProfile/Controller (= 1.0.0)
@@ -732,7 +736,7 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AppBookshelf: 378374491a5909034ab70a786e46233f337e06f6
   AppDiscover: 7b841f4fec7cc21f458ae441103fe8e8e31431ed
-  AppMain: e7d8ca130bda5ccef2afcb1ec8829835cd407e55
+  AppMain: 99f1b5051e93a1e8ab8fcad853660078a6e8cdc2
   AppProfile: 45bb618e3bf45eeab47472f1bdaf74673afc9c6d
   AppSearch: aa500a4d924f9ab858100ce2a0cd39f082c06f2f
   AppToday: 6844f7e905cbafa258b6aa79fec9d7cbe3b610a9

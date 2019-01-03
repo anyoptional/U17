@@ -34,20 +34,12 @@ extension ChapterDownloadListViewController: View {
 }
 
 extension ChapterDownloadListViewController {
-    @objc private func popViewControllerAnimated() {
-        navigationController?.popViewController(animated: true)
-    }
+
 }
 
 extension ChapterDownloadListViewController {
     private func buildNavbar() {
         fd.navigationItem.title = "选择章节"
-        fd.navigationBar.contentMargin.left = 9
-        let backBarButton = UIButton()
-        backBarButton.size = CGSize(width: 28, height: 28)
-        backBarButton.setImage(UIImage(nameInBundle: "backGreen"), for: .normal)
-        backBarButton.addTarget(self, action: #selector(popViewControllerAnimated), for: .touchUpInside)
-        fd.navigationItem.leftBarButtonItem = FDBarButtonItem(customView: backBarButton)
     }
     
     private func buildUI() {

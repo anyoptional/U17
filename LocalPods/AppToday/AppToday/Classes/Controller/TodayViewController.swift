@@ -13,6 +13,7 @@ import TYPagerController
 
 class TodayViewController: TYTabPagerController {
     
+    /// 使用FDNavigationBar替换系统的UINavigationBar
     override var prefersNavigationBarStyle: UINavigationBarStyle {
         return .custom
     }

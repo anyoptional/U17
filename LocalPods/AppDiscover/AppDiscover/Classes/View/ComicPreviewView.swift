@@ -32,7 +32,7 @@ class ComicPreviewView: UIView {
     
     private lazy var comicIv: UIImageView = {
         let v = UIImageView()
-        v.layer.cornerRadius = 7
+        v.layer.cornerRadius = 10
         v.layer.borderWidth = 3.5
         v.layer.masksToBounds = true
         v.layer.borderColor = UIColor.white.cgColor
@@ -41,7 +41,7 @@ class ComicPreviewView: UIView {
         return v
     }()
     
-    private lazy var tagLabel: YYLabel = {
+    fileprivate lazy var tagLabel: YYLabel = {
         let v = YYLabel()
         v.textAlignment = .left
         v.textContainerInset = UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 0)
@@ -52,10 +52,12 @@ class ComicPreviewView: UIView {
     private lazy var titleLabel: YYLabel = {
         let v = YYLabel()
         v.text = "光之契约"
-        v.numberOfLines = 2
+        v.layer.shadowOffset = CGSize(width: 2, height: 2)
         v.font = UIFont.boldSystemFont(ofSize: 25)
+        v.layer.shadowOpacity = 0.15
         v.textAlignment = .left
         v.textColor = .white
+        v.numberOfLines = 2
         addSubview(v)
         return v
     }()
@@ -63,10 +65,12 @@ class ComicPreviewView: UIView {
     private lazy var detailLabel: YYLabel = {
         let v = YYLabel()
         v.text = "美盛游戏\n\n热度值 256.6万"
-        v.numberOfLines = 3
+        v.layer.shadowOffset = CGSize(width: 2, height: 2)
         v.font = UIFont.systemFont(ofSize: 14)
+        v.layer.shadowOpacity = 0.15
         v.textAlignment = .left
         v.textColor = .white
+        v.numberOfLines = 3
         addSubview(v)
         return v
     }()
@@ -104,5 +108,23 @@ class ComicPreviewView: UIView {
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension Reactive where Base: ComicPreviewView {
+    
+    /// 点击标签上的关键字
+    var showsCategory: Observable<String> {
+        return Observable.create({ [weak base] (observer) in
+            if let base = base {
+                base.tagLabel.highlightTapAction = { (container, attrString, range, rect) in
+                    let category = attrString.attributedSubstring(from: range).string
+                    observer.onNext(category.trimmed)
+                }
+            } else {
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }).takeUntil(deallocated)
     }
 }

@@ -7,7 +7,7 @@
 
 import ReactorKit
 
-public final class BookshelfViewReactor: Reactor {
+final class BookshelfViewReactor: Reactor {
     
     public typealias Action = NoAction
     

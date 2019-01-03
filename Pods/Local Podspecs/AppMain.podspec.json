@@ -18,6 +18,9 @@
     "ios": "9.0"
   },
   "dependencies": {
+    "FOLDin": [
+
+    ],
     "Mediator": [
 
     ]

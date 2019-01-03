@@ -7,7 +7,7 @@
 
 import ReactorKit
 
-public final class ProfileViewReactor: Reactor {
+final class ProfileViewReactor: Reactor {
     
     public typealias Action = NoAction
     

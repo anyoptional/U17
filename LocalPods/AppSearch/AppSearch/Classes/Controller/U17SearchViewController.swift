@@ -22,11 +22,13 @@ class U17SearchViewController: UIViewController {
     }
     
     private lazy var searchBar: U17SearchBar = {
-        let width = view.width - 70
+        // 避免提前loadView
+        // 由self.view.width改为kScreenWidth
+        let width = kScreenWidth - 70
         let height = 25.toCGFloat()
-        let searchBar = U17SearchBar(size: CGSize(width: width, height: height))
-        fd.navigationItem.titleView = searchBar
-        return searchBar
+        // viewDidLoad调用的时机会影响到reactor的binding
+        // 以后注意不要提前创建self.view
+        return U17SearchBar(size: CGSize(width: width, height: height))
     }()
     
     /// 点击搜索栏上的`x`按钮和点击`历史记录`会通过代码
@@ -359,7 +361,9 @@ extension U17SearchViewController {
         // 同理，如果没有leftBarButtonItems和backButton，titleViewMargin.left也就没用了
         // 没有rightBarButtonItems，titleViewMargin.right也就没用了
         // 这种情况直接调整fd.navigationBar.contentMargin就可以
+        fd.navigationItem.titleView = searchBar
         fd.navigationItem.hidesBackButton = true
+        fd.navigationItem.leftBarButtonItem = nil
         fd.navigationItem.rightBarButtonItem = FDBarButtonItem(title: "取消", target: self,
                                                                action: #selector(popViewControllerAnimated))
         let titleTextAttributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 15),

@@ -41,6 +41,12 @@ class ComicDetailViewController: UIViewController {
 extension ComicDetailViewController: View {
     func bind(reactor: ComicDetailViewReactor) {
         
+        // MARK: 跳转分类
+        previewView.rx.showsCategory
+            .subscribeNext(weak: self) { (self) in
+                return self.showsCategory
+            }.disposed(by: disposeBag)
+        
         // MARK: 投月票
         toolBar.rx.sendTicket
             .subscribeNext(weak: self) { (self) in
@@ -74,6 +80,13 @@ extension ComicDetailViewController {
     
     @objc private func shareComic() {
         SwiftyHUD.show("分享是不可能给分享滴~")
+    }
+    
+    private func showsCategory(_ category: String) {
+        let vc = ComicCategoryViewController()
+        vc.category = category
+        vc.reactor = ComicCategoryViewReactor()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -34,8 +34,6 @@ static const CGFloat kFDFixedLandscapeNavigationBarHeight = 32.0;
     FDNavigationItem *navItem = objc_getAssociatedObject(self, &kFDNavigationItemContext);
     if (!navItem) {
         navItem = FDNavigationItem.new;
-        // Use key-value coding to access
-        [navItem setValue:self.fd_navigationBar forKeyPath:@"delegate"];
         objc_setAssociatedObject(self, &kFDNavigationItemContext, navItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return navItem;
@@ -87,6 +85,11 @@ static const CGFloat kFDFixedLandscapeNavigationBarHeight = 32.0;
 
 @implementation UIViewController (FDConfiguration)
 
+- (void)fd_deferDelegation {
+    // Use key-value coding to access
+    [self.fd_navigationItem setValue:self.fd_navigationBar forKeyPath:@"delegate"];
+}
+
 - (void)fd_setNavigationBarHidden:(BOOL)animated {
     if ([self fd_isNavigationBarEnabled] && [self fd_hidesSystemNavigationBar]) {
         [self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -130,6 +133,7 @@ static const CGFloat kFDFixedLandscapeNavigationBarHeight = 32.0;
     [self fd_viewDidLoad];
     
     if ([self fd_isNavigationBarEnabled]) {
+        [self fd_deferDelegation];
         [self fd_layoutNavigationBar];
     }
 }

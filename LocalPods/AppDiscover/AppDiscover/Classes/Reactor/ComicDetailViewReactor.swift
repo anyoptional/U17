@@ -7,7 +7,7 @@
 
 import ReactorKit
 
-public final class ComicDetailViewReactor: Reactor {
+final class ComicDetailViewReactor: Reactor {
     
     public typealias Action = NoAction
     

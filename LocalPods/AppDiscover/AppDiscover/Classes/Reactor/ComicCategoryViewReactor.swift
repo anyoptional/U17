@@ -1,13 +1,13 @@
 //
-//  ChapterDownloadListViewReactor.swift
+//  ComicCategoryViewReactor.swift
 //  AppDiscover
 //
-//  Created by Archer on 2019/1/2.
+//  Created by Archer on 2019/1/3.
 //
 
 import ReactorKit
 
-final class ChapterDownloadListViewReactor: Reactor {
+final class ComicCategoryViewReactor: Reactor {
     
     public typealias Action = NoAction
     

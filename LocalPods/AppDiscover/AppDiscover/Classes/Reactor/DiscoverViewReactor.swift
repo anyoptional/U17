@@ -7,7 +7,7 @@
 
 import ReactorKit
 
-public final class DiscoverViewReactor: Reactor {
+final class DiscoverViewReactor: Reactor {
     
     public typealias Action = NoAction
     
