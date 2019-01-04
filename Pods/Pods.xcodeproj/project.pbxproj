@@ -1174,6 +1174,7 @@
 		C49C68C221DEFC91006BB92F /* DiscoverReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C68C121DEFC91006BB92F /* DiscoverReq.swift */; };
 		C49C68C521DEFFD1006BB92F /* ComicGuessLikeResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C68C321DEFFD1006BB92F /* ComicGuessLikeResp.swift */; };
 		C49C68C621DEFFD1006BB92F /* ComicRealtimeDetailResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C68C421DEFFD1006BB92F /* ComicRealtimeDetailResp.swift */; };
+		C49C68C821DF511C006BB92F /* ComicPreviewViewDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C68C721DF511C006BB92F /* ComicPreviewViewDisplay.swift */; };
 		C5148D4CE1B0909BFFB40F7EB6087642 /* lossless_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = DBF9C4516DBACD8FD7D981A3C3D47BEC /* lossless_sse2.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
 		C57252069B947E882601663D79CB471C /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D69EDD1BC6FF83E5A2B6703CC051BB /* SwiftMessages.framework */; };
 		C5B82ED9F0518F726B4F735704707306 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD433B3B6C210E28E251EA8A2C80B7 /* UIImageView+WebCache.m */; };
@@ -4189,6 +4190,7 @@
 		C49C68C121DEFC91006BB92F /* DiscoverReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiscoverReq.swift; path = AppDiscover/Classes/Util/DiscoverReq.swift; sourceTree = "<group>"; };
 		C49C68C321DEFFD1006BB92F /* ComicGuessLikeResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComicGuessLikeResp.swift; path = AppDiscover/Classes/Model/ComicGuessLikeResp.swift; sourceTree = "<group>"; };
 		C49C68C421DEFFD1006BB92F /* ComicRealtimeDetailResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComicRealtimeDetailResp.swift; path = AppDiscover/Classes/Model/ComicRealtimeDetailResp.swift; sourceTree = "<group>"; };
+		C49C68C721DF511C006BB92F /* ComicPreviewViewDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComicPreviewViewDisplay.swift; path = AppDiscover/Classes/Reactor/ComicPreviewViewDisplay.swift; sourceTree = "<group>"; };
 		C4BB7C33DB0A155F182B992535666B2A /* lossless_enc_sse41.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = lossless_enc_sse41.c; path = src/dsp/lossless_enc_sse41.c; sourceTree = "<group>"; };
 		C50F2A89A2E5C1EF248CA8C281F2AC8C /* YYGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYGestureRecognizer.h; path = YYKit/Utility/YYGestureRecognizer.h; sourceTree = "<group>"; };
 		C510785EE69D7E1F5D48236C8A9A1F61 /* delta_palettization_enc.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = delta_palettization_enc.c; path = src/enc/delta_palettization_enc.c; sourceTree = "<group>"; };
@@ -6481,6 +6483,7 @@
 				301DCC9F285D97DF2F0D1BF8E1F79663 /* ComicCategoryViewReactor.swift */,
 				FE089F907E7CD8118D39F58AC15609DF /* ComicDetailViewReactor.swift */,
 				EBFD352F449F8B8BECA21D801BD261F6 /* U17DiscoverViewReactor.swift */,
+				C49C68C721DF511C006BB92F /* ComicPreviewViewDisplay.swift */,
 			);
 			name = Reactor;
 			sourceTree = "<group>";
@@ -10547,6 +10550,7 @@
 			files = (
 				72DB395E136C8551E2CECDD13FD6792D /* AppDiscover-dummy.m in Sources */,
 				5FA71E524271ED1B3E59FFF5C994CF46 /* AppDiscoverTarget.swift in Sources */,
+				C49C68C821DF511C006BB92F /* ComicPreviewViewDisplay.swift in Sources */,
 				32A3DB4EC28251880B6586DA3D330E6E /* ChapterDownloadListViewController.swift in Sources */,
 				C49C68C221DEFC91006BB92F /* DiscoverReq.swift in Sources */,
 				C21ED8B1B3E0F706E966EFB1CF2908FC /* ChapterDownloadListViewReactor.swift in Sources */,

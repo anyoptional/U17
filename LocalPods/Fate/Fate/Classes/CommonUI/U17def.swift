@@ -60,4 +60,12 @@ public struct U17def {
     public static var gray_8E8E8E: UIColor {
         return UIColor(rgbValue: 0x8E8E8E)
     }
+    
+    public static var green_EAF7FA: UIColor {
+        return UIColor(rgbValue: 0xEAF7FA)
+    }
+    
+    public static var green_5AC5D6: UIColor {
+        return UIColor(rgbValue: 0x5AC5D6)
+    }
 }

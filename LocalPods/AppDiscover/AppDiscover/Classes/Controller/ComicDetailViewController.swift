@@ -12,6 +12,7 @@ import FOLDin
 import SnapKit
 import RxSwiftExt
 import ReactorKit
+import RxAppState
 
 class ComicDetailViewController: UIViewController {
 
@@ -47,6 +48,14 @@ extension ComicDetailViewController: View {
                 return self.showsCategory
             }.disposed(by: disposeBag)
         
+        // MARK: 查看其他作品
+        previewView.rx.showsOtherWork
+            .subscribeNext(weak: self) { (self) in
+                return { _ in
+                    SwiftyHUD.show("其他作品是不可能给你看滴~")
+                }
+            }.disposed(by: disposeBag)
+        
         // MARK: 投月票
         toolBar.rx.sendTicket
             .subscribeNext(weak: self) { (self) in
@@ -63,7 +72,19 @@ extension ComicDetailViewController: View {
                 }
             }.disposed(by: disposeBag)
         
+        // MARK: 请求数据
+        rx.viewDidLoad
+            .map { [weak self] _ in Reactor.Action.getStaticDetail(self?.comicId) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
+        
+        // MARK: 绑定数据
+        reactor.state
+            .map { $0.previewViewDisplay }
+            .filterNil()
+            .bind(to: previewView.rx.display)
+            .disposed(by: disposeBag)
     }
 }
 

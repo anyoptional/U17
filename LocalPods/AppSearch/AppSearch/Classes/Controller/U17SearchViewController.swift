@@ -200,7 +200,7 @@ extension U17SearchViewController: View {
             switch sectionItem {
             case .hot(item: let display):
                 let cell: U17HotSearchCell = tv.fate.dequeueReusableCell(for: ip)
-                self?.configure(hotSearchCell: cell, display: display, indexPath: ip)
+                self?.configure(hotSearchCell: cell, display: display)
                 return cell
                 
             case .history(item: let display):
@@ -221,13 +221,18 @@ extension U17SearchViewController: View {
         })
     }
     
-    private func configure(hotSearchCell cell: U17HotSearchCell, display: U17HotSearchCellDisplay, indexPath: IndexPath) {
+    private func configure(hotSearchCell cell: U17HotSearchCell, display: U17HotSearchCellDisplay) {
         cell.disposeBag = DisposeBag()
         cell.display = display
         cell.rx.tap
             .subscribeNext(weak: self, { (self) in
                 return { (keyword) in
-                    guard let comicId = display.state.rawValue.hotItems?[indexPath.row].comic_id else {
+                    let hotItems = display.state.rawValue.hotItems
+                    guard let tappedItem = hotItems?.first(where: { $0.name == keyword }) else {
+                        debugPrint("No tapped item found.")
+                        return
+                    }
+                    guard let comicId = tappedItem.comic_id else {
                         debugPrint("No comicId found.")
                         return
                     }
@@ -262,7 +267,7 @@ extension U17SearchViewController: UITableViewDelegate {
         switch dataSource[indexPath] {
         case .hot(item: let display):
             return tableView.fate.heightForRowAt(indexPath, cellClass: U17HotSearchCell.self, configuration: { (cell) in
-                self.configure(hotSearchCell: cell, display: display, indexPath: indexPath)
+                self.configure(hotSearchCell: cell, display: display)
             })
             
         // 写定好了 这个就不自动算了
