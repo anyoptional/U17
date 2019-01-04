@@ -93,13 +93,13 @@ extension ComicDetailViewController {
 extension ComicDetailViewController {
     private func buildNavbar() {
         fd.navigationBar.barTintColor = .clear
-        fd.navigationBar.contentMargin = FDMargin(left: 9, right: 9)
+        fd.navigationBar.contentMargin = FDMargin(left: 10, right: 9)
         // 没找到2x/3x图
         // 本来想着resize一下图片，想想又懒得写缓存
         // 就采用customView吧，设置一下大小就可以了
         // leftBarButtonItem
         let backBarButton = UIButton()
-        backBarButton.size = CGSize(width: 28, height: 28)
+        backBarButton.size = CGSize(width: 26, height: 26)
         backBarButton.setImage(UIImage(nameInBundle: "detailBackBtn"), for: .normal)
         backBarButton.addTarget(self, action: #selector(popViewControllerAnimated), for: .touchUpInside)
         fd.navigationItem.leftBarButtonItem = FDBarButtonItem(customView: backBarButton)

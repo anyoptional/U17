@@ -11,8 +11,8 @@ import Foundation
 class AppBookshelfTarget: NSObject {
     
     func getBookshelfViewController() -> UIViewController {
-        let vc = BookshelfViewController()
-        vc.reactor = BookshelfViewReactor()
+        let vc = U17BookshelfViewController()
+        vc.reactor = U17BookshelfViewReactor()
         return vc
     }
     

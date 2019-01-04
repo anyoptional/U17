@@ -1,5 +1,5 @@
 //
-//  BookshelfViewController.swift
+//  U17BookshelfViewController.swift
 //  AppBookshelf
 //
 //  Created by Archer on 2018/11/20.
@@ -8,7 +8,7 @@
 import Fate
 import ReactorKit
 
-final class BookshelfViewController: UIViewController {
+final class U17BookshelfViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +18,9 @@ final class BookshelfViewController: UIViewController {
     }
 }
 
-extension BookshelfViewController: View {
+extension U17BookshelfViewController: View {
     
-    func bind(reactor: BookshelfViewReactor) {
+    func bind(reactor: U17BookshelfViewReactor) {
         
     }
 }

@@ -8,6 +8,15 @@
 import UIKit
 
 public extension Fate where Base: UIImage {
+    
+    /// 类似Android中的setColorFilter，可以给图片换颜色。
+    /// e.g, UI给了一张绿色的图，实际效果却是红色，这时候要么
+    /// 重新换一张红色的图，要么就可以使用这个方法。
+    ///
+    /// - Parameters:
+    ///   - rgbValue: 颜色16进制值
+    ///   - alpha: 颜色透明度
+    /// - Returns: 滤镜后的图片
     public func setColorFilter(_ rgbValue: Int, _ alpha: CGFloat = 1.0) -> UIImage? {
         guard let cgImage = base.cgImage else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)

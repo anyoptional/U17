@@ -11,8 +11,7 @@ import Foundation
 class AppTodayTarget: NSObject {
     
     func getTodayViewController() -> UIViewController {
-        let vc = TodayViewController()
-        return vc
+        return U17TodayViewController()
     }
     
 }

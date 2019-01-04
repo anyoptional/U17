@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  U17ProfileViewController.swift
 //  AppProfile
 //
 //  Created by Archer on 2018/11/20.
@@ -8,7 +8,7 @@
 import Fate
 import ReactorKit
 
-class ProfileViewController: UIViewController {
+class U17ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +18,8 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: View {
-    func bind(reactor: ProfileViewReactor) {
+extension U17ProfileViewController: View {
+    func bind(reactor: U17ProfileViewReactor) {
         
     }
 }

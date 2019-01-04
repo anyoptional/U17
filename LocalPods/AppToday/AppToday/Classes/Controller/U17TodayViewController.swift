@@ -1,5 +1,5 @@
 //
-//  TodayViewController.swift
+//  U17TodayViewController.swift
 //  AppToday
 //
 //  Created by Archer on 2018/11/20.
@@ -11,7 +11,7 @@ import Mediator
 import Timepiece
 import TYPagerController
 
-class TodayViewController: TYTabPagerController {
+class U17TodayViewController: TYTabPagerController {
     
     /// 使用FDNavigationBar替换系统的UINavigationBar
     override var prefersNavigationBarStyle: UINavigationBarStyle {
@@ -59,7 +59,7 @@ class TodayViewController: TYTabPagerController {
     deinit { NSLog("\(className()) is deallocating...") }
 }
 
-extension TodayViewController {
+extension U17TodayViewController {
     private func performBinding() {
         searchButton.rx.tap
             .subscribeNext(weak: self) { (self) in
@@ -72,7 +72,7 @@ extension TodayViewController {
     }
 }
 
-extension TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControllerDataSource {
+extension U17TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControllerDataSource {
     func numberOfControllersInTabPagerController() -> Int {
         return weekdayMapper.count
     }
@@ -90,7 +90,7 @@ extension TodayViewController: TYTabPagerControllerDelegate, TYTabPagerControlle
     }
 }
 
-extension TodayViewController {
+extension U17TodayViewController {
     private func buildNavbar() {
         fd.navigationItem.title = "今日更新"
         fd.navigationItem.rightBarButtonItem = FDBarButtonItem(customView: searchButton)

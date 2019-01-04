@@ -16,9 +16,10 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
     /// Sends a HTTP request.
     ///
     /// - Parameters:
-    ///   - token: the token for request
-    ///   - cacheable: cache respose or not
-    /// - Returns: observable sequence that contains response json
+    ///   - token: The token for request.
+    ///   - allowsURLCache: Allows cache respose or not.
+    ///   - ignoredKeys: The ignorable keys in parameters.
+    /// - Returns: Observable sequence that contains response json
     public func request(_ token: APITargetType, allowsURLCache: Bool = false, ignoredKeys: [String] = []) -> Observable<JSONObject> {
         return Observable.create { [weak base = base] observer in
             /// load cache first

@@ -22,7 +22,6 @@ extension Fate where Base: UIButton {
     
     public func setBackgroundImage(withURL imageURL: URL?,
                                    placeholder: UIImage? = nil,
-                                   failedImage: UIImage? = nil,
                                    shouldDecompressImages: Bool = true,
                                    shouldSetImageWithFadeAnimation: Bool = true) {
         SDImageCache.shared().config.shouldDecompressImages = shouldDecompressImages
@@ -44,7 +43,7 @@ extension Fate where Base: UIButton {
                                         }
                                         base.setBackgroundImage(image, for: .normal)
                                     } else {
-                                        base.setBackgroundImage((failedImage != nil) ? failedImage : placeholder, for: .normal)
+                                        base.setBackgroundImage(placeholder, for: .normal)
                                     }
         })
     }

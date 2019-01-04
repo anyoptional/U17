@@ -11,8 +11,8 @@ import Foundation
 class AppDiscoverTarget: NSObject {
     
     func getDiscoverViewController() -> UIViewController {
-        let vc = DiscoverViewController()
-        vc.reactor = DiscoverViewReactor()
+        let vc = U17DiscoverViewController()
+        vc.reactor = U17DiscoverViewReactor()
         return vc
     }
     

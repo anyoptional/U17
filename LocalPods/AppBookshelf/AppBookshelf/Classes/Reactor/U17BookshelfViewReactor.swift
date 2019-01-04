@@ -1,5 +1,5 @@
 //
-//  BookshelfViewReactor.swift
+//  U17BookshelfViewReactor.swift
 //  AppBookshelf
 //
 //  Created by Archer on 2018/11/20.
@@ -7,7 +7,7 @@
 
 import ReactorKit
 
-final class BookshelfViewReactor: Reactor {
+final class U17BookshelfViewReactor: Reactor {
     
     public typealias Action = NoAction
     

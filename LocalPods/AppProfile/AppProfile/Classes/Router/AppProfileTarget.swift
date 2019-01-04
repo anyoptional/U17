@@ -11,8 +11,8 @@ import Foundation
 class AppProfileTarget: NSObject {
     
     func getProfileViewController() -> UIViewController {
-        let vc = ProfileViewController()
-        vc.reactor = ProfileViewReactor()
+        let vc = U17ProfileViewController()
+        vc.reactor = U17ProfileViewReactor()
         return vc
     }
     

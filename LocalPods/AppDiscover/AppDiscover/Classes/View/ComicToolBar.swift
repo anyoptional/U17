@@ -15,7 +15,7 @@ class ComicToolBar: UIView {
 
     fileprivate lazy var ticketButton: UIButton = {
         let v = UIButton()
-        v.setTitle("投月票", for: .normal)
+        v.setTitle("投月票(0)", for: .normal)
         v.titleLabel?.font = .systemFont(ofSize: 15)
         v.setTitleColor(U17def.gray_AAAAAA, for: .normal)
         let image = UIImage(nameInBundle: "sendMonthTicket")?
@@ -27,7 +27,7 @@ class ComicToolBar: UIView {
     
     fileprivate lazy var commentButton: UIButton = {
         let v = UIButton()
-        v.setTitle("评论区", for: .normal)
+        v.setTitle("评论区(0)", for: .normal)
         v.titleLabel?.font = .systemFont(ofSize: 15)
         v.setTitleColor(U17def.gray_AAAAAA, for: .normal)
         let image = UIImage(nameInBundle: "toComment")?
@@ -41,7 +41,7 @@ class ComicToolBar: UIView {
         super.layoutSubviews()
         ticketButton.fate.setTitleAlignment(.right, withOffset: 3)
         commentButton.fate.setTitleAlignment(.right, withOffset: 3)
-        layer.fate.setShadowOffset(CGSize(width: 0, height: -0.7), at: .top)
+        layer.fate.setShadowOffset(CGSize(width: 0, height: -0.5), at: .top)
     }
     
     init() {
@@ -49,7 +49,7 @@ class ComicToolBar: UIView {
         
         // 不设置背景色阴影会包裹着subview
         backgroundColor = .white
-        layer.shadowOpacity = 0.15
+        layer.shadowOpacity = 0.3
         layer.shadowColor = UIColor.black.cgColor
         
         let buttons = [ticketButton, commentButton]
