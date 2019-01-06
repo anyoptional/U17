@@ -19,6 +19,10 @@ class ComicCategoryViewController: UIViewController {
     /// 当前分类
     var category = ""
     
+    override var prefersNavigationBarStyle: UINavigationBarStyle {
+        return .custom
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()

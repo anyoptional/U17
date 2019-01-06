@@ -23,9 +23,24 @@ class ComicDetailViewController: UIViewController {
         return .custom
     }
     
+    private lazy var tableView: UITableView = {
+        let v = UITableView(frame: .zero, style: .grouped)
+        v.showsVerticalScrollIndicator = false
+        v.backgroundColor = .clear
+        v.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        v.delegate = self
+        v.dataSource = self
+        if #available(iOS 11.0, *) {
+            v.contentInsetAdjustmentBehavior = .never
+        }
+        return v
+    }()
+    
+    // 顶部背景图
+    private lazy var coverImageView = ComicImageView()
+    // 顶部简介
     private lazy var previewView = ComicPreviewView()
-    private lazy var scrollView = UIScrollView()
-    private lazy var containerView = UIView()
+    // 底部工具条
     private lazy var toolBar = ComicToolBar()
     
     private lazy var placeholderView = U17PlaceholderView()
@@ -42,35 +57,32 @@ class ComicDetailViewController: UIViewController {
 extension ComicDetailViewController: View {
     func bind(reactor: ComicDetailViewReactor) {
         
+        weak var `self` = self
+        
         // MARK: 跳转分类
         previewView.rx.showsCategory
-            .subscribeNext(weak: self) { (self) in
-                return self.showsCategory
-            }.disposed(by: disposeBag)
+            .subscribe(onNext: { (category) in
+                self?.showsCategory(category)
+            }).disposed(by: disposeBag)
         
         // MARK: 查看其他作品
         previewView.rx.showsOtherWork
-            .subscribeNext(weak: self) { (self) in
-                return { _ in
-                    SwiftyHUD.show("其他作品是不可能给你看滴~")
-                }
-            }.disposed(by: disposeBag)
+            .subscribe(onNext: { _ in
+                SwiftyHUD.show("其他作品是不可能给你看滴~")
+            }).disposed(by: disposeBag)
+
         
         // MARK: 投月票
         toolBar.rx.sendTicket
-            .subscribeNext(weak: self) { (self) in
-                return { _ in
-                    SwiftyHUD.show("月票是不可能给投月票滴~")
-                }
-            }.disposed(by: disposeBag)
-        
+            .subscribe(onNext: {
+                SwiftyHUD.show("月票是不可能给投月票滴~")
+            }).disposed(by: disposeBag)
+  
         // MARK: 评论区
         toolBar.rx.sendComment
-            .subscribeNext(weak: self) { (self) in
-                return { _ in
-                    SwiftyHUD.show("评论是不可能给评论滴~")
-                }
-            }.disposed(by: disposeBag)
+            .subscribe(onNext: {
+                SwiftyHUD.show("评论是不可能给评论滴~")
+            }).disposed(by: disposeBag)
         
         // MARK: 请求数据
         rx.viewDidLoad
@@ -78,13 +90,31 @@ extension ComicDetailViewController: View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
-        // MARK: 绑定数据
+        // MARK: 绑定预览数据
         reactor.state
             .map { $0.previewViewDisplay }
             .filterNil()
             .bind(to: previewView.rx.display)
             .disposed(by: disposeBag)
+        
+        // MARK: 绑定背景图
+        reactor.state
+            .map { $0.imageViewDisplay }
+            .filterNil()
+            .bind(to: coverImageView.rx.display)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension ComicDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.textLabel?.text = "\(indexPath.row)"
+        return cell
     }
 }
 
@@ -155,31 +185,21 @@ extension ComicDetailViewController {
             make.height.equalTo(55)
         }
         
-        view.addSubview(previewView)
-        previewView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
-            // 60是剩余部分
-            // 155 + fd.fullNavbarHeight是图片高度
-            make.height.equalTo(155 + fd.fullNavbarHeight + 60)
+        view.addSubview(coverImageView)
+        coverImageView.snp.makeConstraints { (make) in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(165 + fd.fullNavbarHeight)
         }
-        
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
-        scrollView.contentInset = UIEdgeInsets(top: 155 + 60, left: 0, bottom: 0, right: 0)
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
+
+        tableView.backgroundView = previewView
+        // 60是剩余部分, 155 + fd.fullNavbarHeight是图片高度
+        tableView.contentInset = UIEdgeInsets(top: 155 + 60, left: 0, bottom: 0, right: 0)
+        tableView.setContentOffset(CGPoint(x: 0, y: -(155 + 60)), animated: false)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
             make.top.equalTo(fd.fullNavbarHeight)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(toolBar.snp.top)
         }
-        
-//        scrollView.addSubview(containerView)
-//        containerView.snp.makeConstraints { (make) in
-//            make.edges.width.equalToSuperview()
-//            make.height.greaterThanOrEqualTo(scrollView).offset(1)
-//        }
-        
-        
     }
 }

@@ -10,19 +10,9 @@ import UIKit
 import YYKit
 import RxSwift
 import RxCocoa
-import SDWebImage // 封装一下会好点儿
 import RxBindable
 
 class ComicPreviewView: UIView {
-
-    private lazy var coverIv: UIImageView = {
-        let v = UIImageView()
-        v.clipsToBounds = true
-        v.contentMode = .scaleAspectFill
-        v.image = UIImage(nameInBundle: "detailDefault")
-        addSubview(v)
-        return v
-    }()
 
     private lazy var radiusView: UIView = {
         let v = UIView()
@@ -31,7 +21,7 @@ class ComicPreviewView: UIView {
         v.layer.masksToBounds = true
         addSubview(v)
         return v
-    }() // 234 247 250 | 90 197 214
+    }()
     
     private lazy var comicIv: UIImageView = {
         let v = UIImageView()
@@ -53,9 +43,8 @@ class ComicPreviewView: UIView {
         return v
     }()
     
-    private lazy var titleLabel: YYLabel = {
-        let v = YYLabel()
-        v.text = "光之契约"
+    private lazy var titleLabel: UILabel = {
+        let v = UILabel()
         v.layer.shadowOffset = CGSize(width: 2, height: 2)
         v.font = UIFont.boldSystemFont(ofSize: 25)
         v.layer.shadowOpacity = 0.2
@@ -68,7 +57,6 @@ class ComicPreviewView: UIView {
     
     fileprivate lazy var detailLabel: YYLabel = {
         let v = YYLabel()
-        v.text = "美盛游戏\n\n热度值 256.6万"
         v.layer.shadowOffset = CGSize(width: 2, height: 2)
         v.layer.shadowOpacity = 0.2
         v.textAlignment = .left
@@ -79,22 +67,19 @@ class ComicPreviewView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
-        coverIv.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.bottom.equalTo(-45) // 算上15个点的圆角
-        }
+
         radiusView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(60)
+            make.top.equalTo(155)
+            make.height.equalTo(500) // 加长一点
+            make.left.right.equalToSuperview()
         }
         comicIv.snp.makeConstraints { (make) in
+            make.top.equalTo(20)
             make.left.equalTo(20)
-            make.bottom.equalTo(-10)
             make.size.equalTo(CGSize(width: 150, height: 190))
         }
         tagLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(comicIv).offset(-10)
+            make.bottom.equalTo(comicIv).offset(-7)
             make.left.equalTo(comicIv.snp.right).offset(10)
             make.right.equalTo(-20)
         }
@@ -123,23 +108,7 @@ extension ComicPreviewView: Bindable {
         detailLabel.attributedText = presenter.detailAttributedText
         
         tagLabel.attributedText = presenter.tagAttributedText
-        
-        coverIv.sd_setImage(with: presenter.backgroundImageURL,
-                            placeholderImage: UIImage(nameInBundle: "detailDefault"),
-                            options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
-                                if let image = image, let url = url {
-                                    // 下载的 更新缓存
-                                    if cacheType == .none {
-                                        let image = image.byBlur(withTint: presenter.backgroundImageColor)
-                                        self?.coverIv.image = image
-                                        SDImageCache.shared().store(image, forKey: url.absoluteString, completion: nil)
-                                    } else {
-                                        // 非下载直接设置
-                                        self?.coverIv.image = image
-                                    }
-                                }
-        }
-        
+            
         comicIv.fate.setImage(withURL: presenter.imageURL, placeholder: UIImage(nameInBundle: "classify_placeholder"))
     }
 }

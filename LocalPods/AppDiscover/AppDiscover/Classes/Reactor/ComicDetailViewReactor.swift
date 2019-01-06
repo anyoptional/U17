@@ -33,6 +33,7 @@ final class ComicDetailViewReactor: Reactor {
     struct State {
         var error: APIError?
         var staticResponse: StaticResponse?
+        var imageViewDisplay: ComicImageViewDisplay?
         var previewViewDisplay: ComicPreviewViewDisplay?
         var placeholderState = U17PlaceholderView.State.loading
     }
@@ -68,6 +69,8 @@ final class ComicDetailViewReactor: Reactor {
         case .setStaticResponse(let response):
             // 记录response
             state.staticResponse = response
+            // 背景图数据
+            state.imageViewDisplay = ComicImageViewDisplay(rawValue: response)
             // 预览层数据
             state.previewViewDisplay = ComicPreviewViewDisplay(rawValue: response)
         }

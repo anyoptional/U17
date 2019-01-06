@@ -12,8 +12,6 @@ import RxBindable
 struct ComicPreviewViewPresenter: Presentable {
     
     let imageURL: URL?
-    let backgroundImageURL: URL?
-    let backgroundImageColor: UIColor
     let titleText: String
     let detailAttributedText: NSAttributedString?
     let tagAttributedText: NSAttributedString?
@@ -26,36 +24,26 @@ struct ComicPreviewViewPresenter: Presentable {
         let coverURLString = comic?.cover
         let originalURLString = (comic?.ori).filterNil()
         imageURL = URL(string: coverURLString.filterNil(originalURLString))
-        
-        // wide不存在取cover，cover也没有取ori
-        let wideURLString = comic?.wideCover
-        if wideURLString?.isBlank ?? true {
-            backgroundImageURL = imageURL
-        } else {
-            backgroundImageURL = URL(string: wideURLString.filterNil())
-        }
-        
-        if let wideColorString = comic?.wideColor, let color = UIColor(hexString: wideColorString) {
-            backgroundImageColor = color
-        } else {
-            backgroundImageColor = UIColor(white: 0.84, alpha: 0.36)
-        }        
-
+    
         let comicName = comic?.name
         titleText = comicName.filterNil()
         
         // TODO: 寻找表示热度值的字段
-        let authorNmae = comic?.author?.name
-        let detailText = authorNmae.filterNil() + "\n\n" + "热度值 281.9万"
-        detailAttributedText = NSAttributedString(string: detailText, attributes: [.foregroundColor : UIColor.white,
-                                                                                   .font : UIFont.systemFont(ofSize: 14)])
+        let authorNmae = (comic?.author?.name).filterNil()
+        let detailText = authorNmae + "\n\n" + "热度值 281.9万"
+        let detailAttrText = NSMutableAttributedString(string: detailText, attributes: [.foregroundColor : UIColor.white,
+                                                                                        .font : UIFont.systemFont(ofSize: 14)])
+        detailAttrText.setTextHighlight((authorNmae as NSString).rangeOfAll(), color: nil, backgroundColor: nil, userInfo: nil)
+        detailAttrText.lineSpacing = -3
+        detailAttributedText = detailAttrText.fate.clone()
         
+        // 最多取三个
         let attrText = NSMutableAttributedString()
-        for tagName in (comic?.theme_ids).filterNil([]) {
+        for tagName in (comic?.theme_ids).filterNil([]).suffix(3) {
             let tagFillColor = U17def.green_EAF7FA
             let tagText = NSMutableAttributedString(string: tagName)
-            tagText.insertString("   ", at: 0)
-            tagText.appendString("   ")
+            tagText.insertString("    ", at: 0)
+            tagText.appendString("    ")
             tagText.color = U17def.green_5AC5D6
             tagText.font = UIFont.systemFont(ofSize: 13)
             tagText.setTextBinding(YYTextBinding(deleteConfirm: false), range: (tagText.string as NSString).rangeOfAll())
@@ -63,6 +51,7 @@ struct ComicPreviewViewPresenter: Presentable {
             border.lineJoin = .bevel
             border.insets = UIEdgeInsets(top: -4, left: -6, bottom: -4, right: -6)
             tagText.setTextBackgroundBorder(border, range: (tagText.string as NSString).range(of: tagName))
+            tagText.setTextHighlight((tagText.string as NSString).rangeOfAll(), color: nil, backgroundColor: nil, userInfo: nil)
             attrText.append(tagText)
         }
         

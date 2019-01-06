@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "370AE74C01AF3063C52B3B8467198C28"
+               BlueprintIdentifier = "79C49AB7C53BB2D4E1FDBB2349698424"
                BlueprintName = "FOLDin"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "FOLDin.framework">
