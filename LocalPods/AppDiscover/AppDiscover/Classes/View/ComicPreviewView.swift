@@ -27,6 +27,7 @@ class ComicPreviewView: UIView {
         let v = UIImageView()
         v.layer.cornerRadius = 10
         v.layer.borderWidth = 3.5
+        v.backgroundColor = .white
         v.layer.masksToBounds = true
         v.contentMode = .scaleAspectFit
         v.layer.borderColor = UIColor.white.cgColor
@@ -65,13 +66,25 @@ class ComicPreviewView: UIView {
         return v
     }()
     
+    private lazy var eggIv: UIImageView = {
+        let v = UIImageView()
+        v.layer.masksToBounds = true
+        v.contentMode = .scaleAspectFit
+        v.image = UIImage(nameInBundle: "boutique_nomore")
+        radiusView.addSubview(v)
+        return v
+    }()
+    
     init() {
         super.init(frame: .zero)
 
         radiusView.snp.makeConstraints { (make) in
             make.top.equalTo(155)
-            make.height.equalTo(500) // 加长一点
-            make.left.right.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+        }
+        eggIv.snp.makeConstraints { (make) in
+            make.top.equalTo(70)
+            make.left.right.bottom.equalToSuperview()
         }
         comicIv.snp.makeConstraints { (make) in
             make.top.equalTo(20)

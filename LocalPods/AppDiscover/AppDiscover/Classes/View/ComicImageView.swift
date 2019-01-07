@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YYKit
 import RxSwift
 import RxCocoa
 import RxBindable
@@ -17,10 +18,21 @@ class ComicImageView: UIImageView {
         super.init(frame: .zero)
         clipsToBounds = true
         contentMode = .scaleAspectFill
-        image = UIImage(nameInBundle: "detailDefault")
+        image = UIImage(color: UIColor(rgb: 0x5F5F5F))
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ComicImageView {
+    private func addFadeAnimation() {
+        if !isHighlighted { layer.removeAnimation(forKey: "_KFadeAnimationKey") }
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.type = .fade
+        layer.add(transition, forKey: "_KFadeAnimationKey")
     }
 }
 
@@ -29,20 +41,38 @@ extension ComicImageView: Bindable {
         
         let presenter = display.state.presenter
         
-        sd_setImage(with: presenter.backgroundImageURL,
-                    placeholderImage: UIImage(nameInBundle: "detailDefault"),
-                    options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
-                        if let image = image, let url = url {
-                            // 下载的 更新缓存
-                            if cacheType == .none {
-                                let image = image.byBlur(withTint: presenter.backgroundImageColor)
-                                self?.image = image
-                                SDImageCache.shared().store(image, forKey: url.absoluteString, completion: nil)
+        // 更换一下缓存的key 避免影响到cover
+        if let imageURL = presenter.backgroundImageURL {
+            let key = "_comic_bg_" + imageURL.absoluteString
+            // hit cache
+            if let image = SDImageCache.shared().imageFromCache(forKey: key) {
+                addFadeAnimation()
+                self.image = image
+            } else {
+                sd_setImage(with: imageURL,
+                            placeholderImage: UIImage(nameInBundle: "detailDefault"),
+                            options: [.avoidAutoSetImage])
+                { [weak self] (image, error, cacheType, url) in
+                    if let image = image {
+                        // 下载的 更新缓存
+                        if cacheType == .none {
+                            var finalImage: UIImage?
+                            if let color = presenter.backgroundImageColor {
+                                finalImage = image.fate.setColorFilter(color)
                             } else {
-                                // 非下载直接设置
-                                self?.image = image
+                                finalImage = image.byBlurSoft()
                             }
+                            self?.addFadeAnimation()
+                            self?.image = finalImage
+                            SDImageCache.shared().store(finalImage, forKey: key, completion: nil)
+                        } else {
+                            // 非下载直接设置
+                            self?.image = image
+                            self?.addFadeAnimation()
                         }
+                    }
+                }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C80C6325977C88C5430DB3078041983"
+               BlueprintIdentifier = "8D5AC36398636CF62A72B81F4145BFEB"
                BuildableName = "FOLDin.bundle"
                BlueprintName = "FOLDin-FOLDin"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C80C6325977C88C5430DB3078041983"
+            BlueprintIdentifier = "8D5AC36398636CF62A72B81F4145BFEB"
             BuildableName = "FOLDin.bundle"
             BlueprintName = "FOLDin-FOLDin"
             ReferencedContainer = "container:Pods.xcodeproj">

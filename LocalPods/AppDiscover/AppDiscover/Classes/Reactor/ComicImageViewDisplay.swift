@@ -10,7 +10,7 @@ import RxBindable
 struct ComicImageViewPresenter: Presentable {
     
     let backgroundImageURL: URL?
-    let backgroundImageColor: UIColor
+    let backgroundImageColor: UIColor?
     
     init(rawValue: ComicStaticDetailResp.DataBean.ReturnDataBean) {
         
@@ -30,9 +30,9 @@ struct ComicImageViewPresenter: Presentable {
         }
         
         if let wideColorString = comic?.wideColor, let color = UIColor(hexString: wideColorString) {
-            backgroundImageColor = color
+            backgroundImageColor = color.withAlphaComponent(0.8)
         } else {
-            backgroundImageColor = UIColor(white: 0.84, alpha: 0.36)
+            backgroundImageColor = nil
         }
     }
 }

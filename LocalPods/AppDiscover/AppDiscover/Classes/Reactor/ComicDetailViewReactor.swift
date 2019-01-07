@@ -13,6 +13,7 @@ import ReactorKit
 
 final class ComicDetailViewReactor: Reactor {
     
+    typealias Section = ComicDetailSection
     typealias StaticObject = ComicStaticDetailResp
     typealias StaticResponse = ComicStaticDetailResp.DataBean.ReturnDataBean
     
@@ -28,10 +29,12 @@ final class ComicDetailViewReactor: Reactor {
     enum Mutation {
         case setError(APIError)
         case setStaticResponse(StaticResponse)
+//        case setGuessLikeResponse
     }
     
     struct State {
         var error: APIError?
+        var sections = [Section]()
         var staticResponse: StaticResponse?
         var imageViewDisplay: ComicImageViewDisplay?
         var previewViewDisplay: ComicPreviewViewDisplay?
@@ -73,6 +76,10 @@ final class ComicDetailViewReactor: Reactor {
             state.imageViewDisplay = ComicImageViewDisplay(rawValue: response)
             // 预览层数据
             state.previewViewDisplay = ComicPreviewViewDisplay(rawValue: response)
+            // fake data
+            state.sections.append(.chapter(items: Array(repeating: ComicChapterCellDisplay(rawValue: "hello world"), count: 10).map { .chapter(item: $0) }))
+            state.sections.append(.guessLike(items: Array(repeating: ComicGuessLikeCellDisplay(rawValue: "really done"), count: 10).map { .guessLike(item: $0) }))
+
         }
         
         return state

@@ -13,6 +13,7 @@ import SnapKit
 import RxSwiftExt
 import ReactorKit
 import RxAppState
+import RxDataSources
 
 class ComicDetailViewController: UIViewController {
 
@@ -27,9 +28,9 @@ class ComicDetailViewController: UIViewController {
         let v = UITableView(frame: .zero, style: .grouped)
         v.showsVerticalScrollIndicator = false
         v.backgroundColor = .clear
-        v.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        v.delegate = self
-        v.dataSource = self
+        v.separatorStyle = .none
+        v.fate.register(cellClass: ComicChapterCell.self)
+        v.fate.register(cellClass: ComicGuessLikeCell.self)
         if #available(iOS 11.0, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
@@ -45,6 +46,8 @@ class ComicDetailViewController: UIViewController {
     
     private lazy var placeholderView = U17PlaceholderView()
     
+    private lazy var dataSource = tableViewSectionedReloadDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
@@ -57,39 +60,31 @@ class ComicDetailViewController: UIViewController {
 extension ComicDetailViewController: View {
     func bind(reactor: ComicDetailViewReactor) {
         
+        // MARK: 设置代理
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+
+        // 每个都去写[weak self]
+        // 还是挺烦的，简化一下
         weak var `self` = self
         
-        // MARK: 跳转分类
-        previewView.rx.showsCategory
-            .subscribe(onNext: { (category) in
-                self?.showsCategory(category)
-            }).disposed(by: disposeBag)
-        
-        // MARK: 查看其他作品
-        previewView.rx.showsOtherWork
-            .subscribe(onNext: { _ in
-                SwiftyHUD.show("其他作品是不可能给你看滴~")
-            }).disposed(by: disposeBag)
-
-        
-        // MARK: 投月票
-        toolBar.rx.sendTicket
-            .subscribe(onNext: {
-                SwiftyHUD.show("月票是不可能给投月票滴~")
-            }).disposed(by: disposeBag)
-  
-        // MARK: 评论区
-        toolBar.rx.sendComment
-            .subscribe(onNext: {
-                SwiftyHUD.show("评论是不可能给评论滴~")
-            }).disposed(by: disposeBag)
+        let viewDidLoad = rx.viewDidLoad.share(replay: 1, scope: .forever)
         
         // MARK: 请求数据
-        rx.viewDidLoad
-            .map { [weak self] _ in Reactor.Action.getStaticDetail(self?.comicId) }
+        viewDidLoad
+            .map { Reactor.Action.getStaticDetail(self?.comicId) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        viewDidLoad
+            .map { Reactor.Action.getGuessLikeList(self?.comicId) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        viewDidLoad
+            .map { Reactor.Action.getRealtimeDetail(self?.comicId) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         // MARK: 绑定预览数据
         reactor.state
             .map { $0.previewViewDisplay }
@@ -103,18 +98,119 @@ extension ComicDetailViewController: View {
             .filterNil()
             .bind(to: coverImageView.rx.display)
             .disposed(by: disposeBag)
+        
+        // MARK: 绑定数据源
+        reactor.state
+            .map { $0.sections }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        // MARK: 处理出错
+        reactor.state
+            .map {$0.error }
+            .filterNil()
+            .subscribe(onNext: { (error) in
+                SwiftyHUD.show(error.message)
+            }).disposed(by: disposeBag)
+        
+        // MARK: 跳转分类
+        previewView.rx.showsCategory
+            .subscribe(onNext: { (category) in
+                self?.showsCategory(category)
+            }).disposed(by: disposeBag)
+        
+        // MARK: 查看其他作品
+        previewView.rx.showsOtherWork
+            .subscribe(onNext: { _ in
+                SwiftyHUD.show("其他作品是不可能给你看滴~")
+            }).disposed(by: disposeBag)
+        
+        // MARK: 投月票
+        toolBar.rx.sendTicket
+            .subscribe(onNext: {
+                SwiftyHUD.show("月票是不可能给投月票滴~")
+            }).disposed(by: disposeBag)
+        
+        // MARK: 评论区
+        toolBar.rx.sendComment
+            .subscribe(onNext: {
+                SwiftyHUD.show("评论是不可能给评论滴~")
+            }).disposed(by: disposeBag)
+    }
+    
+    private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<ComicDetailSection> {
+        return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, sectionItem) in
+            switch sectionItem {
+            case .chapter(item: let display):
+                let cell: ComicChapterCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
+                
+            case .guessLike(item: let display):
+                let cell: ComicGuessLikeCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.display = display
+                return cell
+            }
+        })
     }
 }
 
-extension ComicDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+extension ComicDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch dataSource[indexPath] {
+        case .chapter: return 45
+        case .guessLike: return 45
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = "\(indexPath.row)"
-        return cell
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch dataSource[section] {
+        case .chapter:
+            return UIView()
+            
+        case .guessLike:
+            let view = YYLabel()
+            view.text = "猜你喜欢"
+            view.textAlignment = .left
+            view.backgroundColor = .white
+            view.textColor = U17def.black_333333
+            view.font = UIFont.boldSystemFont(ofSize: 18)
+            view.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 0, right: 0)
+            return view
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch dataSource[section] {
+        case .chapter: return 0.01
+        case .guessLike: return 45
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch dataSource[section] {
+        case .chapter:
+            let view = UIView()
+            view.backgroundColor = U17def.gray_F2F2F2
+            return view
+            
+        case .guessLike:
+            let view = UIButton()
+            view.backgroundColor = .white
+            view.setTitle("内容举报", for: .normal)
+            view.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+            view.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+            view.setTitleColor(U17def.gray_999999.withAlphaComponent(0.7), for: .normal)
+            view.addTarget(self, action: #selector(reportFeedback), for: .touchUpInside)
+            return view
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch dataSource[section] {
+        case .chapter: return 6
+        case .guessLike: return 35
+        }
     }
 }
 
@@ -138,6 +234,10 @@ extension ComicDetailViewController {
         vc.category = category
         vc.reactor = ComicCategoryViewReactor()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func reportFeedback() {
+        SwiftyHUD.show("举报是不可能举报的嘛")
     }
 }
 
@@ -174,6 +274,13 @@ extension ComicDetailViewController {
         // 这个本身就是失效的 写不写也就那样了
         automaticallyAdjustsScrollViewInsets = false
         
+        view.addSubview(coverImageView)
+        coverImageView.snp.makeConstraints { (make) in
+            make.top.left.right.equalToSuperview()
+            // 附加的10pt是用来显示圆角的
+            make.height.equalTo(155 + 10 + fd.fullNavbarHeight)
+        }
+        
         view.addSubview(toolBar)
         toolBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -185,17 +292,12 @@ extension ComicDetailViewController {
             make.height.equalTo(55)
         }
         
-        view.addSubview(coverImageView)
-        coverImageView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(165 + fd.fullNavbarHeight)
-        }
-
         tableView.backgroundView = previewView
         // 60是剩余部分, 155 + fd.fullNavbarHeight是图片高度
         tableView.contentInset = UIEdgeInsets(top: 155 + 60, left: 0, bottom: 0, right: 0)
         tableView.setContentOffset(CGPoint(x: 0, y: -(155 + 60)), animated: false)
-        view.addSubview(tableView)
+        // 避免挡住阴影
+        view.insertSubview(tableView, belowSubview: toolBar)
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(fd.fullNavbarHeight)
             make.left.right.equalToSuperview()
