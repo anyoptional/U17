@@ -5,7 +5,7 @@
 //  Created by Archer on 2018/12/10.
 //
 
-import Foundation
+import UIKit
 
 @objc protocol FDNavigationItemDelegate: NSObjectProtocol {
     func navigationItemDidChange(_ item: FDNavigationItem)

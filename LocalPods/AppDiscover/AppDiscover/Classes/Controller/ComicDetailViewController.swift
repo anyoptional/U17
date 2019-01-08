@@ -166,10 +166,7 @@ extension ComicDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch dataSource[indexPath] {
         case .chapter: return 45
-        case .guessLike(item: let display):
-            return tableView.fate.heightForRowAt(indexPath, cellClass: ComicGuessLikeCell.self, configuration: { (cell) in
-                cell.display = display
-            })
+        case .guessLike: return 180
         }
     }
     

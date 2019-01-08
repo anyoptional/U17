@@ -33,8 +33,8 @@ class ComicGuessLikeComponentView: UIView {
         super.init(frame: .zero)
         
         imgView.snp.makeConstraints { (make) in
-            make.top.left.width.equalToSuperview()
-            make.height.equalTo(imgView.snp.width).multipliedBy(1.4)
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(140)
         }
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imgView.snp.bottom).offset(10)
