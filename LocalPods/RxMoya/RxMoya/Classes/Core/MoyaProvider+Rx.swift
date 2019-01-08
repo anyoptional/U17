@@ -7,6 +7,7 @@
 
 import Moya
 import RxSwift
+import SwiftyJSON
 
 /// Extends reactive proxy
 extension MoyaProvider: ReactiveCompatible {}
@@ -36,10 +37,21 @@ public extension Reactive where Base: Moya.MoyaProvider<Moya.MultiTarget> {
                         let jsonObject = try response.mapString()
                         /// store in cache
                         if allowsURLCache { Cache.setObject(jsonObject, forTarget: token, ignoredKeys: ignoredKeys) }
-                        /// emit element
-                        observer.onNext(jsonObject)
-                        /// unsubscribe
-                        observer.onCompleted()
+                        /////////////////////////////////////////////////////////////////////////////////////////////
+                        /// NOTE: 业务相关的错误处理
+                        /////////////////////////////////////////////////////////////////////////////////////////////
+                        let json = JSON(parseJSON: jsonObject)
+                        // NOTE: 目前观察到stateCode不等于1且有错误描述时视为U17定义的错误
+                        if let data = json["data"].dictionary,
+                            let errorMessage = data["message"]?.string,
+                            let stateCode = data["stateCode"]?.int, stateCode != 1 {
+                            observer.onError(APIError.u17Predefined(errorMessage))
+                        } else {
+                            /// emit element
+                            observer.onNext(jsonObject)
+                            /// unsubscribe
+                            observer.onCompleted()
+                        }
                     } catch MoyaError.statusCode(let response) {
                         observer.onError(APIError.statusCode(response.statusCode))
                     } catch MoyaError.stringMapping {

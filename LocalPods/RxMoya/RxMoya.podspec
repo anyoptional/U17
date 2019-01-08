@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
         cs.dependency 'YYKit', '~> 1.0.9'
         cs.dependency 'RxSwift', '~> 4.1.2'
         cs.dependency 'RxOptional', '~> 3.4.0'
+        cs.dependency 'SwiftyJSON', '~> 4.2.0'
     end
     
 end

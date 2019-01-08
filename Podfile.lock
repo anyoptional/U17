@@ -635,6 +635,7 @@ PODS:
     - Moya (~> 11.0.2)
     - RxOptional (~> 3.4.0)
     - RxSwift (~> 4.1.2)
+    - SwiftyJSON
     - YYKit (~> 1.0.9)
   - RxOptional (3.4.0):
     - RxCocoa (~> 4.0)
@@ -662,6 +663,7 @@ PODS:
   - SwiftMessages (6.0.1):
     - SwiftMessages/App (= 6.0.1)
   - SwiftMessages/App (6.0.1)
+  - SwiftyJSON (4.2.0)
   - Timepiece (1.3.1)
   - TYPagerController (2.1.2)
   - "UITableView+FDTemplateLayoutCell (1.6)"
@@ -705,6 +707,7 @@ SPEC REPOS:
     - SkeletonView
     - SnapKit
     - SwiftMessages
+    - SwiftyJSON
     - Timepiece
     - TYPagerController
     - "UITableView+FDTemplateLayoutCell"
@@ -754,7 +757,7 @@ SPEC CHECKSUMS:
   RxBindable: a92782b2c078658b0aba6cbf70c0ca3728ef5f3b
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxMoya: 17a7b84e16d8b8522b6113999aea558ab62807ec
+  RxMoya: 26a3bc8402a148d2ded6c5d17a7a097bee4abf20
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
   RxSkeleton: b5a29725d68b68cbfdba63214a7f81ef5a2dcb56
   RxSwift: e49536837d9901277638493ea537394d4b55f570
@@ -764,6 +767,7 @@ SPEC CHECKSUMS:
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftMessages: 42ed7b6e1f2f1ead9ee667dc61a0ae87e4f49570
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   Timepiece: c0760ec0e545697d86b80424dcd2b4d5ef66cf51
   TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f

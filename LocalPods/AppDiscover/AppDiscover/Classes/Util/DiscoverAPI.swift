@@ -22,9 +22,9 @@ extension DiscoverAPI: APITargetType {
         switch self {
         case .getStaticDetail: return "comic/detail_static_new"
             
-        case .getRealtimeDetail: return "comic/guessLike"
+        case .getGuessLikeList: return "comic/guessLike"
             
-        case .getGuessLikeList: return "comic/detail_realtime"
+        case .getRealtimeDetail: return "comic/detail_realtime"
         }
     }
     

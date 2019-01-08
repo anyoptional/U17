@@ -14,15 +14,19 @@ class FDBarBackground: UIView {
     
     var shadowImage: UIImage? {
         didSet {
-            shadowImageView.image = shadowImage
-            shadowImageView.isHidden = shadowImage == nil
+            if shadowImage != oldValue {
+                shadowImageView.image = shadowImage
+                shadowImageView.isHidden = shadowImage == nil
+            }
         }
     }
     
     var backgroundImage: UIImage? {
         didSet {
-            backgroundImageView.image = backgroundImage
-            backgroundImageView.isHidden = backgroundImage == nil
+            if backgroundImage != oldValue {
+                backgroundImageView.image = backgroundImage
+                backgroundImageView.isHidden = backgroundImage == nil
+            }
         }
     }
     
@@ -52,7 +56,6 @@ class FDBarBackground: UIView {
     init() {
         super.init(frame: .zero)
         _setupViewHierarchy()
-        _configureInitialize()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,10 +67,5 @@ extension FDBarBackground {
     private func _setupViewHierarchy() {
         addSubview(shadowImageView)
         addSubview(backgroundImageView)
-    }
-    
-    private func _configureInitialize() {
-        backgroundColor = UIColor(rgbValue: 0xF9F9F9)
-        shadowImageView.image = UIImage.create(UIColor(rgbValue: 0xE3E3E3))
     }
 }

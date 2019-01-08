@@ -20,18 +20,30 @@ public class FDNavigationItem: NSObject {
     
     // Title when topmost on the stack. default is nil
     public var title: String? {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            if title != oldValue {
+                delegate?.navigationItemDidChange(self)
+            }
+        }
     }
     
     // Custom view to use in lieu of a title. May be sized horizontally. Only used when item is topmost on the stack.
     public var titleView: UIView? {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            if titleView != oldValue {
+                delegate?.navigationItemDidChange(self)
+            }
+        }
     }
     
     // TitleView相对于navigationItem.leftBarButtonItems/navigationItem.rightBarButtonItems的边距，
     // left对应leftBarButtonItems，right对应rightBarButtonItems
     public var titleViewMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            if titleViewMargin != oldValue {
+                delegate?.navigationItemDidChange(self)
+            }
+        }
     }
     
     // Bar button item to use for the back button in the child navigation item.
@@ -44,7 +56,11 @@ public class FDNavigationItem: NSObject {
     
     // If YES, this navigation item will hide the back button when it's on top of the stack.
     public var hidesBackButton: Bool = false {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            if hidesBackButton != oldValue {
+                delegate?.navigationItemDidChange(self)
+            }
+        }
     }
     
     /* By default, the leftItemsSupplementBackButton property is NO. In this case,
@@ -53,7 +69,11 @@ public class FDNavigationItem: NSObject {
      set leftItemsSupplementBackButton to YES.
      */
     public var leftItemsSupplementBackButton: Bool = false {
-        didSet { delegate?.navigationItemDidChange(self) }
+        didSet {
+            if leftItemsSupplementBackButton != oldValue {
+                delegate?.navigationItemDidChange(self)
+            }
+        }
     }
     
     /* Use these properties to set multiple items in a navigation bar.
@@ -70,24 +90,40 @@ public class FDNavigationItem: NSObject {
      */
     public var leftBarButtonItems: [FDBarButtonItem]? {
         get { return _leftBarButtonItems }
-        set { setLeftBarButtonItems(newValue, animated: false) }
+        set {
+            if leftBarButtonItems != newValue {
+                setLeftBarButtonItems(newValue, animated: false)
+            }
+        }
     }
     
     public var rightBarButtonItems: [FDBarButtonItem]?  {
         get { return _rightBarButtonItems }
-        set { setRightBarButtonItems(newValue, animated: false) }
+        set {
+            if rightBarButtonItems != newValue {
+                setRightBarButtonItems(newValue, animated: false)
+            }
+        }
     }
     
     // Some navigation items want to display a custom left or right item when they're on top of the stack.
     // A custom left item replaces the regular back button unless you set leftItemsSupplementBackButton to YES
     public var leftBarButtonItem: FDBarButtonItem? {
         get { return _leftBarButtonItem }
-        set { setLeftBarButton(newValue, animated: false) }
+        set {
+            if leftBarButtonItem != newValue {
+                setLeftBarButton(newValue, animated: false)
+            }
+        }
     }
     
     public var rightBarButtonItem: FDBarButtonItem? {
         get { return _rightBarButtonItem }
-        set { setRightBarButton(newValue, animated: false) }
+        set {
+            if rightBarButtonItem != newValue {
+                setRightBarButton(newValue, animated: false)
+            }
+        }
     }
      
     private lazy var _leftBarButtonItem: FDBarButtonItem? = nil

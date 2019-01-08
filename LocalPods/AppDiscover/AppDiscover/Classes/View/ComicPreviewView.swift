@@ -68,6 +68,7 @@ class ComicPreviewView: UIView {
     
     private lazy var eggIv: UIImageView = {
         let v = UIImageView()
+        v.alpha = 0
         v.layer.masksToBounds = true
         v.contentMode = .scaleAspectFit
         v.image = UIImage(nameInBundle: "boutique_nomore")
@@ -77,7 +78,7 @@ class ComicPreviewView: UIView {
     
     init() {
         super.init(frame: .zero)
-
+        
         radiusView.snp.makeConstraints { (make) in
             make.top.equalTo(155)
             make.left.right.bottom.equalToSuperview()
@@ -104,6 +105,13 @@ class ComicPreviewView: UIView {
         detailLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(titleLabel)
             make.bottom.equalTo(radiusView.snp.top).offset(-12)
+        }
+        
+        // 彩蛋嘛 当然要晚一点出来了
+        DispatchQueue.main.asyncAfter(deadline: 5) {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.eggIv.alpha = 1
+            })
         }
     }
     required init?(coder aDecoder: NSCoder) {

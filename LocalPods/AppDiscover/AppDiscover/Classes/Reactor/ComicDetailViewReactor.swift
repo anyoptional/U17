@@ -16,6 +16,8 @@ final class ComicDetailViewReactor: Reactor {
     typealias Section = ComicDetailSection
     typealias StaticObject = ComicStaticDetailResp
     typealias StaticResponse = ComicStaticDetailResp.DataBean.ReturnDataBean
+    typealias GuessLikeObject = ComicGuessLikeResp
+    typealias GuessLikeResponse = ComicGuessLikeResp.DataBean.ReturnDataBean
     
     enum Action {
         // 获取默认详情
@@ -29,13 +31,14 @@ final class ComicDetailViewReactor: Reactor {
     enum Mutation {
         case setError(APIError)
         case setStaticResponse(StaticResponse)
-//        case setGuessLikeResponse
+        case setGuessLikeResponse(GuessLikeResponse)
     }
     
     struct State {
         var error: APIError?
         var sections = [Section]()
         var staticResponse: StaticResponse?
+        var guessLikeResponse: GuessLikeResponse?
         var imageViewDisplay: ComicImageViewDisplay?
         var previewViewDisplay: ComicPreviewViewDisplay?
         var placeholderState = U17PlaceholderView.State.loading
@@ -63,6 +66,8 @@ final class ComicDetailViewReactor: Reactor {
         case .setError(let error):
             state.error = error
             // 没网显示占位图
+            // 这个就不可能没有章节列表数据了
+            // empty的状态不用管了
             if APIError.networkRelated.contains(error)  {
                 state.placeholderState = .failed
             } else {
@@ -77,9 +82,13 @@ final class ComicDetailViewReactor: Reactor {
             // 预览层数据
             state.previewViewDisplay = ComicPreviewViewDisplay(rawValue: response)
             // fake data
-            state.sections.append(.chapter(items: Array(repeating: ComicChapterCellDisplay(rawValue: "hello world"), count: 10).map { .chapter(item: $0) }))
-            state.sections.append(.guessLike(items: Array(repeating: ComicGuessLikeCellDisplay(rawValue: "really done"), count: 10).map { .guessLike(item: $0) }))
-
+            state.sections.insert(.chapter(items: Array(repeating: ComicChapterCellDisplay(rawValue: "hello world"), count: 10).map { .chapter(item: $0) }), at: 0)
+            
+        case .setGuessLikeResponse(let response):
+            // 记录response
+            state.guessLikeResponse = response
+            // 添加table view 的 section
+            state.sections.append(.guessLike(items: [.guessLike(item: ComicGuessLikeCellDisplay(rawValue: response))]))
         }
         
         return state
@@ -95,6 +104,7 @@ extension ComicDetailViewReactor {
             .map { $0.data?.returnData }
             .filterNil()
             .map { Mutation.setStaticResponse($0) }
+            .catchError { .just(Mutation.setError($0.apiError)) }
     }
     
     private func getRealtimeDetail(_ comicId: String?) -> Observable<Mutation> {
@@ -102,7 +112,14 @@ extension ComicDetailViewReactor {
     }
     
     private func getGuessLikeList(_ comicId: String?) -> Observable<Mutation> {
-        return .empty()
+        let req = GuessLikeReq()
+        req.comic_id = comicId
+        return APIProvider.rx.request(DiscoverAPI.getGuessLikeList(req))
+            .mapObject(GuessLikeObject.self)
+            .map { $0.data?.returnData }
+            .filterNil()
+            .map { Mutation.setGuessLikeResponse($0) }
+            .catchError { .just(Mutation.setError($0.apiError)) }
     }
 }
 

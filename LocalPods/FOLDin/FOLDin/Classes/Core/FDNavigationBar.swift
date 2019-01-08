@@ -15,11 +15,15 @@ public class FDNavigationBar: UIView {
         get { return barTintColor }
         set { barTintColor = newValue }
     }
-    
-    /// default is nil
+
+    /// default is 0xF9F9F9
     public dynamic var barTintColor: UIColor? {
         get { return backView.backgroundColor }
-        set { backView.backgroundColor = newValue }
+        set {
+            if barTintColor != newValue {
+                backView.backgroundColor = newValue
+            }
+        }
     }
     
     /* In general, you should specify a value for the normal state to be used by other states which don't have a custom value set.
@@ -28,18 +32,30 @@ public class FDNavigationBar: UIView {
      */
     
     public dynamic var backgroundImage: UIImage? {
-        didSet { backView.backgroundImage = backgroundImage }
+        didSet {
+            if backgroundImage != oldValue {
+                backView.backgroundImage = backgroundImage
+            }
+        }
     }
     
-    /* Default is nil. When non-nil, a custom shadow image to show instead of the default shadow image. For a custom shadow to be shown, a custom background image must also be set with -setBackgroundImage:forBarMetrics: (if the default background image is used, the default shadow image will be used).
+    /* Default is not nil. When non-nil, a custom shadow image to show instead of the default shadow image. For a custom shadow to be shown, a custom background image must also be set with -setBackgroundImage:forBarMetrics: (if the default background image is used, the default shadow image will be used).
      */
     public dynamic var shadowImage: UIImage? {
-        didSet { backView.shadowImage = shadowImage}
+        didSet {
+            if shadowImage != oldValue {
+                backView.shadowImage = shadowImage
+            }
+        }
     }
     
     // Content margin of content view
-    public dynamic var contentMargin: FDMargin = .init(left: 12, right: 12) {
-        didSet { contentView.contentMargin = contentMargin }
+    public dynamic var contentMargin: FDMargin {
+        didSet {
+            if contentMargin != oldValue {
+                contentView.contentMargin = contentMargin
+            }
+        }
     }
     
     /* You may specify the font, text color, and shadow properties for the title in the text attributes dictionary, using the keys found in NSAttributedString.h.
@@ -64,6 +80,7 @@ public class FDNavigationBar: UIView {
     }
     
     public override init(frame: CGRect) {
+        contentMargin = FDMargin(left: 12, right: 12)
         super.init(frame: frame)
         _setupViewHierarchy()
         _configureInitailize()
@@ -95,6 +112,11 @@ extension FDNavigationBar {
     
     private func _configureInitailize() {
         contentMargin.delegate = self
+        contentView.contentMargin = contentMargin
+        barTintColor = UIColor(rgbValue: 0xF9F9F9)
+        backView.backgroundColor = barTintColor
+        shadowImage = UIImage.create(UIColor(rgbValue: 0xE3E3E3))
+        backView.shadowImage = shadowImage
     }
     
     private func _layoutSubviews() {

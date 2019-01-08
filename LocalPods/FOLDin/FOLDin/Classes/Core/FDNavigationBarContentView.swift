@@ -245,7 +245,10 @@ extension FDNavigationBarContentView {
     
     func titleTextAttributesDidChange(_ attributes: [NSAttributedString.Key : Any]?) {
         titleTextAttributes = attributes
-        guard let title = navigationItem.title else { return }
+        guard let title = navigationItem.title else {
+            titleLabel.attributedText = nil
+            return
+        }
         titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
     }
 }

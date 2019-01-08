@@ -22,7 +22,11 @@ public class FDBarButtonItem: NSObject {
     /// 如果只有leftBarButtonItems/rightBarButtonItems只有一个，那么设置这个属性是没有
     /// 用的，可以使用navigationBar.contentInsets来设置
     public var margin: CGFloat = 12.0 {
-        didSet { delegate?.barButtonItemDidChange(self) }
+        didSet {
+            if margin != oldValue {
+                delegate?.barButtonItemDidChange(self)
+            }
+        }
     }
     
     // default is system font of size 15
@@ -30,8 +34,10 @@ public class FDBarButtonItem: NSObject {
     public var font: UIFont? {
         get { return buttonView.titleLabel?.font }
         set {
-            buttonView.titleLabel?.font = newValue
-            delegate?.barButtonItemDidChange(self)
+            if font != newValue {
+                buttonView.titleLabel?.font = newValue
+                delegate?.barButtonItemDidChange(self)
+            }
         }
     }
     
@@ -40,8 +46,10 @@ public class FDBarButtonItem: NSObject {
     public var textColor: UIColor? {
         get { return buttonView.titleColor(for: .normal) }
         set {
-            buttonView.setTitleColor(newValue, for: .normal)
-            delegate?.barButtonItemDidChange(self)
+            if textColor != newValue {
+                buttonView.setTitleColor(newValue, for: .normal)
+                delegate?.barButtonItemDidChange(self)
+            }
         }
     }
 
@@ -49,14 +57,16 @@ public class FDBarButtonItem: NSObject {
     public var title: String? {
         get { return buttonView.title(for: .normal) }
         set {
-            buttonView.setTitle(newValue, for: .normal)
-            if let title = newValue {
-                for (rawValue, attributes) in titleTextAttributes {
-                    buttonView.setAttributedTitle(NSAttributedString(string: title, attributes: attributes),
-                                                  for: UIControl.State(rawValue: rawValue))
+            if title != newValue {
+                buttonView.setTitle(newValue, for: .normal)
+                if let title = newValue {
+                    for (rawValue, attributes) in titleTextAttributes {
+                        buttonView.setAttributedTitle(NSAttributedString(string: title, attributes: attributes),
+                                                      for: UIControl.State(rawValue: rawValue))
+                    }
                 }
+                delegate?.barButtonItemDidChange(self)
             }
-            delegate?.barButtonItemDidChange(self)
         }
     }
     
@@ -64,8 +74,10 @@ public class FDBarButtonItem: NSObject {
     public var image: UIImage? {
         get { return buttonView.image(for: .normal) }
         set {
-            buttonView.setImage(newValue, for: .normal)
-            delegate?.barButtonItemDidChange(self)
+            if image != newValue {
+                buttonView.setImage(newValue, for: .normal)
+                delegate?.barButtonItemDidChange(self)
+            }
         }
     }
     

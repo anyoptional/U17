@@ -27,7 +27,7 @@ final class U17NavigationController: UINavigationController {
             // 全局默认返回按钮
             if viewController.prefersNavigationBarStyle == .custom {
                 // 调整一下外边距
-                viewController.fd.navigationBar.contentMargin.left = 8
+                viewController.fd.navigationBar.contentMargin.left = 4
                 let backButton = UIButton()
                 backButton.frame = CGRect(origin: .zero, size: CGSize(width: 32, height: 32))
                 backButton.setImage(UIImage(nameInBundle: "nav_back_default"), for: .normal)

@@ -25,6 +25,8 @@ public enum APIError: Error {
     case statusCode(Int)
     /// 其他奇奇怪怪的错误
     case underlying(Error)
+    /// 有妖气定义的错误
+    case u17Predefined(String)
     
     public var message: String {
         switch self {
@@ -44,6 +46,8 @@ public enum APIError: Error {
             return "请求失败, code = \(code)"
         case .underlying(let error):
             return "请求失败, error = \(error)"
+        case .u17Predefined(let errorMessage):
+            return errorMessage
         }
     }
 }

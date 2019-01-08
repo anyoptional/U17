@@ -10,6 +10,8 @@ import UIKit
 import YYKit
 import FOLDin
 import SnapKit
+import RxSwift
+import RxCocoa
 import RxSwiftExt
 import ReactorKit
 import RxAppState
@@ -27,10 +29,15 @@ class ComicDetailViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let v = UITableView(frame: .zero, style: .grouped)
         v.showsVerticalScrollIndicator = false
+        v.estimatedRowHeight = 100
         v.backgroundColor = .clear
         v.separatorStyle = .none
         v.fate.register(cellClass: ComicChapterCell.self)
         v.fate.register(cellClass: ComicGuessLikeCell.self)
+        v.fate.register(headerFooterViewClass: ChapterHeaderView.self)
+        v.fate.register(headerFooterViewClass: ChapterFooterView.self)
+        v.fate.register(headerFooterViewClass: GuessLikeHeaderView.self)
+        v.fate.register(headerFooterViewClass: GuessLikeFooterView.self)
         if #available(iOS 11.0, *) {
             v.contentInsetAdjustmentBehavior = .never
         }
@@ -159,24 +166,21 @@ extension ComicDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch dataSource[indexPath] {
         case .chapter: return 45
-        case .guessLike: return 45
+        case .guessLike(item: let display):
+            return tableView.fate.heightForRowAt(indexPath, cellClass: ComicGuessLikeCell.self, configuration: { (cell) in
+                cell.display = display
+            })
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch dataSource[section] {
         case .chapter:
-            return UIView()
+            let view: ChapterHeaderView? = tableView.fate.dequeueReusableHeaderFooterView()
+            return view
             
         case .guessLike:
-            let view = YYLabel()
-            view.text = "猜你喜欢"
-            view.textAlignment = .left
-            view.backgroundColor = .white
-            view.textColor = U17def.black_333333
-            view.font = UIFont.boldSystemFont(ofSize: 18)
-            view.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 0, right: 0)
-            return view
+            return tableView.fate.dequeueReusableHeaderFooterView() as GuessLikeHeaderView?
         }
     }
     
@@ -190,26 +194,39 @@ extension ComicDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch dataSource[section] {
         case .chapter:
-            let view = UIView()
-            view.backgroundColor = U17def.gray_F2F2F2
+            let view: ChapterFooterView? = tableView.fate.dequeueReusableHeaderFooterView()
+            let disposeBag = DisposeBag()
+            view?.disposeBag = disposeBag
+            view?.rx.expand
+                .subscribeNext(weak: self) { (self) in
+                    return { _ in self.expandBranch(at: section) }
+                }.disposed(by: disposeBag)
             return view
             
         case .guessLike:
-            let view = UIButton()
-            view.backgroundColor = .white
-            view.setTitle("内容举报", for: .normal)
-            view.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-            view.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-            view.setTitleColor(U17def.gray_999999.withAlphaComponent(0.7), for: .normal)
-            view.addTarget(self, action: #selector(reportFeedback), for: .touchUpInside)
+            let view: GuessLikeFooterView? = tableView.fate.dequeueReusableHeaderFooterView()
+            let disposeBag = DisposeBag()
+            view?.disposeBag = disposeBag
+            view?.rx.report
+                .subscribeNext(weak: self) { (self) in
+                    return { _ in self.reportFeedback() }
+                }.disposed(by: disposeBag)
             return view
         }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch dataSource[section] {
-        case .chapter: return 6
-        case .guessLike: return 35
+        return 35
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        // 向下滑动
+        if offsetY < 0 {
+            fd.navigationItem.title = nil
+        } else {
+            let comicName = reactor?.currentState.staticResponse?.comic?.name
+            fd.navigationItem.title = comicName
         }
     }
 }
@@ -236,8 +253,12 @@ extension ComicDetailViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc private func reportFeedback() {
+    private func reportFeedback() {
         SwiftyHUD.show("举报是不可能举报的嘛")
+    }
+    
+    private func expandBranch(at section: Int) {
+        
     }
 }
 
@@ -245,6 +266,8 @@ extension ComicDetailViewController {
     private func buildNavbar() {
         fd.navigationBar.barTintColor = .clear
         fd.navigationBar.contentMargin = FDMargin(left: 10, right: 9)
+        fd.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
+                                                .font : UIFont.boldSystemFont(ofSize: 17)]
         // 没找到2x/3x图
         // 本来想着resize一下图片，想想又懒得写缓存
         // 就采用customView吧，设置一下大小就可以了

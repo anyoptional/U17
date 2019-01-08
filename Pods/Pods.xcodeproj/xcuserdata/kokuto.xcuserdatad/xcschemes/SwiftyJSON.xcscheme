@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8FCF69AAC967CEC771AE2AFF010D1443"
-               BuildableName = "FOLDin.framework"
-               BlueprintName = "FOLDin"
+               BlueprintIdentifier = "E63F45339592356321EA6BF5EFA9E150"
+               BuildableName = "SwiftyJSON.framework"
+               BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8FCF69AAC967CEC771AE2AFF010D1443"
-            BuildableName = "FOLDin.framework"
-            BlueprintName = "FOLDin"
+            BlueprintIdentifier = "E63F45339592356321EA6BF5EFA9E150"
+            BuildableName = "SwiftyJSON.framework"
+            BlueprintName = "SwiftyJSON"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
