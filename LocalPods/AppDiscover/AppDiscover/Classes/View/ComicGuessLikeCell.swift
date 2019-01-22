@@ -7,9 +7,12 @@
 
 import Fate
 import UIKit
+import RxSwift
+import RxCocoa
+import RxOptional
 import RxBindable
 
-class ComicGuessLikeComponentView: UIView {
+class ComicGuessLikeComponentView: UIControl {
     
     private lazy var imgView: UIImageView = {
         let v = UIImageView()
@@ -62,9 +65,9 @@ extension ComicGuessLikeComponentView: Bindable {
 
 class ComicGuessLikeCell: UITableViewCell {
     
-    private lazy var leftView = ComicGuessLikeComponentView()
-    private lazy var midView = ComicGuessLikeComponentView()
-    private lazy var rightView = ComicGuessLikeComponentView()
+    fileprivate lazy var leftView = ComicGuessLikeComponentView()
+    fileprivate lazy var midView = ComicGuessLikeComponentView()
+    fileprivate lazy var rightView = ComicGuessLikeComponentView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,5 +104,21 @@ extension ComicGuessLikeCell: Bindable {
         } else {
             debugPrint("WARNING: Returned guess like comics is not much enough.")
         }
+    }
+}
+
+extension Reactive where Base: ComicGuessLikeCell {
+    
+    /// 点击猜你喜欢
+    var tap: Observable<String> {
+        return Observable.from([base.leftView,
+                                base.midView,
+                                base.rightView]
+            .map { (v) in
+                v.rx.controlEvent(.touchUpInside)
+                    // 提取漫画ID
+                    .map { v.display?.state.rawValue.comic_id.toString() }
+                    .filterNil()
+        }).flatMap { $0 }
     }
 }

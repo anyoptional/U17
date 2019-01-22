@@ -28,6 +28,8 @@ class ComicCategoryViewController: UIViewController {
         buildUI()
         buildNavbar()
     }
+    
+    deinit { NSLog("\(className()) is deallocating...") }
 }
 
 extension ComicCategoryViewController: View {

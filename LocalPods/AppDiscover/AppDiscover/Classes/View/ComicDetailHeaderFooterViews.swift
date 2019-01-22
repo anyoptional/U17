@@ -11,18 +11,136 @@ import YYKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxBindable
 
 class ChapterHeaderView: UITableViewHeaderFooterView {
+    
+    fileprivate lazy var collectButton: UIButton = {
+        let v = UIButton()
+        let image = UIImage(nameInBundle: "july_comic_end_collect")?
+            .byResize(to: CGSize(width: 25, height: 28))
+        v.setImage(image, for: .normal)
+        v.setTitle("收藏(--)", for: .normal)
+        v.setTitleColor(U17def.black_333333, for: .normal)
+        v.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    fileprivate lazy var readButton: UIButton = {
+        let v = UIButton()
+        v.setBackgroundImage(UIImage(nameInBundle: "detailContinue"), for: .normal)
+        v.setTitle("阅读 第~话", for: .normal)
+        v.setTitleColor(.white, for: .normal)
+        v.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    private lazy var descLabel: UILabel = {
+        let v = UILabel()
+        v.numberOfLines = 0
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    fileprivate lazy var showAllButton: UIButton = {
+        let v = UIButton()
+        let image = UIImage(nameInBundle: "zhanBtnDetail")?
+            .byResize(to: CGSize(width: 45, height: 20))
+        v.setBackgroundImage(image, for: .normal)
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    private lazy var totalLabel: UILabel = {
+        let v = UILabel()
+        v.textAlignment = .left
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    fileprivate lazy var orderButton: UIButton = {
+        let v = UIButton()
+        v.setImage(UIImage(nameInBundle: "Reverse"), for: .normal)
+        v.setImage(UIImage(nameInBundle: "positive sequence"), for: .selected)
+        contentView.addSubview(v)
+        return v
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard let display = display else { return }
+        
+        readButton.top = 20
+        readButton.width = width / 2
+        readButton.right = width
+        readButton.height = 40
+        
+        collectButton.width = width / 2 - 10
+        collectButton.height = 20
+        collectButton.centerY = readButton.centerY
+        collectButton.left = 0
+        
+        descLabel.top = readButton.bottom + 20
+        descLabel.left = 13
+        descLabel.width = width - 26
+        descLabel.height = display.state.presenter.descLabelHeight
+        
+        showAllButton.size = CGSize(width: 45, height: 20)
+        showAllButton.right = width - 13
+        showAllButton.bottom = descLabel.bottom
+        
+        totalLabel.top = descLabel.bottom + 15
+        totalLabel.left = descLabel.left
+        totalLabel.width = width - 150
+        totalLabel.height = 20
+        
+        orderButton.size = CGSize(width: 45, height: 20)
+        orderButton.right = width - 13
+        orderButton.centerY = totalLabel.centerY
+        
+        // 圆角
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: bounds,
+                                      byRoundingCorners: [.topLeft, .topRight],
+                                      cornerRadii: CGSize(width:15, height:15)).cgPath
+        layer.mask = maskLayer
+    
+        // 对齐
+        collectButton.fate.setTitleAlignment(.right, withOffset: 3)
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         backgroundView = UIView()
-        backgroundView?.backgroundColor = U17def.gray_F2F2F2
-        
+        backgroundView?.backgroundColor = .white
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ChapterHeaderView: Bindable {
+    func bind(display: ChapterHeaderViewDisplay) {
+        
+        let presenter = display.state.presenter
+        
+        descLabel.attributedText = presenter.descAttrText
+        
+        totalLabel.attributedText = presenter.totalAttributedText
+        
+        showAllButton.isHidden = presenter.showsFullDescription
+    }
+}
+
+extension Reactive where Base: ChapterHeaderView {
+    
+    /// 显示全部简介
+    var showsAll: Observable<Void> {
+        return base.showAllButton.rx.tap.asObservable()
     }
 }
 

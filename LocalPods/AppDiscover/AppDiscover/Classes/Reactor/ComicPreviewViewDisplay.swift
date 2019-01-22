@@ -39,7 +39,7 @@ struct ComicPreviewViewPresenter: Presentable {
         
         // 最多取三个
         let attrText = NSMutableAttributedString()
-        for tagName in (comic?.theme_ids).filterNil([]).suffix(3) {
+        for tagName in (comic?.theme_ids).filterNil([]).prefix(3) {
             let tagFillColor = U17def.green_EAF7FA
             let tagText = NSMutableAttributedString(string: tagName)
             tagText.insertString("    ", at: 0)

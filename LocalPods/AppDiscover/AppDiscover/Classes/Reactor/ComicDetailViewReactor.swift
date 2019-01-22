@@ -26,12 +26,15 @@ final class ComicDetailViewReactor: Reactor {
         case getRealtimeDetail(String?)
         // 获取猜你喜欢
         case getGuessLikeList(String?)
+        // 显示所有漫画简介
+        case showsFullDescription
     }
     
     enum Mutation {
         case setError(APIError)
         case setStaticResponse(StaticResponse)
         case setGuessLikeResponse(GuessLikeResponse)
+        case updateChapterHeaderViewDisplay
     }
     
     struct State {
@@ -41,6 +44,7 @@ final class ComicDetailViewReactor: Reactor {
         var guessLikeResponse: GuessLikeResponse?
         var imageViewDisplay: ComicImageViewDisplay?
         var previewViewDisplay: ComicPreviewViewDisplay?
+        var chapterHeaderViewDisplay: ChapterHeaderViewDisplay?
         var placeholderState = U17PlaceholderView.State.loading
     }
     
@@ -56,6 +60,9 @@ final class ComicDetailViewReactor: Reactor {
             
         case .getGuessLikeList(let comicId):
             return getGuessLikeList(comicId)
+            
+        case .showsFullDescription:
+            return showsFullDescription()
         }
     }
     
@@ -81,14 +88,26 @@ final class ComicDetailViewReactor: Reactor {
             state.imageViewDisplay = ComicImageViewDisplay(rawValue: response)
             // 预览层数据
             state.previewViewDisplay = ComicPreviewViewDisplay(rawValue: response)
-            // fake data
-            state.sections.insert(.chapter(items: Array(repeating: ComicChapterCellDisplay(rawValue: "hello world"), count: 10).map { .chapter(item: $0) }), at: 0)
+            // 章节列表段头数据
+            state.chapterHeaderViewDisplay = ChapterHeaderViewDisplay(rawValue: response)
+            // 章节列表(至多选5个)
+            let chapterList = response.chapter_list.filterNil([]).prefix(5)
+            state.sections.insert(.chapter(items: chapterList.map {
+                .chapter(item: ComicChapterCellDisplay(rawValue: $0))
+            }), at: 0)
             
         case .setGuessLikeResponse(let response):
             // 记录response
             state.guessLikeResponse = response
-            // 添加table view 的 section
+            // 猜你喜欢
             state.sections.append(.guessLike(items: [.guessLike(item: ComicGuessLikeCellDisplay(rawValue: response))]))
+            
+        case .updateChapterHeaderViewDisplay:
+            let rawValue = state.chapterHeaderViewDisplay?.state.rawValue
+            rawValue?.showsFullDescription = true
+            if let rawValue = rawValue {
+                state.chapterHeaderViewDisplay = ChapterHeaderViewDisplay(rawValue: rawValue)
+            }
         }
         
         return state
@@ -120,6 +139,10 @@ extension ComicDetailViewReactor {
             .filterNil()
             .map { Mutation.setGuessLikeResponse($0) }
             .catchError { .just(Mutation.setError($0.apiError)) }
+    }
+    
+    private func showsFullDescription() -> Observable<Mutation> {
+        return .just(Mutation.updateChapterHeaderViewDisplay)
     }
 }
 

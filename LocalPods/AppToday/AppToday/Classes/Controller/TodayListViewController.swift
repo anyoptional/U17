@@ -143,23 +143,24 @@ extension TodayListViewController: View {
     }
     
     private func collectionViewSkeletonedAnimatedDataSource() -> RxCollectionViewSkeletonedAnimatedDataSource<TodayRecommendSection> {
-        return RxCollectionViewSkeletonedAnimatedDataSource(configureCell: { (ds, cv, ip, display) in
+        /// 注意这个闭包对self的引用
+        return RxCollectionViewSkeletonedAnimatedDataSource(configureCell: { [weak self] (ds, cv, ip, display) in
             let cell: TodayRecommendCell = cv.fate.dequeueReusableCell(for: ip)
             // 解决cell重用时取消订阅的问题
             cell.disposeBag = DisposeBag()
             cell.display = display
             // 查看全集
             cell.rx.showComics
-                .subscribeNext(weak: self, { (self) in
-                    return { (comicId) in
+                .subscribe(onNext: { (comicId) in
+                    withExtendedLifetime(self, { (self) in
                         /// 在我看来，涉及大组件的访问才有路由/中介的必要
                         /// 一个组件内的页面间跳转采用路由的形式真的是多此一举
                         /// 直接用导航控制器跳转就好了啊，干嘛整那么复杂呢~~~
                         /// URL字符串写起来它是真的烦呐
                         if let vc = Mediator.getComicDetailViewController(withComicId: comicId) {
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: true)
                         }
-                    }
+                    })
                 }).disposed(by: cell.disposeBag)
             return cell
             

@@ -29,7 +29,7 @@ struct ComicGuessLikeCellPresenter: Presentable {
     
     init(rawValue: ComicGuessLikeResp.DataBean.ReturnDataBean) {
         
-        let comics = rawValue.comics.filterNil([]).suffix(3)
+        let comics = rawValue.comics.filterNil([]).prefix(3)
         
         componentViewDisplays = comics.map { ComicGuessLikeComponentViewDisplay(rawValue: $0) }
     }

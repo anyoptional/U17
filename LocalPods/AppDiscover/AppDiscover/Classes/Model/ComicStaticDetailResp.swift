@@ -23,6 +23,10 @@ class ComicStaticDetailResp: NSObject, YYModel {
 
 		@objcMembers
 		class ReturnDataBean: NSObject, YYModel {
+            
+            /// 用来做显示所有简介
+            var showsFullDescription: Bool = false
+            
 			var otherWorks: [OtherWorksBean]?
 
 			@objcMembers
@@ -157,7 +161,8 @@ class ComicStaticDetailResp: NSObject, YYModel {
 				var publish_time: Int = 0
 				var name: String?
 				var imHightArr: [ImHightArrBean]?
-
+                var chapterIndex: Int = 0
+                
 				@objcMembers
 				class ImHightArrBean: NSObject, YYModel {
 					var width: String?

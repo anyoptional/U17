@@ -31,6 +31,7 @@ class ComicDetailViewController: UIViewController {
         v.showsVerticalScrollIndicator = false
         v.estimatedRowHeight = 100
         v.backgroundColor = .clear
+        v.layer.cornerRadius = 15
         v.separatorStyle = .none
         v.fate.register(cellClass: ComicChapterCell.self)
         v.fate.register(cellClass: ComicGuessLikeCell.self)
@@ -146,7 +147,7 @@ extension ComicDetailViewController: View {
     }
     
     private func tableViewSectionedReloadDataSource() -> RxTableViewSectionedReloadDataSource<ComicDetailSection> {
-        return RxTableViewSectionedReloadDataSource(configureCell: { (ds, tv, ip, sectionItem) in
+        return RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (ds, tv, ip, sectionItem) in
             switch sectionItem {
             case .chapter(item: let display):
                 let cell: ComicChapterCell = tv.fate.dequeueReusableCell(for: ip)
@@ -155,7 +156,18 @@ extension ComicDetailViewController: View {
                 
             case .guessLike(item: let display):
                 let cell: ComicGuessLikeCell = tv.fate.dequeueReusableCell(for: ip)
+                cell.disposeBag = DisposeBag()
                 cell.display = display
+                // 点击猜你喜欢跳转漫画详情
+                cell.rx.tap
+                    .subscribe(onNext: { (comicId) in
+                        withExtendedLifetime(self, { (self) in
+                            let vc = ComicDetailViewController()
+                            vc.comicId = comicId
+                            vc.reactor = ComicDetailViewReactor()
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                        })
+                    }).disposed(by: cell.disposeBag)
                 return cell
             }
         })
@@ -165,7 +177,7 @@ extension ComicDetailViewController: View {
 extension ComicDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch dataSource[indexPath] {
-        case .chapter: return 45
+        case .chapter: return 80
         case .guessLike: return 180
         }
     }
@@ -174,6 +186,15 @@ extension ComicDetailViewController: UITableViewDelegate {
         switch dataSource[section] {
         case .chapter:
             let view: ChapterHeaderView? = tableView.fate.dequeueReusableHeaderFooterView()
+            let display = reactor?.currentState.chapterHeaderViewDisplay
+            view?.disposeBag = DisposeBag()
+            view?.display = display
+            if let view = view {
+                view.rx.showsAll
+                    .map { Reactor.Action.showsFullDescription }
+                    .bind(to: reactor!.action)
+                    .disposed(by: view.disposeBag)
+            }
             return view
             
         case .guessLike:
@@ -183,7 +204,9 @@ extension ComicDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch dataSource[section] {
-        case .chapter: return 0.01
+        case .chapter:
+            let display = reactor?.currentState.chapterHeaderViewDisplay
+            return display?.state.presenter.height ?? 0.01
         case .guessLike: return 45
         }
     }
