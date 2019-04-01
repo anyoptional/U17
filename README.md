@@ -1,3 +1,6 @@
+# NOTE
+使用ReactorKit并不好处理数据变动的问题。一旦State中有一个属性发生变化，所有的状态都会被其ActionSubject发射出来从而导致很多不必要的界面刷新，这不是我想要的，所以这个项目就先放弃啦。</br>
+
 # 效果图
 
 <p align="center">
